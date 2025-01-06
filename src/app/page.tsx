@@ -8,7 +8,7 @@ export default function Home() {
     <div className={styles.Top}>
       <Link href="/bar" className={styles.Top__link}>
         <Image
-          src="/top/bar_photo_1.JPG"
+          src="/top/bar_photo_1.webp"
           alt="バーの写真1"
           width={720}
           height={967}
