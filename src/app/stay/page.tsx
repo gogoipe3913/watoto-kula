@@ -1,3 +1,3 @@
 export default function Stay() {
-  return <div>宿のページ</div>;
+  return <div>準備中です。</div>;
 }

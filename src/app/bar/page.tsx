@@ -1,3 +1,3 @@
 export default function Bar() {
-  return <div>バーのページ</div>;
+  return <div>準備中です。</div>;
 }
