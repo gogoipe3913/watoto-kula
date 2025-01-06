@@ -1,0 +1,47 @@
+.Top {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+
+  .Top__link {
+    max-width: 50%;
+    width: 50%;
+    height: 100%;
+    position: relative;
+  }
+
+  .Top__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .Top__title {
+    position: relative;
+    top: -50%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    width: fit-content;
+    font-size: 28px;
+    font-family: mr-eaves-sans, sans-serif;
+  }
+
+  .Top__textBar,
+  .Top__textStay {
+    position: relative;
+    bottom: 132px;
+    font-size: 14px;
+    font-family: hina-mincho, sans-serif;
+  }
+
+  .Top__textBar {
+    left: 40px;
+    width: fit-content;
+  }
+
+  .Top__textStay {
+    margin-left: auto;
+    padding-right: 40px;
+    width: fit-content;
+  }
+}
