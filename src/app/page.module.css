@@ -3,6 +3,14 @@
   height: 100vh;
   overflow: hidden;
 
+  .Top__logo {
+    position: fixed;
+    top: 48px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 999;
+  }
+
   .Top__link {
     max-width: 50%;
     width: 50%;

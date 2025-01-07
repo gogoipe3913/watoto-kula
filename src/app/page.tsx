@@ -6,6 +6,13 @@ import Image from "next/image";
 export default function Home() {
   return (
     <div className={styles.Top}>
+      <Image
+        src="/top/mahito_hazama_logo.svg"
+        alt="ロゴ"
+        width={241}
+        height={74}
+        className={styles.Top__logo}
+      />
       <Link href="/bar" className={styles.Top__link}>
         <Image
           src="/top/bar_photo_1.webp"
