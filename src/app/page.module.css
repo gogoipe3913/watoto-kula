@@ -18,7 +18,12 @@
     position: relative;
   }
 
+  .Top__slider {
+    height: 100%;
+  }
+
   .Top__image {
+    margin-top: -12%;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -38,7 +43,7 @@
   .Top__textStay {
     position: relative;
     bottom: 132px;
-    font-size: 14px;
+    font-size: 13px;
     font-family: hina-mincho, sans-serif;
   }
 

@@ -1,9 +1,31 @@
 "use client";
+
 import styles from "./page.module.css";
 import Link from "next/link";
 import Image from "next/image";
+import dynamic from "next/dynamic";
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+// dynamicでSlick Sliderをクライアントサイドのみで読み込む
+const Slider = dynamic(() => import("react-slick"), { ssr: false });
 
 export default function Home() {
+  const settings = {
+    dots: false, // ドットナビゲーションを表示
+    infinite: true, // 無限スクロール
+    arrows: false,
+    speed: 1500, // スライドの切り替え速度
+    slidesToShow: 1, // 表示するスライド数
+    slidesToScroll: 1, // スクロールするスライド数
+    draggable: false,
+    swipe: false,
+    fade: true,
+    autoplay: true, // 自動再生
+    autoplaySpeed: 4000, // 自動再生速度
+  };
+
   return (
     <div className={styles.Top}>
       <Image
@@ -14,13 +36,29 @@ export default function Home() {
         className={styles.Top__logo}
       />
       <Link href="/bar" className={styles.Top__link}>
-        <Image
-          src="/top/bar_photo_1.webp"
-          alt="バーの写真1"
-          width={720}
-          height={967}
-          className={styles.Top__image}
-        />
+        <Slider {...settings} className={styles.Top__slider}>
+          <Image
+            src="/top/bar_photo_1.webp"
+            alt="バーの写真1"
+            width={720}
+            height={967}
+            className={styles.Top__image}
+          />
+          <Image
+            src="/top/bar_photo_2.webp"
+            alt="バーの写真2"
+            width={720}
+            height={967}
+            className={styles.Top__image}
+          />
+          <Image
+            src="/top/bar_photo_3.webp"
+            alt="バーの写真3"
+            width={720}
+            height={967}
+            className={styles.Top__image}
+          />
+        </Slider>
         <p className={styles.Top__title}>Bar</p>
         <p className={styles.Top__textBar}>
           京都・下鴨に佇む、
@@ -29,16 +67,32 @@ export default function Home() {
         </p>
       </Link>
       <Link href="/stay" className={styles.Top__link}>
-        <Image
-          src="/top/stay_photo_1.png"
-          alt="宿の写真1"
-          width={720}
-          height={967}
-          className={styles.Top__image}
-        />
+        <Slider {...settings} className={styles.Top__slider}>
+          <Image
+            src="/top/stay_photo_1.webp"
+            alt="宿の写真1"
+            width={720}
+            height={967}
+            className={styles.Top__image}
+          />
+          <Image
+            src="/top/stay_photo_2.webp"
+            alt="宿の写真2"
+            width={720}
+            height={967}
+            className={styles.Top__image}
+          />
+          <Image
+            src="/top/stay_photo_3.webp"
+            alt="宿の写真2"
+            width={720}
+            height={967}
+            className={styles.Top__image}
+          />
+        </Slider>
         <p className={styles.Top__title}>Stay</p>
         <p className={styles.Top__textStay}>
-          福井/小浜の自然に囲まれて
+          福井・小浜の自然に囲まれて、
           <br />
           自分だけの風景を探すひとときを。
         </p>
