@@ -52,7 +52,7 @@ export default function Home() {
     setTimeout(() => {
       setBarActiveIndex(0);
       setStayActiveIndex(0);
-    }, 100);
+    }, 200);
   }, []);
 
   return (
