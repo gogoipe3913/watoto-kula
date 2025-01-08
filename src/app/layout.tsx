@@ -25,7 +25,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Adobe Fontsのスクリプトを動的に注入 */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
