@@ -1,13 +1,29 @@
+@use "./../styles/mixin" as m;
+
 .Top {
   display: flex;
   height: 100vh;
   overflow: hidden;
+
+  @include m.respondToSm {
+    padding: 16px;
+    height: calc(100vh - 16px);
+    flex-direction: column;
+  }
 
   .Top__logo {
     position: fixed;
     top: 40px;
     left: 32px;
     z-index: 999;
+
+    @include m.respondToSm {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 140px;
+    }
   }
 
   .Top__link {
@@ -15,6 +31,12 @@
     width: 50%;
     height: 100%;
     position: relative;
+
+    @include m.respondToSm {
+      max-width: initial;
+      width: 100%;
+      height: 50%;
+    }
   }
 
   .Top__slider {
@@ -43,6 +65,10 @@
     font-size: 28px;
     font-family: mr-eaves-sans, sans-serif;
     mix-blend-mode: difference;
+
+    @include m.respondToSm {
+      display: none;
+    }
   }
 
   .Top__textBar,
@@ -51,16 +77,36 @@
     bottom: 132px;
     font-size: 13px;
     font-family: hina-mincho, sans-serif;
+
+    @include m.respondToSm {
+      position: absolute;
+      -ms-writing-mode: tb-rl;
+      writing-mode: vertical-rl;
+      margin-top: 28px;
+      bottom: initial;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+    }
   }
 
   .Top__textBar {
     left: 40px;
     width: fit-content;
+
+    @include m.respondToSm {
+      top: 0;
+      left: 20px;
+    }
   }
 
   .Top__textStay {
     margin-left: auto;
     padding-right: 40px;
     width: fit-content;
+
+    @include m.respondToSm {
+      top: 0px;
+      right: -20px;
+    }
   }
 }

@@ -128,7 +128,7 @@ export default function Home() {
           />
           <Image
             src="/top/stay_photo_3.webp"
-            alt="宿の写真2"
+            alt="宿の写真3"
             width={720}
             height={967}
             className={classNames(
