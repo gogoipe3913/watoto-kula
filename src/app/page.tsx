@@ -58,10 +58,10 @@ export default function Home() {
   return (
     <div className={styles.Top}>
       <Image
-        src="/top/mahito_hazama_logo.svg"
+        src="/logo/main.svg"
         alt="ロゴ"
-        width={241}
-        height={74}
+        width={40}
+        height={120}
         className={styles.Top__logo}
       />
       <Link href="/bar" className={styles.Top__link}>

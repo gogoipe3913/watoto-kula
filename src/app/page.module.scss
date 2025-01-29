@@ -5,9 +5,8 @@
 
   .Top__logo {
     position: fixed;
-    top: 48px;
-    left: 50%;
-    transform: translateX(-50%);
+    top: 40px;
+    left: 32px;
     z-index: 999;
   }
 
@@ -43,6 +42,7 @@
     width: fit-content;
     font-size: 28px;
     font-family: mr-eaves-sans, sans-serif;
+    mix-blend-mode: difference;
   }
 
   .Top__textBar,
