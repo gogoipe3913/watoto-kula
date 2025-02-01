@@ -26,6 +26,8 @@ export default function Home() {
     draggable: false,
     swipe: false,
     fade: true,
+    pauseOnFocus: false, //フォーカスで一時停止
+    pauseOnHover: false, //マウスホバーで一時停止
     autoplay: true, // 自動再生
     autoplaySpeed: 5500, // 自動再生速度
     beforeChange: (_: number, nextIndex: number) =>
@@ -41,6 +43,8 @@ export default function Home() {
     draggable: false,
     swipe: false,
     fade: true,
+    pauseOnFocus: false, //フォーカスで一時停止
+    pauseOnHover: false, //マウスホバーで一時停止
     autoplay: true,
     autoplaySpeed: 5500,
     beforeChange: (_: number, nextIndex: number) =>
@@ -52,7 +56,7 @@ export default function Home() {
     setTimeout(() => {
       setBarActiveIndex(0);
       setStayActiveIndex(0);
-    }, 200);
+    }, 500);
   }, []);
 
   return (
