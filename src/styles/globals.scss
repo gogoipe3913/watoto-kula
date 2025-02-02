@@ -5,3 +5,25 @@ body {
   font-family: ltc-nicholas-cochin-pro, hina-mincho, sans-serif;
   font-weight: 400;
 }
+
+:root {
+  // basic color
+  --color-black: #202020;
+  --color-base-background: #fff;
+  // text color
+  --color-text-black: var(--color-black);
+  --color-text-gray: #616161;
+  --color-text-gray-2: #d8d8d8;
+  // border color
+  --color-border-gray: rgba(0, 0, 0, 0.07);
+
+  // font-family
+  --font-family-title: ltc-nicholas-cochin-pro, hina-mincho, sans-serif;
+  --font-family-gothic: mr-eaves-sans, hina-mincho, sans-serif; /** ほとんど使わない */
+  --font-family-text-jp: hina-mincho, sans-serif;
+  --font-family-text-en: hina-mincho, sans-serif;
+
+  // letter-spacing
+  --letter-space-text-jp: 0.02em;
+  --letter-space-text-en: 0.01em;
+}
