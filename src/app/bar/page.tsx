@@ -50,7 +50,7 @@ export default function Bar() {
       />
       <ul className={styles.Bar__menu}>
         <li>
-          <a href="#about">About</a>
+          <a href="#BarAbout">About</a>
         </li>
         <li>
           <a href="#concept">Concept</a>
@@ -68,14 +68,14 @@ export default function Bar() {
           </button>
         </li>
       </ul>
-      <video
+      {/* <video
         playsInline
         muted={true}
         autoPlay={true}
         loop={true}
         src="/bar/video/top.mp4"
         className={styles.Bar__topVideo}
-      />
+      /> */}
       <Slider {...settings} className={styles.Bar__slider}>
         <Image
           src="/bar/top-slides/bar/2.JPG"
@@ -114,6 +114,27 @@ export default function Bar() {
         多様な人々のための空間でカクテルを。
       </p>
       <ScrollIndicator className={styles.Bar__scrollIndicator} />
+
+      <Image
+        src="/bar/second/3.JPG"
+        alt="トップ画像下の画像"
+        width={720}
+        height={967}
+        className={styles.Bar__imageSecond}
+      />
+
+      <div id="#BarAbout" className={styles.BarAbout}>
+        <div className={styles.BarAbout__texts}>
+          <h2 className={styles.BarAbout__title}>About</h2>
+        </div>
+        <Image
+          src="/bar/about/1.JPG"
+          alt="About バー店内の写真"
+          width={720}
+          height={967}
+          className={styles.BarAbout__image}
+        />
+      </div>
     </div>
   );
 }
