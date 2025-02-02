@@ -1,6 +1,6 @@
 @use "../../styles/mixin" as m;
 
-.Bar {
+.Stay {
   $padding-frame-vertical: 40px;
   $padding-frame-horizontal: 48px;
 
@@ -12,6 +12,7 @@
   justify-content: center;
   align-items: center;
   text-align: center;
+  font-family: var(--font-family-text-jp);
   line-height: 2.5;
 
   @include m.respondToSm {
