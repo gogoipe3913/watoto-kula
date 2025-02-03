@@ -1,0 +1,74 @@
+@use "../../styles/mixin" as m;
+
+.Header {
+  $padding-frame-vertical: 40px;
+  $padding-frame-horizontal: 48px;
+
+  .Header__logo {
+    position: fixed;
+    top: $padding-frame-vertical;
+    left: $padding-frame-horizontal;
+    z-index: var(--z-index-elevation-2);
+
+    &--colored {
+      fill: var(--color-black);
+    }
+
+    @include m.respondToSm {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 140px;
+    }
+  }
+
+  .Header__menu {
+    position: fixed;
+    display: flex;
+    gap: 40px;
+    top: $padding-frame-vertical;
+    right: $padding-frame-horizontal;
+    z-index: var(--z-index-elevation-2);
+    font-family: ltc-nicholas-cochin-pro, sans-serif;
+    font-size: 14px;
+
+    li > a {
+      // アニメーション設定
+      transition-duration: 0.4s;
+      transition-timing-function: ease-in-out;
+    }
+
+    .Header__hamburger {
+      margin-left: 12px;
+      height: 100%;
+
+      .Header__hamburgerLine {
+        display: flex;
+        width: 44px;
+        height: 1px;
+        background-color: var(--color-white);
+
+        // アニメーション設定
+        transition-duration: 0.4s;
+        transition-timing-function: ease-in-out;
+      }
+
+      .Header__hamburgerLine + .Header__hamburgerLine {
+        margin-top: 6px;
+      }
+    }
+
+    &--colored {
+      color: var(--color-black);
+
+      li > a {
+        color: inherit;
+      }
+
+      .Header__hamburger > .Header__hamburgerLine {
+        background-color: var(--color-black);
+      }
+    }
+  }
+}

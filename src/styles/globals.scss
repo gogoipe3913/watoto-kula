@@ -9,7 +9,8 @@ body {
 :root {
   // basic color
   --color-black: #202020;
-  --color-base-background: #fff;
+  --color-white: #fff;
+  --color-base-background: var(--color-white);
   // text color
   --color-text-black: var(--color-black);
   --color-text-gray: #616161;
@@ -26,4 +27,11 @@ body {
   // letter-spacing
   --letter-space-text-jp: 0.02em;
   --letter-space-text-en: 0.01em;
+
+  // z-index
+  --z-index-elevation-1: 100000;
+  --z-index-elevation-2: 300000;
+  --z-index-elevation-3: 600000;
+  --z-index-elevation-4: 900000;
+  --z-index-elevation-5: 2147483647;
 }
