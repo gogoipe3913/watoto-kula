@@ -32,8 +32,8 @@ const BarAbout: React.FC<BarAboutProps> = ({ onIntersect }) => {
   }, [onIntersect]);
 
   return (
-    <>
-      <div ref={targetRef} id="#BarAbout" className={styles.BarAbout}>
+    <div ref={targetRef} id="#BarAbout" className={styles.BarAbout}>
+      <div className={styles.BarAbout__body}>
         <div className={styles.BarAbout__texts}>
           <h2 className={styles.BarAbout__title}>
             <p className={styles.BarAbout__titleJp}>わととについて</p>
@@ -125,7 +125,15 @@ const BarAbout: React.FC<BarAboutProps> = ({ onIntersect }) => {
           className={styles.BarAbout__image}
         />
       </div>
-    </>
+
+      <Image
+        src="/bar/about/2.JPG"
+        alt="About バー店内の写真"
+        width={720}
+        height={420}
+        className={styles.BarAbout__lowerImage}
+      />
+    </div>
   );
 };
 

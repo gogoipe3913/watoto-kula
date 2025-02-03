@@ -2,8 +2,8 @@
 
 import React from "react";
 import classNames from "classnames";
-import Image from "next/image";
 import style from "./style.module.scss";
+import Logo from "../logo";
 
 type HeaderProps = {
   isColored?: boolean;
@@ -15,7 +15,7 @@ const Header: React.FC<HeaderProps> = ({
   className = "",
 }) => (
   <div className={classNames(style.Header, className)}>
-    <Image
+    {/* <Image
       src="/logo/main.svg"
       alt="ロゴ"
       width={40}
@@ -24,7 +24,8 @@ const Header: React.FC<HeaderProps> = ({
         style.Header__logo,
         isColored ? style["Header__logo--colored"] : ""
       )}
-    />
+    /> */}
+    <Logo isColored={isColored} className={style.Header__logo} />
     <ul
       className={classNames(
         style.Header__menu,

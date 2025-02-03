@@ -9,10 +9,8 @@
     top: $padding-frame-vertical;
     left: $padding-frame-horizontal;
     z-index: var(--z-index-elevation-2);
-
-    &--colored {
-      fill: var(--color-black);
-    }
+    width: 40px;
+    height: 120px;
 
     @include m.respondToSm {
       top: 50%;
