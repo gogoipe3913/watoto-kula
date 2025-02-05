@@ -22,10 +22,10 @@
     object-fit: cover;
     object-position: 0 -80px;
     transition: 6s ease-out;
-    transform: scale(1.15);
+    transform: scale(1.23);
 
     &--active {
-      transform: scale(1);
+      transform: scale(1.08);
     }
   }
 

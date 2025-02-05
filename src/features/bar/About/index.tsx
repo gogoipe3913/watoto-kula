@@ -1,38 +1,12 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import Image from "next/image";
 import styles from "./style.module.scss";
 
-type BarAboutProps = {
-  onIntersect: (isIntersected: boolean) => void;
-};
-
-const BarAbout: React.FC<BarAboutProps> = ({ onIntersect }) => {
-  const targetRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    if (!targetRef.current) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          onIntersect(true);
-        } else {
-          onIntersect(false);
-        }
-      },
-      {
-        threshold: 0,
-        rootMargin: "0px 0px -92% 0px", // 画面上部に到達したらトリガー
-      }
-    );
-
-    observer.observe(targetRef.current);
-  }, [onIntersect]);
-
+const BarAbout: React.FC = ({}) => {
   return (
-    <div ref={targetRef} id="#BarAbout" className={styles.BarAbout}>
+    <div id="#BarAbout" className={styles.BarAbout}>
       <div className={styles.BarAbout__body}>
         <div className={styles.BarAbout__texts}>
           <h2 className={styles.BarAbout__title}>
@@ -125,14 +99,14 @@ const BarAbout: React.FC<BarAboutProps> = ({ onIntersect }) => {
           className={styles.BarAbout__image}
         />
       </div>
-
+      {/* 
       <Image
         src="/bar/about/2.JPG"
         alt="About バー店内の写真"
         width={720}
         height={420}
         className={styles.BarAbout__lowerImage}
-      />
+      /> */}
     </div>
   );
 };

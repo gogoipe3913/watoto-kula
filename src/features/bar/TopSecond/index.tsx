@@ -3,8 +3,6 @@
 import React from "react";
 import Image from "next/image";
 import styles from "./style.module.scss";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 
 const BarTopSecond: React.FC = ({}) => {
   return (

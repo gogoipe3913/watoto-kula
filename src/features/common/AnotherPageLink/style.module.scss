@@ -1,0 +1,88 @@
+@use "../../../styles/mixin" as m;
+
+.AnotherPageLink {
+  padding: 100px;
+  width: 100%;
+
+  a {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    aspect-ratio: 1306 / 563;
+    object-fit: cover;
+    border-radius: 40px;
+    background-image: url("/bar/anotherPage/1.png");
+    background-size: cover;
+    // アニメーション設定
+    transition-duration: 0.4s;
+    transition-timing-function: ease-in-out;
+
+    &:hover {
+      .AnotherPageLink__button {
+        color: var(--color-black);
+        // border: none;
+        background-color: var(--color-white);
+
+        .AnotherPageLink__linkArrow {
+          border-top: 1px solid var(--color-black);
+
+          &::after {
+            border-top: 1px solid var(--color-black);
+          }
+        }
+      }
+    }
+  }
+
+  span {
+    display: block;
+  }
+
+  .AnotherPageLink__button {
+    margin: 40px auto 0;
+    padding: 20px 24px;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 20px;
+    width: 360px;
+    font-size: 20px;
+    color: var(--color-white);
+    font-family: var(--font-family-text-en);
+    border: 1px solid var(--color-white);
+    border-radius: 40px;
+    // アニメーション設定
+    transition-duration: 0.4s;
+    transition-timing-function: ease-in-out;
+  }
+
+  .AnotherPageLink__linkArrow {
+    position: relative;
+    display: block;
+    width: 100px;
+    height: 0px;
+    border-top: 1px solid var(--color-white);
+    // アニメーション設定
+    transition-duration: 0.4s;
+    transition-timing-function: ease-in-out;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: -5px;
+      right: -3px;
+      display: block;
+      width: 12px;
+      height: 0px;
+      border-top: 1px solid var(--color-white);
+      transform: rotate(45deg);
+
+      // アニメーション設定
+      transition-duration: 0.4s;
+      transition-timing-function: ease-in-out;
+    }
+  }
+}

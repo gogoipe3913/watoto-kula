@@ -4,10 +4,8 @@
 .BarAbout {
   position: relative;
   z-index: var(--z-index-elevation-1);
-  margin-top: -48px;
   padding: 180px 0 100px 100px;
   background-color: var(--color-base-background);
-  border-radius: 60px 60px 0 0;
 
   .BarAbout__body {
     display: flex;
