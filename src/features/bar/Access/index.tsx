@@ -60,11 +60,9 @@ const BarAccess: React.FC = ({}) => {
           <h3>営業時間</h3>
           <ul className={styles.BarAccess__openingHours}>
             <li>
-              <p className={styles.BarAccess__openingHoursJp}>
-                京阪出町柳駅より徒歩
-              </p>
+              <p className={styles.BarAccess__openingHoursJp}>不定休</p>
               <p className={styles.BarAccess__openingHoursEn}>
-                By train, taxi from Kyoto Station
+                Irregular holidays
               </p>
             </li>
             <li>

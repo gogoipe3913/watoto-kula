@@ -87,6 +87,9 @@
     margin-top: 20px;
     display: flex;
 
+    li + li {
+      margin-left: 40px;
+    }
     p + p {
       margin-top: 4px;
     }
