@@ -14,9 +14,11 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Footer from "@/features/common/Footer";
 import AnotherPageLink from "@/features/common/AnotherPageLink";
+import MenuModal from "@/components/MenuModal";
 
 export default function Bar() {
-  const [isMenuColored, setIsMenuColored] = useState(false);
+  const [isHeaderColored, setIsHeaderColored] = useState(false);
+  const [isMenuModalOpened, setIsMenuModalOpened] = useState(false);
   const targetRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -25,9 +27,9 @@ export default function Bar() {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsMenuColored(true);
+          setIsHeaderColored(true);
         } else {
-          setIsMenuColored(false);
+          setIsHeaderColored(false);
         }
       },
       {
@@ -41,7 +43,18 @@ export default function Bar() {
 
   return (
     <div className={styles.Bar}>
-      <Header isColored={isMenuColored} />
+      <Header
+        isColored={isHeaderColored}
+        onClick={() => {
+          setIsMenuModalOpened(true);
+        }}
+      />
+      <MenuModal
+        isOpen={isMenuModalOpened}
+        closeModal={() => {
+          setIsMenuModalOpened(false);
+        }}
+      />
       {/* <video
         playsInline
         muted={true}

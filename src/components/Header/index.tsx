@@ -8,23 +8,15 @@ import Logo from "../logo";
 type HeaderProps = {
   isColored?: boolean;
   className?: string;
+  onClick?(): void;
 };
 
 const Header: React.FC<HeaderProps> = ({
   isColored = false,
   className = "",
+  onClick = () => {},
 }) => (
   <div className={classNames(style.Header, className)}>
-    {/* <Image
-      src="/logo/main.svg"
-      alt="ロゴ"
-      width={40}
-      height={120}
-      className={classNames(
-        style.Header__logo,
-        isColored ? style["Header__logo--colored"] : ""
-      )}
-    /> */}
     <Logo isColored={isColored} className={style.Header__logo} />
     <ul
       className={classNames(
@@ -45,7 +37,7 @@ const Header: React.FC<HeaderProps> = ({
         <a href="#access">Access</a>
       </li>
       <li>
-        <button className={style.Header__hamburger}>
+        <button className={style.Header__hamburger} onClick={onClick}>
           <span className={style.Header__hamburgerLine}></span>
           <span className={style.Header__hamburgerLine}></span>
         </button>
