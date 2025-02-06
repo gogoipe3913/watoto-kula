@@ -4,16 +4,20 @@ body {
   // font-family: mr-eaves-sans, hina-mincho, sans-serif;
   font-family: ltc-nicholas-cochin-pro, hina-mincho, sans-serif;
   font-weight: 400;
+  color: var(--color-black);
 }
 
 :root {
   // basic color
   --color-black: #202020;
-  --color-base-background: #fff;
+  --color-white: #fff;
+  --color-gold: #b49e50;
+  --color-base-background: var(--color-white);
   // text color
   --color-text-black: var(--color-black);
   --color-text-gray: #616161;
   --color-text-gray-2: #d8d8d8;
+  --color-text-gold: var(--color-gold);
   // border color
   --color-border-gray: rgba(0, 0, 0, 0.07);
 
@@ -26,4 +30,11 @@ body {
   // letter-spacing
   --letter-space-text-jp: 0.02em;
   --letter-space-text-en: 0.01em;
+
+  // z-index
+  --z-index-elevation-1: 100000;
+  --z-index-elevation-2: 300000;
+  --z-index-elevation-3: 600000;
+  --z-index-elevation-4: 900000;
+  --z-index-elevation-5: 2147483647;
 }

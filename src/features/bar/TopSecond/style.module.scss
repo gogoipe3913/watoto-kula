@@ -1,0 +1,10 @@
+@use "../../../styles/mixin" as m;
+
+.BarTopSecond {
+  position: sticky;
+  top: 0px;
+  margin-top: -88px;
+  width: 100%;
+  height: 100svh;
+  object-fit: cover;
+}
