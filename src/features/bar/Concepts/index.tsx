@@ -4,6 +4,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import style from "./style.module.scss";
+import classNames from "classnames";
 
 const BarConcepts: React.FC = ({}) => {
   const [displayedImageNumber, setDisplayedImageNumber] = useState(1);
@@ -51,8 +52,38 @@ const BarConcepts: React.FC = ({}) => {
           <Image
             width={800}
             height={400}
-            src={`/bar/concept/${displayedImageNumber}.JPG`}
+            src={`/bar/concept/1.JPG`}
             alt="コンセプトのバー画像"
+            className={classNames(
+              style.BarConcepts__contentImageBody,
+              displayedImageNumber == 1
+                ? style["BarConcepts__contentImageBody--active"]
+                : ""
+            )}
+          />
+          <Image
+            width={800}
+            height={400}
+            src={`/bar/concept/2.JPG`}
+            alt="コンセプトのバー画像"
+            className={classNames(
+              style.BarConcepts__contentImageBody,
+              displayedImageNumber == 2
+                ? style["BarConcepts__contentImageBody--active"]
+                : ""
+            )}
+          />
+          <Image
+            width={800}
+            height={400}
+            src={`/bar/concept/3.JPG`}
+            alt="コンセプトのバー画像"
+            className={classNames(
+              style.BarConcepts__contentImageBody,
+              displayedImageNumber == 3
+                ? style["BarConcepts__contentImageBody--active"]
+                : ""
+            )}
           />
         </div>
         <ul className={style.BarConcepts__contentTexts}>

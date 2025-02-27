@@ -72,6 +72,16 @@ const BarTop: React.FC = ({}) => {
           )}
         />
       </Slider>
+      <div className={styles.BarTop__spVideoWrapper}>
+        <video
+          playsInline
+          muted={true}
+          autoPlay={true}
+          loop={true}
+          src="/bar/video/top.mp4"
+          className={styles.BarTop__spVideo}
+        />
+      </div>
       <div className={styles.BarTop__text}>
         <p className={styles.BarTop__textJp}>
           京都・下鴨に佇む、
@@ -81,7 +91,9 @@ const BarTop: React.FC = ({}) => {
         <p className={styles.BarTop__textEn}>
           Savor cocktails in a sanctuary for all,
           <br />
-          nestled in the heart of Shimogamo, Kyoto—where time flows gently,
+          nestled in the heart of Shimogamo, Kyoto
+          <br className={styles.BarTop__spBr} />
+          —where time flows gently,
           <br />
           and stories intertwine.
         </p>

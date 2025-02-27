@@ -9,7 +9,9 @@
   height: auto;
 
   @include m.respondToSm {
-    padding: 16px;
+    width: 100%;
+    min-width: initial;
+    overflow: hidden;
   }
 
   .Bar__contents {

@@ -17,7 +17,13 @@ const Header: React.FC<HeaderProps> = ({
   onClick = () => {},
 }) => (
   <div className={classNames(style.Header, className)}>
-    <Logo isColored={isColored} className={style.Header__logo} />
+    <Logo
+      isColored={isColored}
+      className={classNames(
+        style.Header__logo,
+        isColored ? style["Header__logo--resized"] : ""
+      )}
+    />
     <ul
       className={classNames(
         style.Header__menu,
