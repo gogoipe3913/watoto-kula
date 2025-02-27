@@ -4,6 +4,10 @@
   $padding-frame-vertical: 40px;
   $padding-frame-horizontal: 48px;
 
+  @include m.respondToSm {
+    width: 100%;
+  }
+
   .Header__logo {
     position: fixed;
     top: $padding-frame-vertical;
@@ -11,13 +15,17 @@
     z-index: var(--z-index-elevation-2);
     width: 40px;
     height: 120px;
+    // アニメーション設定
+    transition-duration: 0.4s;
+    transition-timing-function: ease-in-out;
+
+    &--resized {
+      width: 28px;
+      height: 82px;
+    }
 
     @include m.respondToSm {
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 60px;
-      height: 140px;
+      left: 20px;
     }
   }
 
@@ -31,7 +39,19 @@
     font-family: ltc-nicholas-cochin-pro, sans-serif;
     font-size: 14px;
 
+    @include m.respondToSm {
+      right: 20px;
+    }
+
     li {
+      @include m.respondToSm {
+        display: none;
+      }
+
+      &:last-child {
+        display: block;
+      }
+
       a {
         // アニメーション設定
         transition-duration: 0.4s;

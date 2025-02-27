@@ -59,7 +59,9 @@ const MenuModal: React.FC<MenuModalProps> = ({
             <div className={style.MenuModal__section}>
               <p>Stay</p>
               <ul>
-                <li>現在準備中</li>
+                <li className={style.MenuModal__underConstruction}>
+                  現在準備中
+                </li>
               </ul>
             </div>
           </div>
