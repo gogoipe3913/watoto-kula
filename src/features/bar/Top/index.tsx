@@ -78,6 +78,7 @@ const BarTop: React.FC = ({}) => {
           muted={true}
           autoPlay={true}
           loop={true}
+          width={375}
           src="/bar/video/top.mp4"
           className={styles.BarTop__spVideo}
         />
