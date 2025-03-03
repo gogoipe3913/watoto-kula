@@ -11,7 +11,7 @@
   @include m.respondToSm {
     width: 100%;
     min-width: initial;
-    overflow: hidden;
+    // overflow: hidden;
   }
 
   .Bar__contents {
@@ -22,5 +22,9 @@
     width: 100%;
     background-color: var(--color-base-background);
     border-radius: 60px;
+
+    @include m.respondToSm {
+      border-radius: 28px;
+    }
   }
 }

@@ -50,7 +50,7 @@ const BarAccess: React.FC = ({}) => {
                 By train, taxi from Kyoto Station
               </p>
             </li>
-            <li>
+            <li className={styles.BarAccess__roadTimeRight}>
               <p className={styles.BarAccess__roadTimeTextJp}>約10分</p>
               <p className={styles.BarAccess__roadTimeTextEn}>About 10 min</p>
             </li>

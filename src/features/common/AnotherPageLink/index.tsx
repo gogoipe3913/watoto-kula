@@ -11,7 +11,7 @@ const AnotherPageLink: React.FC = ({}) => {
       <Link href="/stay">
         <Image
           src="/bar/anotherPage/stay-text.svg"
-          alt=""
+          alt="stay"
           width={180}
           height={80}
         />

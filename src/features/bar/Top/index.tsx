@@ -94,7 +94,7 @@ const BarTop: React.FC = ({}) => {
           nestled in the heart of Shimogamo, Kyoto
           <br className={styles.BarTop__spBr} />
           —where time flows gently,
-          <br />
+          <br className={styles.BarTop__pcBr} />
           and stories intertwine.
         </p>
       </div>

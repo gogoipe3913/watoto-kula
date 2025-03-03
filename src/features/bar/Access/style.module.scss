@@ -7,8 +7,16 @@
   width: 100%;
   background-color: var(--color-base-background);
 
+  @include m.respondToSm {
+    padding-top: 100px;
+  }
+
   h2 {
     padding-left: 100px;
+
+    @include m.respondToSm {
+      padding-left: 20px;
+    }
   }
 
   /* ---------------------------------------------------------
@@ -41,11 +49,18 @@
     filter: grayscale(1); /* Googleマップをグレースケールにする */
   }
 
+  // -----------------------------------------------------------
+
   .BarAccess__information {
     margin-top: 80px;
     padding-left: 100px;
     display: flex;
     gap: 60px;
+
+    @include m.respondToSm {
+      flex-direction: column;
+      padding-left: 20px;
+    }
   }
 
   .BarAccess__address {
@@ -61,6 +76,16 @@
 
     li {
       width: 280px;
+
+      @include m.respondToSm {
+        width: 240px;
+      }
+    }
+
+    .BarAccess__roadTimeRight {
+      @include m.respondToSm {
+        width: 80px;
+      }
     }
   }
 

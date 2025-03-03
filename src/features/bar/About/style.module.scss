@@ -7,15 +7,28 @@
   padding: 180px 0 100px 100px;
   background-color: var(--color-base-background);
 
+  @include m.respondToSm {
+    padding: 80px 0;
+  }
+
   .BarAbout__body {
     display: flex;
     justify-content: space-between;
     gap: 60px;
+
+    @include m.respondToSm {
+      flex-direction: column;
+      padding: 0 20px;
+    }
   }
 
   .BarAbout__texts {
     padding-top: 240px;
     width: 100%;
+
+    @include m.respondToSm {
+      padding-top: initial;
+    }
   }
 
   .BarAbout__title {
@@ -40,6 +53,10 @@
     display: flex;
     gap: 60px;
     justify-content: start;
+
+    @include m.respondToSm {
+      flex-direction: column;
+    }
   }
 
   .BarAbout__contentJp {
@@ -66,6 +83,12 @@
     object-fit: cover;
     aspect-ratio: 800 / 1600;
     border-radius: 40px 0 0 40px;
+
+    @include m.respondToSm {
+      width: 100%;
+      max-height: calc(100vh - 80px);
+      border-radius: 40px;
+    }
   }
 
   .BarAbout__lowerImage {
