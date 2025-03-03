@@ -4,6 +4,10 @@
   padding: 100px;
   width: 100%;
 
+  @include m.respondToSm {
+    padding: 20px;
+  }
+
   a {
     position: relative;
     display: flex;
@@ -15,24 +19,36 @@
     object-fit: cover;
     border-radius: 40px;
     background-image: url("/bar/anotherPage/1.png");
+    background-position: center;
     background-size: cover;
     // アニメーション設定
     transition-duration: 0.4s;
     transition-timing-function: ease-in-out;
 
-    &:hover {
-      .AnotherPageLink__button {
-        color: var(--color-black);
-        // border: none;
-        background-color: var(--color-white);
+    @media (hover: hover) {
+      &:hover {
+        .AnotherPageLink__button {
+          color: var(--color-black);
+          // border: none;
+          background-color: var(--color-white);
 
-        .AnotherPageLink__linkArrow {
-          border-top: 1px solid var(--color-black);
-
-          &::after {
+          .AnotherPageLink__linkArrow {
             border-top: 1px solid var(--color-black);
+
+            &::after {
+              border-top: 1px solid var(--color-black);
+            }
           }
         }
+      }
+    }
+
+    @include m.respondToSm {
+      padding: 80px 0;
+      border-radius: 12px;
+
+      img {
+        width: 100px;
       }
     }
   }
@@ -57,6 +73,13 @@
     // アニメーション設定
     transition-duration: 0.4s;
     transition-timing-function: ease-in-out;
+
+    @include m.respondToSm {
+      margin-top: 20px;
+      padding: 12px 24px;
+      width: 280px;
+      font-size: 17px;
+    }
   }
 
   .AnotherPageLink__linkArrow {
@@ -83,6 +106,10 @@
       // アニメーション設定
       transition-duration: 0.4s;
       transition-timing-function: ease-in-out;
+    }
+
+    @include m.respondToSm {
+      width: 60px;
     }
   }
 }

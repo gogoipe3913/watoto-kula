@@ -26,9 +26,9 @@
     height: calc(100vh - 200px);
 
     @include m.respondToSm {
-      top: 0px;
+      top: 20px;
       width: 100%;
-      height: calc(100vh - 20px);
+      height: calc(100vh - 40px);
     }
 
     & .BarConcepts__contentImageBody {
@@ -99,7 +99,7 @@
     text-align: justify;
 
     @include m.respondToSm {
-      font-size: 16px;
+      font-size: 14px;
     }
   }
 
@@ -114,7 +114,7 @@
 
     @include m.respondToSm {
       color: var(--color-white);
-      font-size: 16px;
+      font-size: 15px;
     }
   }
 }
