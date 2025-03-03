@@ -6,9 +6,17 @@
   padding: 180px 100px 100px;
   background-color: var(--color-white);
 
+  @include m.respondToSm {
+    padding: 20px;
+  }
+
   .BarConcepts__contents {
     display: flex;
     gap: 40px;
+
+    @include m.respondToSm {
+      flex-direction: column;
+    }
   }
 
   .BarConcepts__contentImageBox {
@@ -16,6 +24,12 @@
     top: 100px;
     width: 70%;
     height: calc(100vh - 200px);
+
+    @include m.respondToSm {
+      top: 0px;
+      width: 100%;
+      height: calc(100vh - 20px);
+    }
 
     & .BarConcepts__contentImageBody {
       position: absolute;
@@ -49,8 +63,20 @@
     width: 250px;
     min-width: 220px;
 
+    @include m.respondToSm {
+      position: relative;
+      z-index: var(--z-index-elevation-1);
+      padding: 100vh 40px;
+      width: 100%;
+      color: var(--color-white);
+    }
+
     li + li {
       margin-top: 80px;
+
+      @include m.respondToSm {
+        margin-top: 120px;
+      }
     }
   }
 
@@ -59,6 +85,10 @@
     padding-bottom: 12px;
     font-size: 20px;
     border-bottom: 1px solid var(--color-border-gray);
+
+    @include m.respondToSm {
+      font-size: 22px;
+    }
   }
 
   .BarConcepts__contentTextBodyJa {
@@ -67,6 +97,10 @@
     line-height: 2;
     letter-spacing: var(--letter-space-text-jp);
     text-align: justify;
+
+    @include m.respondToSm {
+      font-size: 16px;
+    }
   }
 
   .BarConcepts__contentTextBodyEn {
@@ -77,5 +111,10 @@
     // letter-spacing: var(--letter-space-text-en);
     line-height: 1.6;
     text-align: justify;
+
+    @include m.respondToSm {
+      color: var(--color-white);
+      font-size: 16px;
+    }
   }
 }
