@@ -11,6 +11,17 @@ const BarConcepts: React.FC = ({}) => {
   const cocktailRef = useRef<HTMLHeadingElement | null>(null);
   const coffeeRef = useRef<HTMLHeadingElement | null>(null);
   const lunchRef = useRef<HTMLHeadingElement | null>(null);
+  const [offsetY, setOffsetY] = useState(0);
+  const speed = 0.08;
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setOffsetY(window.scrollY * speed);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [speed]);
 
   useEffect(() => {
     const sections = [
@@ -48,43 +59,58 @@ const BarConcepts: React.FC = ({}) => {
   return (
     <div className={style.BarConcepts}>
       <div className={style.BarConcepts__contents}>
-        <div className={style.BarConcepts__contentImageBox}>
-          <Image
-            width={800}
-            height={400}
-            src={`/bar/concept/1.JPG`}
-            alt="コンセプトのバー画像"
+        <div className={style.BarConcepts__imageWrapper}>
+          <div
             className={classNames(
-              style.BarConcepts__contentImageBody,
+              style.BarConcepts__contentImageBox,
               displayedImageNumber == 1
-                ? style["BarConcepts__contentImageBody--active"]
+                ? style["BarConcepts__contentImageBox--active"]
                 : ""
             )}
-          />
-          <Image
-            width={800}
-            height={400}
-            src={`/bar/concept/2.JPG`}
-            alt="コンセプトのバー画像"
+          >
+            <Image
+              width={800}
+              height={400}
+              src={`/bar/concept/1.JPG`}
+              alt="コンセプトのバー画像"
+              className={style.BarConcepts__contentImageBody}
+              style={{ transform: `translateY(-${offsetY}px)` }}
+            />
+          </div>
+          <div
             className={classNames(
-              style.BarConcepts__contentImageBody,
+              style.BarConcepts__contentImageBox,
               displayedImageNumber == 2
-                ? style["BarConcepts__contentImageBody--active"]
+                ? style["BarConcepts__contentImageBox--active"]
                 : ""
             )}
-          />
-          <Image
-            width={800}
-            height={400}
-            src={`/bar/concept/3.JPG`}
-            alt="コンセプトのバー画像"
+          >
+            <Image
+              width={800}
+              height={400}
+              src={`/bar/concept/2.JPG`}
+              alt="コンセプトのバー画像"
+              className={style.BarConcepts__contentImageBody}
+              style={{ transform: `translateY(-${offsetY - 100}px)` }}
+            />
+          </div>
+          <div
             className={classNames(
-              style.BarConcepts__contentImageBody,
+              style.BarConcepts__contentImageBox,
               displayedImageNumber == 3
-                ? style["BarConcepts__contentImageBody--active"]
+                ? style["BarConcepts__contentImageBox--active"]
                 : ""
             )}
-          />
+          >
+            <Image
+              width={800}
+              height={400}
+              src={`/bar/concept/3.JPG`}
+              alt="コンセプトのバー画像"
+              className={style.BarConcepts__contentImageBody}
+              style={{ transform: `translateY(-${offsetY - 200}px)` }}
+            />
+          </div>
         </div>
         <ul className={style.BarConcepts__contentTexts}>
           <li>
@@ -112,7 +138,7 @@ const BarConcepts: React.FC = ({}) => {
             </h3>
             <p className={style.BarConcepts__contentTextBodyJa}>
               わととでは、自家焙煎した深煎りを中心とするコーヒーを提供しています。
-              コーヒーを飲みながら、瞑想のように心を落ち着ける時間を過ごしても、ただ何も考えないひとときを楽しんでも、日常に溢れる情報から距離を置いても構いません。
+              コーヒーを飲みながら、瞑想のように心を落ち着ける時間を過ごしても、ただ何も考えないひとときを楽しんでも、日常に溢れる情報から距離を置くように過ごしても構いません。
               バータイムにもコーヒーをご利用いただけます。自由に自分のペースで過ごす時間をお楽しみください。
             </p>
             <p className={style.BarConcepts__contentTextBodyEn}>

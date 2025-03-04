@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import styles from "./style.module.scss";
 import FadeInContainer from "@/components/FadeInContainer";
+import { ScrollParallax } from "react-just-parallax";
 
 const BarAbout: React.FC = ({}) => {
   return (
@@ -96,13 +97,17 @@ const BarAbout: React.FC = ({}) => {
           </FadeInContainer>
         </div>
 
-        <Image
-          src="/bar/about/1.JPG"
-          alt="About バー店内の写真"
-          width={720}
-          height={967}
-          className={styles.BarAbout__image}
-        />
+        <div className={styles.BarAbout__parallaxWrapper}>
+          <ScrollParallax strength={0.09}>
+            <Image
+              src="/bar/about/1.JPG"
+              alt="About バー店内の写真"
+              width={720}
+              height={967}
+              className={styles.BarAbout__image}
+            />
+          </ScrollParallax>
+        </div>
       </div>
       {/* 
       <Image

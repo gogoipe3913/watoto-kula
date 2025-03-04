@@ -60,6 +60,10 @@
     @include m.respondToSm {
       flex-direction: column;
       padding-left: 20px;
+
+      h3 {
+        font-size: 16px;
+      }
     }
   }
 
@@ -68,6 +72,11 @@
 
     p + p {
       margin-top: 4px;
+    }
+
+    @include m.respondToSm {
+      margin-top: 28px;
+      font-size: 14px;
     }
   }
 
@@ -100,6 +109,10 @@
   .BarAccess__roadTimeTextJp {
     font-family: var(--font-family-text-jp);
     font-size: 14px;
+
+    @include m.respondToSm {
+      font-size: 13px;
+    }
   }
 
   .BarAccess__roadTimeTextEn {
@@ -111,6 +124,12 @@
   .BarAccess__openingHours {
     margin-top: 20px;
     display: flex;
+
+    li {
+      @include m.respondToSm {
+        font-size: 14px;
+      }
+    }
 
     li + li {
       margin-left: 40px;
@@ -134,5 +153,9 @@
     margin-top: 24px;
     font-size: 14px;
     line-height: 1.6;
+
+    @include m.respondToSm {
+      font-size: 13px;
+    }
   }
 }
