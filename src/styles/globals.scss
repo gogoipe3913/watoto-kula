@@ -12,7 +12,13 @@ body {
   --color-black: #202020;
   --color-white: #fff;
   --color-gold: #b6a66c;
+  --color-cream: #f0efea;
+  --color-green: #215256;
+  --color-red: #7b342e;
+  --color-brown: #795542;
   --color-base-background: var(--color-white);
+
+  // ---- bar color ----
   // text color
   --color-text-black: var(--color-black);
   --color-text-gray: #616161;
@@ -20,6 +26,11 @@ body {
   --color-text-gold: var(--color-gold);
   // border color
   --color-border-gray: rgba(0, 0, 0, 0.07);
+
+  // ---- stay color ----
+  --color-stay-text-black: var(--color-black);
+  --color-stay-text-white: var(--color-white);
+  --color-stay-background: var(--color-cream);
 
   // font-family
   --font-family-title: ltc-nicholas-cochin-pro, hina-mincho, sans-serif;
