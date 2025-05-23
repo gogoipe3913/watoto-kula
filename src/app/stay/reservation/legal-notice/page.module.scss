@@ -1,13 +1,14 @@
 @use "../../../../styles/mixin" as m;
 
 .LegalNotice {
-  $padding-frame-vertical: 40px;
-  $padding-frame-horizontal: 48px;
-
   padding-bottom: 200px;
   width: 100%;
   height: auto;
   background-color: var(--color-stay-background);
+
+  @include m.respondToMd {
+    padding: 0 20px 200px;
+  }
 
   & .LegalNotice__title {
     padding-top: 120px;
