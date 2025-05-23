@@ -27,7 +27,9 @@ export default function Stay() {
         </li>
         <li className={styles.LegalNotice__item}>
           <p className={styles.LegalNotice__itemKey}>所在地</p>
-          <p className={styles.LegalNotice__itemValue}>福井県小浜市忠野9-14</p>
+          <p className={styles.LegalNotice__itemValue}>
+            〒917-0245 福井県小浜市忠野9-14
+          </p>
         </li>
         <li className={styles.LegalNotice__item}>
           <p className={styles.LegalNotice__itemKey}>お問い合わせ先</p>
