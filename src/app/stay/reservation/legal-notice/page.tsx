@@ -6,9 +6,7 @@ export default function Stay() {
   return (
     <div className={styles.LegalNotice}>
       <h1 className={styles.LegalNotice__title}>
-        <p className={styles.LegalNotice__titleJa}>
-          特定商法取引法に基づく表記
-        </p>
+        <p className={styles.LegalNotice__titleJa}>特定商取引法に基づく表記</p>
         <p className={styles.LegalNotice__titleEn}>Legal notice</p>
       </h1>
 
