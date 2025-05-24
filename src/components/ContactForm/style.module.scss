@@ -1,0 +1,110 @@
+@use "../../styles/mixin" as m;
+
+.ContactForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+
+  input,
+  textarea {
+    background-color: transparent;
+    border: none;
+    outline: none;
+  }
+
+  & .ContactForm__inputItem,
+  & .ContactForm__textareaItem {
+    width: 100%;
+  }
+
+  & .ContactForm__inputItemBody,
+  & .ContactForm__textarea {
+    margin-top: 8px;
+    padding: 12px 8px;
+    width: 100%;
+    border: 1px solid var(--color-black);
+    border-radius: 4px;
+    font-family: var(--font-family-text-jp);
+
+    &::placeholder {
+      color: var(--color-stay-placeholder);
+    }
+  }
+
+  & .ContactForm__inputItemTitle {
+    @include m.respondToMd {
+      flex-shrink: 0;
+    }
+
+    &--required {
+      &::after {
+        content: " *";
+        color: var(--color-red);
+      }
+
+      @include m.respondToMd {
+        font-size: 13px;
+      }
+    }
+  }
+
+  & .ContactForm__inputItemTitleWithNotation {
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+
+    & .ContactForm__inputItemNotation {
+      font-size: 13px;
+      color: var(--color-text-gray);
+
+      @include m.respondToMd {
+        font-size: 11px;
+      }
+    }
+  }
+
+  & .ContactForm__textarea {
+    height: 200px;
+  }
+
+  & .ContactForm__confirm {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    p {
+      font-size: 14px;
+      line-height: 1.6;
+
+      @include m.respondToMd {
+        font-size: 13px;
+      }
+    }
+
+    label {
+      font-size: 15px;
+
+      @include m.respondToMd {
+        font-size: 14px;
+      }
+    }
+  }
+
+  & .ContactForm__submitButton {
+    margin-top: 16px;
+    padding: 16px 0;
+    width: 100%;
+    background-color: var(--color-red);
+    color: var(--color-white);
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 4px;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+}

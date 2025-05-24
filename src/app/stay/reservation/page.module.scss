@@ -1,190 +1,78 @@
 @use "../../../styles/mixin" as m;
 
-.Stay {
-  $padding-frame-vertical: 40px;
-  $padding-frame-horizontal: 48px;
-
+.Reservation {
+  padding-bottom: 120px;
   width: 100%;
-  height: 100svh;
+  background-color: var(--color-stay-background);
 
-  // 準備中テキスト
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  font-family: var(--font-family-text-jp);
-  line-height: 2.5;
-
-  @include m.respondToSm {
-    padding: 16px;
+  a {
+    color: var(--color-stay-text-black);
   }
 
-  .Bar__logo {
-    position: fixed;
-    top: $padding-frame-vertical;
-    left: $padding-frame-horizontal;
-    z-index: 999;
-
-    @include m.respondToSm {
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 60px;
-      height: 140px;
-    }
-  }
-
-  .Bar__menu {
-    position: fixed;
+  & .Reservation__title {
+    padding-top: 120px;
     display: flex;
-    gap: 40px;
-    top: $padding-frame-vertical;
-    right: $padding-frame-horizontal;
-    z-index: 999;
-    font-family: ltc-nicholas-cochin-pro, sans-serif;
-    font-size: 14px;
-
-    .Bar__hamburger {
-      margin-left: 12px;
-      height: 100%;
-
-      .Bar__hamburgerLine {
-        display: flex;
-        width: 44px;
-        height: 1px;
-        background-color: #fff;
-      }
-
-      .Bar__hamburgerLine + .Bar__hamburgerLine {
-        margin-top: 6px;
-      }
-    }
+    flex-direction: column;
+    align-items: center;
   }
 
-  .Bar__topVideo {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    z-index: 999;
-    width: 230px;
-    height: 320px;
-    object-fit: cover;
-    border-radius: 2px;
-    transform: translate(-50%, -50%);
-  }
-
-  .Bar__slider {
-    height: 100svh;
-    overflow: hidden;
-  }
-
-  .Bar__image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: 0 -80px;
-    transition: 6s ease-out;
-    transform: scale(1.15);
-
-    &--active {
-      transform: scale(1);
-    }
-  }
-
-  .Bar__text {
-    position: relative;
-    bottom: 140px;
-    left: $padding-frame-vertical;
+  & .Reservation__titleJa {
+    font-size: 28px;
     width: fit-content;
-    font-size: 13px;
-    font-family: hina-mincho, sans-serif;
-    color: #fff;
+    letter-spacing: -3px;
+
+    @include m.respondToMd {
+      font-size: 22px;
+    }
+  }
+  & .Reservation__titleEn {
+    margin-top: 4px;
+    font-size: 16px;
+    width: fit-content;
+  }
+
+  & .Reservation__text {
+    margin: 32px auto 0;
+    width: fit-content;
+    max-width: 640px;
+    font-size: 15px;
+    text-align: center;
     line-height: 1.6;
 
-    @include m.respondToSm {
-      position: absolute;
-      -ms-writing-mode: tb-rl;
-      writing-mode: vertical-rl;
-      margin-top: 28px;
-      top: 0;
-      left: 20px;
-      bottom: initial;
-      font-size: 11px;
-      letter-spacing: 0.2em;
+    @include m.respondToMd {
+      max-width: 320px;
+      font-size: 14px;
+      text-align: left;
     }
   }
 
-  .Bar__scrollIndicator {
-    position: absolute;
-    right: -12px;
-    bottom: 68px;
+  & .Reservation__calendar {
+    margin: 100px auto 0;
+    max-width: 80%;
+
+    @include m.respondToMd {
+      max-width: calc(100% - 40px);
+    }
   }
 
-  .Bar__imageSecond {
-    margin-top: -39px;
-    width: 100%;
-    height: 100vh;
-  }
-}
-
-// About
-.BarAbout {
-  padding: 180px 0 100px 100px;
-  display: flex;
-  justify-content: space-between;
-  gap: 60px;
-
-  .BarAbout__texts {
-    padding-top: 240px;
-    width: 100%;
-  }
-
-  .BarAbout__title {
-    padding-bottom: 20px;
-    border-bottom: 1px solid var(--color-border-gray);
-  }
-
-  .BarAbout__titleJp {
-    font-size: 18px;
-  }
-
-  .BarAbout__titleEn {
-    margin-top: 4px;
-    color: var(--color-text-gray-2);
-    font-size: 15px;
-    line-height: 1;
-  }
-
-  .BarAbout__content {
-    margin-top: 20px;
-    display: flex;
-    gap: 40px;
-    justify-content: start;
-  }
-
-  .BarAbout__contentJp {
-    min-width: 306px;
-    font-family: var(--font-family-text-jp);
+  & .Reservation__calendarEventLabel {
+    padding: 8px 2px;
+    background-color: var(--color-red);
+    border: var(--color-red);
     font-size: 13px;
-    color: var(--color-black);
-    line-height: 2;
-    letter-spacing: var(--letter-space-text-jp);
+
+    @include m.respondToMd {
+      font-size: 10px;
+    }
   }
 
-  .BarAbout__contentEn {
-    min-width: 306px;
-    font-family: var(--font-family-text-en);
-    font-size: 15px;
-    color: var(--color-text-gray);
-    line-height: 1.4;
-    letter-spacing: var(--letter-space-text-en);
-  }
+  & .Reservation__form {
+    margin: 120px auto 0;
+    max-width: 440px;
 
-  .BarAbout__image {
-    width: 30%;
-    max-height: 720px;
-    object-fit: cover;
-    aspect-ratio: 800 / 1600;
-    border-radius: 40px 0 0 40px;
+    @include m.respondToMd {
+      padding: 0 20px;
+      font-size: 14px;
+    }
   }
 }

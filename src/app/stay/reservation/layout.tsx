@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   description: "福井県小浜市にある民泊施設です。",
 };
 
-export default function StayLayout({
+export default function ReservationLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;

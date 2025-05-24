@@ -69,7 +69,7 @@
   & .LegalNotice__itemValue {
     max-width: 460px;
     line-height: 1.6;
-    font-family: "hina-mincho";
+    font-family: var(--font-family-text-jp);
 
     @include m.respondToMd {
       max-width: 350px;
