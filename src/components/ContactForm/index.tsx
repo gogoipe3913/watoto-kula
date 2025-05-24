@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEventHandler, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import style from "./style.module.scss";
 import classNames from "classnames";
 
@@ -10,8 +10,10 @@ type FormInputItemProps = {
   placeholder: string;
   value?: string | number;
   notation?: string;
-  onChange?: ChangeEventHandler<HTMLInputElement>;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   required: boolean;
+  error?: boolean;
+  errorMessage?: string;
 };
 
 const FormInputItem: React.FC<FormInputItemProps> = ({
@@ -22,32 +24,12 @@ const FormInputItem: React.FC<FormInputItemProps> = ({
   notation,
   onChange,
   required,
+  error,
+  errorMessage,
 }) => (
   <div className={style.ContactForm__inputItem}>
     {notation ? (
-      <>
-        <div className={style.ContactForm__inputItemTitleWithNotation}>
-          <p
-            className={classNames(
-              style.ContactForm__inputItemTitle,
-              required ? style["ContactForm__inputItemTitle--required"] : ""
-            )}
-          >
-            {itemTitle}
-          </p>
-          <p className={style.ContactForm__inputItemNotation}>{notation}</p>
-        </div>
-        <input
-          name={name}
-          placeholder={placeholder}
-          value={value}
-          onChange={onChange}
-          required={required}
-          className={style.ContactForm__inputItemBody}
-        />
-      </>
-    ) : (
-      <>
+      <div className={style.ContactForm__inputItemTitleWithNotation}>
         <p
           className={classNames(
             style.ContactForm__inputItemTitle,
@@ -56,20 +38,36 @@ const FormInputItem: React.FC<FormInputItemProps> = ({
         >
           {itemTitle}
         </p>
-        <input
-          name={name}
-          placeholder={placeholder}
-          value={value}
-          onChange={onChange}
-          required={required}
-          className={style.ContactForm__inputItemBody}
-        />
-      </>
+        <p className={style.ContactForm__inputItemNotation}>{notation}</p>
+      </div>
+    ) : (
+      <p
+        className={classNames(
+          style.ContactForm__inputItemTitle,
+          required ? style["ContactForm__inputItemTitle--required"] : ""
+        )}
+      >
+        {itemTitle}
+      </p>
+    )}
+    <input
+      name={name}
+      placeholder={placeholder}
+      value={value}
+      onChange={onChange}
+      required={required}
+      className={classNames(
+        style.ContactForm__inputItemBody,
+        error ? style["ContactForm__inputItemBody--error"] : ""
+      )}
+    />
+    {error && errorMessage && (
+      <p className={style.ContactForm__errorMessage}>{errorMessage}</p>
     )}
   </div>
 );
 
-const ContactForm: React.FC = ({}) => {
+const ContactForm: React.FC = () => {
   const [form, setForm] = useState({
     name: "",
     nameKana: "",
@@ -85,24 +83,97 @@ const ContactForm: React.FC = ({}) => {
     checkInTime: "",
     message: "",
     agreeReservationConfirmation: false,
-    // agreePrivacyPolicy: false,
   });
+
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [status, setStatus] = useState("");
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    console.log("handleChange", e.target.name, e.target.value);
+    const { name, type, value } = e.target;
+    if (type === "checkbox" && e.target instanceof HTMLInputElement) {
+      setForm({
+        ...form,
+        [name]: e.target.checked,
+      });
+    } else {
+      setForm({
+        ...form,
+        [name]: value,
+      });
+    }
+  };
+
+  const validate = () => {
+    console.log("validate");
+    const newErrors: { [key: string]: string } = {};
+    const requiredFields = [
+      "name",
+      "nameKana",
+      "email",
+      "tel",
+      "postalCode",
+      "address",
+      "headCountAdult",
+      "headCountChild",
+      "headCountBaby",
+      "checkInDate",
+      "checkOutDate",
+      "checkInTime",
+    ];
+
+    requiredFields.forEach((key) => {
+      if (!form[key as keyof typeof form]) {
+        newErrors[key] = "この項目は必須です。";
+      }
+    });
+
+    if (form.email && !/^[\w\.-]+@[\w\.-]+\.\w{2,}$/.test(form.email)) {
+      newErrors["email"] = "正しいメールアドレスを入力してください。";
+    }
+
+    const numericFields = [
+      "tel",
+      "postalCode",
+      "headCountAdult",
+      "headCountChild",
+      "headCountBaby",
+    ];
+    numericFields.forEach((key) => {
+      const value = form[key as keyof typeof form];
+      if (value && !/^\d+$/.test(String(value))) {
+        newErrors[key] = "数字のみで入力してください。";
+      }
+    });
+
+    if (!form.agreeReservationConfirmation) {
+      newErrors["agreeReservationConfirmation"] = "確認が必要です。";
+    }
+
+    return newErrors;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
+    console.log("handleSubmit", form);
     e.preventDefault();
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      setStatus("入力に不備があります。");
+      return;
+    }
+
+    setErrors({});
     setStatus("送信中...");
+
     const res = await fetch("/api/send-email", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form),
     });
+
     if (res.ok) {
       setStatus("送信成功！");
       setForm({
@@ -120,7 +191,6 @@ const ContactForm: React.FC = ({}) => {
         checkInTime: "",
         message: "",
         agreeReservationConfirmation: false,
-        // agreePrivacyPolicy: false,
       });
     } else {
       setStatus("送信失敗");
@@ -135,7 +205,9 @@ const ContactForm: React.FC = ({}) => {
         placeholder="下鴨 矢三郎"
         value={form.name}
         onChange={handleChange}
-        required={true}
+        required
+        error={!!errors.name}
+        errorMessage={errors.name}
       />
       <FormInputItem
         itemTitle="おなまえ（ふりがな）"
@@ -143,7 +215,9 @@ const ContactForm: React.FC = ({}) => {
         placeholder="しもがも やざぶろう"
         value={form.nameKana}
         onChange={handleChange}
-        required={true}
+        required
+        error={!!errors.nameKana}
+        errorMessage={errors.nameKana}
       />
       <FormInputItem
         itemTitle="メールアドレス"
@@ -151,7 +225,9 @@ const ContactForm: React.FC = ({}) => {
         placeholder="lita@watoto.com"
         value={form.email}
         onChange={handleChange}
-        required={true}
+        required
+        error={!!errors.email}
+        errorMessage={errors.email}
       />
       <FormInputItem
         itemTitle="電話番号"
@@ -159,7 +235,9 @@ const ContactForm: React.FC = ({}) => {
         placeholder="09012345678"
         value={form.tel}
         onChange={handleChange}
-        required={true}
+        required
+        error={!!errors.tel}
+        errorMessage={errors.tel}
       />
       <FormInputItem
         itemTitle="郵便番号"
@@ -167,7 +245,9 @@ const ContactForm: React.FC = ({}) => {
         placeholder="1110900"
         value={form.postalCode}
         onChange={handleChange}
-        required={true}
+        required
+        error={!!errors.postalCode}
+        errorMessage={errors.postalCode}
       />
       <FormInputItem
         itemTitle="ご住所"
@@ -175,7 +255,9 @@ const ContactForm: React.FC = ({}) => {
         placeholder="京都府京都市左京区 わととマンション 101"
         value={form.address}
         onChange={handleChange}
-        required={true}
+        required
+        error={!!errors.address}
+        errorMessage={errors.address}
       />
       <FormInputItem
         itemTitle="宿泊人数（大人）"
@@ -183,7 +265,9 @@ const ContactForm: React.FC = ({}) => {
         placeholder="5"
         value={form.headCountAdult}
         onChange={handleChange}
-        required={true}
+        required
+        error={!!errors.headCountAdult}
+        errorMessage={errors.headCountAdult}
       />
       <FormInputItem
         itemTitle="宿泊人数（4~9歳）"
@@ -191,7 +275,9 @@ const ContactForm: React.FC = ({}) => {
         placeholder="3"
         value={form.headCountChild}
         onChange={handleChange}
-        required={true}
+        required
+        error={!!errors.headCountChild}
+        errorMessage={errors.headCountChild}
       />
       <FormInputItem
         itemTitle="宿泊人数（3歳以下）"
@@ -200,7 +286,9 @@ const ContactForm: React.FC = ({}) => {
         placeholder="1"
         value={form.headCountBaby}
         onChange={handleChange}
-        required={true}
+        required
+        error={!!errors.headCountBaby}
+        errorMessage={errors.headCountBaby}
       />
       <FormInputItem
         itemTitle="ご希望のチェックイン日"
@@ -208,7 +296,9 @@ const ContactForm: React.FC = ({}) => {
         placeholder="2025/10/01"
         value={form.checkInDate}
         onChange={handleChange}
-        required={true}
+        required
+        error={!!errors.checkInDate}
+        errorMessage={errors.checkInDate}
       />
       <FormInputItem
         itemTitle="ご希望のチェックアウト日"
@@ -216,16 +306,21 @@ const ContactForm: React.FC = ({}) => {
         placeholder="2025/10/02"
         value={form.checkOutDate}
         onChange={handleChange}
-        required={true}
+        required
+        error={!!errors.checkOutDate}
+        errorMessage={errors.checkOutDate}
       />
       <FormInputItem
         itemTitle="チェックイン時間"
         name="checkInTime"
-        placeholder="15:00"
+        placeholder="16:00"
         value={form.checkInTime}
         onChange={handleChange}
-        required={true}
+        required
+        error={!!errors.checkInTime}
+        errorMessage={errors.checkInTime}
       />
+
       <div className={style.ContactForm__textareaItem}>
         <p className={style.ContactForm__inputItemTitle}>備考欄</p>
         <textarea
@@ -236,10 +331,10 @@ const ContactForm: React.FC = ({}) => {
           className={style.ContactForm__textarea}
         />
       </div>
+
       <div className={style.ContactForm__confirm}>
         <p>
-          送信時点でご予約を確定できるものではございません。
-          メール送付による決済完了をもって確定となりますので、あらかじめご了承の上、チェックをお願いします。
+          送信時点でご予約を確定できるものではございません。メール送付による決済完了をもって確定となりますので、あらかじめご了承の上、チェックをお願いします。
         </p>
         <label>
           <input
@@ -247,30 +342,20 @@ const ContactForm: React.FC = ({}) => {
             name="agreeReservationConfirmation"
             checked={form.agreeReservationConfirmation}
             onChange={handleChange}
-            required={true}
           />
           確認しました
         </label>
+        {errors.agreeReservationConfirmation && (
+          <p className={style.ContactForm__errorMessage}>
+            {errors.agreeReservationConfirmation}
+          </p>
+        )}
       </div>
-      {/* <div className={style.ContactForm__confirm}>
-        <p>
-          プライバシーポリシーをご確認の上、同意するにチェックをお願いします。
-        </p>
-        <label>
-          <input
-            type="checkbox"
-            name="agreePrivacyPolicy"
-            checked={form.agreePrivacyPolicy}
-            onChange={handleChange}
-            required={true}
-          />
-          同意します
-        </label>
-      </div> */}
+
       <button type="submit" className={style.ContactForm__submitButton}>
         予約を申し込む
       </button>
-      <p>{status}</p>
+      <p className={style.ContactForm__submitStatus}>{status}</p>
     </form>
   );
 };
