@@ -38,7 +38,7 @@ export default function Stay() {
         <li className={styles.LegalNotice__item}>
           <p className={styles.LegalNotice__itemKey}>販売価格</p>
           <p className={styles.LegalNotice__itemValue}>
-            ホームページ内ご利用案内に記載。予約日数と人数により金額が異なります。
+            Instagram投稿に記載。予約日数と人数により金額が異なります。
           </p>
         </li>
         <li className={styles.LegalNotice__item}>
