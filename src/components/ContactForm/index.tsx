@@ -91,7 +91,6 @@ const ContactForm: React.FC = () => {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    console.log("handleChange", e.target.name, e.target.value);
     const { name, type, value } = e.target;
     if (type === "checkbox" && e.target instanceof HTMLInputElement) {
       setForm({
@@ -107,7 +106,6 @@ const ContactForm: React.FC = () => {
   };
 
   const validate = () => {
-    console.log("validate");
     const newErrors: { [key: string]: string } = {};
     const requiredFields = [
       "name",
@@ -156,7 +154,6 @@ const ContactForm: React.FC = () => {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    console.log("handleSubmit", form);
     e.preventDefault();
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
