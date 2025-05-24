@@ -36,11 +36,18 @@ export default function Reservation() {
           <p className={styles.Reservation__titleEn}>Reservation form</p>
         </h2>
         <p className={styles.Reservation__text}>
-          フォームを入力いただき、宿泊予約を進めてください。
+          フォームを入力し、宿泊予約を進めてください。
           <br />
           入力完了後メールにて支払いリンクを送信しますので、お支払いをお願いします。
           <br />
-          料金や宿情報は、こちらからご確認ください。
+          料金や宿情報は、
+          <a
+            href="https://www.instagram.com/p/DJQVh_SBqoS/?img_index=1"
+            className={styles.Reservation__link}
+          >
+            こちら
+          </a>
+          からご確認ください。
         </p>
         <div className={styles.Reservation__form}>
           <ContactForm />

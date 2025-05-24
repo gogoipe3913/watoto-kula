@@ -66,6 +66,10 @@
     }
   }
 
+  & .Reservation__link {
+    text-decoration: underline;
+  }
+
   & .Reservation__form {
     margin: 120px auto 0;
     max-width: 440px;
