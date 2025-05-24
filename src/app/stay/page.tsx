@@ -1,16 +1,38 @@
 "use client";
 
+import Link from "next/link";
 import styles from "./page.module.scss";
 
 export default function Stay() {
   return (
     <div className={styles.Stay}>
-      <br />
-      Watoto Stay Litaは、
-      <br />
-      福井県小浜市忠野9-14 にて2025年春よりオープン予定です。
-      <br />
-      今しばらくお待ちください。
+      <div>
+        <div className={styles.Stay__texts}>
+          <br />
+          <p>Watoto Stay Litaのウェブサイトは、現在準備中です。</p>
+          <p>
+            宿の詳しい情報については、
+            <a
+              href="https://www.instagram.com/watoto_stay_lita/"
+              className={styles.Stay__igLink}
+            >
+              Instagram
+            </a>
+            をご覧ください。
+          </p>
+          <p>ご予約は、下記のフォームからお申し込みいただけます。</p>
+        </div>
+        <Link href="/stay/reservation" className={styles.Stay__reservationLink}>
+          <span>予約フォーム</span>
+          <span className={styles.Stay__linkArrow} />
+        </Link>
+        <Link
+          href="/stay/reservation/legal-notice"
+          className={styles.Stay__legalNoticeLink}
+        >
+          <span>特定商取引法に基づく表記</span>
+        </Link>
+      </div>
     </div>
   );
 }
