@@ -20,7 +20,8 @@
     font-family: var(--font-family-text-jp);
 
     @include m.respondToSm {
-      padding: 16px;
+      padding: 20px;
+      font-size: 14px;
     }
 
     p {
@@ -104,5 +105,9 @@
     color: var(--color-text-gray);
     text-align: center;
     text-decoration: underline;
+
+    @include m.respondToSm {
+      font-size: 14px;
+    }
   }
 }

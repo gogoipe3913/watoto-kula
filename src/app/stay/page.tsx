@@ -11,7 +11,7 @@ export default function Stay() {
           <br />
           <p>Watoto Stay Litaのウェブサイトは、現在準備中です。</p>
           <p>
-            宿の詳しい情報については、
+            宿の情報については、
             <a
               href="https://www.instagram.com/watoto_stay_lita/"
               className={styles.Stay__igLink}
@@ -20,7 +20,8 @@ export default function Stay() {
             </a>
             をご覧ください。
           </p>
-          <p>ご予約は、下記のフォームからお申し込みいただけます。</p>
+          <br />
+          <p>ご予約は、下記フォームからお申し込みください。</p>
         </div>
         <Link href="/stay/reservation" className={styles.Stay__reservationLink}>
           <span>予約フォーム</span>
