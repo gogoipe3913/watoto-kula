@@ -21,7 +21,7 @@ export default function Reservation() {
           <FullCalendar
             plugins={[dayGridPlugin, googleCalendarPlugin]}
             initialView="dayGridMonth"
-            googleCalendarApiKey="AIzaSyBOLB_2dDa5TzQ_nOrH9PQUT_8CkAepHVQ"
+            googleCalendarApiKey="AIzaSyAShrvs3a4xRMxfY8ND8AY4q-Sx5gXeSZY"
             events={{
               googleCalendarId:
                 "87d7e10665681782805d414216253dc04c89c1073cc0a15ef6cf018442fe9ecc@group.calendar.google.com",
