@@ -38,7 +38,27 @@ export default function Stay() {
         <li className={styles.LegalNotice__item}>
           <p className={styles.LegalNotice__itemKey}>販売価格</p>
           <p className={styles.LegalNotice__itemValue}>
-            Instagram投稿に記載。予約日数と人数により金額が異なります。
+            基本料金と人数料金を組み合わせた料金体系です。
+            <br />
+            <br />
+            【基本料金（1泊1棟あたり）】
+            <br />
+            ・金/土/日/祝前日：20,000円
+            <br />
+            ・平日：15,000円
+            <br />
+            ・2連泊目：10,000円
+            <br />
+            ・3泊目以降無料（最大5泊まで）
+            <br />
+            <br />
+            【人数料金】
+            <br />
+            ・大人1名あたり：＋5,000円
+            <br />
+            ・子ども（4~9歳）1名あたり：＋3,000円
+            <br />
+            ・3歳以下：無料
           </p>
         </li>
         <li className={styles.LegalNotice__item}>
@@ -104,8 +124,6 @@ export default function Stay() {
               <br />
               ホームページに掲載された内容について、情報雑誌、その他の情報媒体および
               事業者が提示している条件と異なる場合があります。
-              特定商取引法に規定されているクーリングオフが適用されるサービス
-              ではありません。
             </p>
           </div>
         </li>
