@@ -19,7 +19,8 @@ export async function POST(req: Request) {
     checkInTime,
     message,
     agreeReservationConfirmation,
-    // agreePrivacyPolicy,
+    agreePrivacyPolicy,
+    totalPrice,
   } = data;
 
   const mailTextBody = `
@@ -42,7 +43,10 @@ export async function POST(req: Request) {
     予約確認の同意: ${
       agreeReservationConfirmation ? "確認しました" : "確認していません"
     }
+    宿泊約款の同意: ${agreePrivacyPolicy ? "同意しました" : "同意していません"}
     -----------------
+
+    合計金額: ${totalPrice} 円
   `;
 
   const transporter = nodemailer.createTransport({
@@ -56,7 +60,8 @@ export async function POST(req: Request) {
   try {
     await transporter.sendMail({
       from: email,
-      to: "cafe.watoto0617@gmail.com",
+      // to: "cafe.watoto0617@gmail.com",
+      to: "taiki.kishiyama@gmail.com",
       subject: `新しいお問い合わせ from ${name} 様`,
       text: mailTextBody,
     });

@@ -79,4 +79,32 @@
       font-size: 14px;
     }
   }
+
+  & .Reservation__totalPrice {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    padding: 24px 16px;
+    color: var(--color-cream);
+    background-color: var(--color-blue);
+    border-radius: 8px;
+
+    @include m.respondToSm {
+      left: 0;
+      right: 0;
+      bottom: 20px;
+      margin: 0 auto;
+      width: calc(100% - 40px);
+    }
+  }
+
+  & .Reservation__totalPriceBody {
+    width: 160px;
+    text-align: center;
+    font-family: var(--font-family-text-jp);
+
+    @include m.respondToSm {
+      width: 100%;
+    }
+  }
 }

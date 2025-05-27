@@ -1,8 +1,15 @@
 "use client";
 
-import { ChangeEvent, useState } from "react";
+import {
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import style from "./style.module.scss";
 import classNames from "classnames";
+import { calculateTotalPrice } from "./function";
 
 type FormInputItemProps = {
   itemTitle: string;
@@ -14,6 +21,11 @@ type FormInputItemProps = {
   required: boolean;
   error?: boolean;
   errorMessage?: string;
+};
+
+type ContactFormProps = {
+  totalPrice: number;
+  setTotalPrice: Dispatch<SetStateAction<number>>;
 };
 
 const ACCOMMODATION_AGREEMENT_URL =
@@ -70,7 +82,10 @@ const FormInputItem: React.FC<FormInputItemProps> = ({
   </div>
 );
 
-const ContactForm: React.FC = () => {
+const ContactForm: React.FC<ContactFormProps> = ({
+  totalPrice,
+  setTotalPrice,
+}) => {
   const [form, setForm] = useState({
     name: "",
     nameKana: "",
@@ -87,6 +102,7 @@ const ContactForm: React.FC = () => {
     message: "",
     agreeReservationConfirmation: false,
     agreePrivacyPolicy: false,
+    totalPrice: totalPrice || 0,
   });
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
@@ -100,11 +116,13 @@ const ContactForm: React.FC = () => {
       setForm({
         ...form,
         [name]: e.target.checked,
+        totalPrice,
       });
     } else {
       setForm({
         ...form,
         [name]: value,
+        totalPrice,
       });
     }
   };
@@ -196,194 +214,212 @@ const ContactForm: React.FC = () => {
         message: "",
         agreeReservationConfirmation: false,
         agreePrivacyPolicy: false,
+        totalPrice,
       });
     } else {
       setStatus("送信失敗");
     }
   };
 
+  useEffect(() => {
+    const price = calculateTotalPrice(
+      form.checkInDate,
+      form.checkOutDate,
+      Number(form.headCountAdult),
+      Number(form.headCountChild)
+    );
+    setTotalPrice(price);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    form.checkInDate,
+    form.checkOutDate,
+    form.headCountAdult,
+    form.headCountChild,
+  ]);
+
   return (
-    <form onSubmit={handleSubmit} className={style.ContactForm}>
-      <FormInputItem
-        itemTitle="お名前"
-        name="name"
-        placeholder="下鴨 矢三郎"
-        value={form.name}
-        onChange={handleChange}
-        required
-        error={!!errors.name}
-        errorMessage={errors.name}
-      />
-      <FormInputItem
-        itemTitle="おなまえ（ふりがな）"
-        name="nameKana"
-        placeholder="しもがも やざぶろう"
-        value={form.nameKana}
-        onChange={handleChange}
-        required
-        error={!!errors.nameKana}
-        errorMessage={errors.nameKana}
-      />
-      <FormInputItem
-        itemTitle="メールアドレス"
-        name="email"
-        placeholder="lita@watoto.com"
-        value={form.email}
-        onChange={handleChange}
-        required
-        error={!!errors.email}
-        errorMessage={errors.email}
-      />
-      <FormInputItem
-        itemTitle="電話番号"
-        name="tel"
-        placeholder="09012345678"
-        value={form.tel}
-        onChange={handleChange}
-        required
-        error={!!errors.tel}
-        errorMessage={errors.tel}
-      />
-      <FormInputItem
-        itemTitle="郵便番号"
-        name="postalCode"
-        placeholder="1110900"
-        value={form.postalCode}
-        onChange={handleChange}
-        required
-        error={!!errors.postalCode}
-        errorMessage={errors.postalCode}
-      />
-      <FormInputItem
-        itemTitle="ご住所"
-        name="address"
-        placeholder="京都府京都市左京区 わととマンション 101"
-        value={form.address}
-        onChange={handleChange}
-        required
-        error={!!errors.address}
-        errorMessage={errors.address}
-      />
-      <FormInputItem
-        itemTitle="宿泊人数（大人）"
-        name="headCountAdult"
-        placeholder="5"
-        value={form.headCountAdult}
-        onChange={handleChange}
-        required
-        error={!!errors.headCountAdult}
-        errorMessage={errors.headCountAdult}
-      />
-      <FormInputItem
-        itemTitle="宿泊人数（4~9歳）"
-        name="headCountChild"
-        placeholder="3"
-        value={form.headCountChild}
-        onChange={handleChange}
-        required
-        error={!!errors.headCountChild}
-        errorMessage={errors.headCountChild}
-      />
-      <FormInputItem
-        itemTitle="宿泊人数（3歳以下）"
-        notation="※3歳以下のお子様の宿泊料は無料です"
-        name="headCountBaby"
-        placeholder="1"
-        value={form.headCountBaby}
-        onChange={handleChange}
-        required
-        error={!!errors.headCountBaby}
-        errorMessage={errors.headCountBaby}
-      />
-      <FormInputItem
-        itemTitle="ご希望のチェックイン日"
-        name="checkInDate"
-        placeholder="2025/10/01"
-        value={form.checkInDate}
-        onChange={handleChange}
-        required
-        error={!!errors.checkInDate}
-        errorMessage={errors.checkInDate}
-      />
-      <FormInputItem
-        itemTitle="ご希望のチェックアウト日"
-        name="checkOutDate"
-        placeholder="2025/10/02"
-        value={form.checkOutDate}
-        onChange={handleChange}
-        required
-        error={!!errors.checkOutDate}
-        errorMessage={errors.checkOutDate}
-      />
-      <FormInputItem
-        itemTitle="チェックイン時間"
-        name="checkInTime"
-        placeholder="16:00"
-        value={form.checkInTime}
-        onChange={handleChange}
-        required
-        error={!!errors.checkInTime}
-        errorMessage={errors.checkInTime}
-      />
-
-      <div className={style.ContactForm__textareaItem}>
-        <p className={style.ContactForm__inputItemTitle}>備考欄</p>
-        <textarea
-          name="message"
-          placeholder="自転車3台のレンタル、ピザ窯の使用を希望します。"
-          value={form.message}
+    <>
+      <form onSubmit={handleSubmit} className={style.ContactForm}>
+        <FormInputItem
+          itemTitle="お名前"
+          name="name"
+          placeholder="下鴨 矢三郎"
+          value={form.name}
           onChange={handleChange}
-          className={style.ContactForm__textarea}
+          required
+          error={!!errors.name}
+          errorMessage={errors.name}
         />
-      </div>
+        <FormInputItem
+          itemTitle="おなまえ（ふりがな）"
+          name="nameKana"
+          placeholder="しもがも やざぶろう"
+          value={form.nameKana}
+          onChange={handleChange}
+          required
+          error={!!errors.nameKana}
+          errorMessage={errors.nameKana}
+        />
+        <FormInputItem
+          itemTitle="メールアドレス"
+          name="email"
+          placeholder="lita@watoto.com"
+          value={form.email}
+          onChange={handleChange}
+          required
+          error={!!errors.email}
+          errorMessage={errors.email}
+        />
+        <FormInputItem
+          itemTitle="電話番号"
+          name="tel"
+          placeholder="09012345678"
+          value={form.tel}
+          onChange={handleChange}
+          required
+          error={!!errors.tel}
+          errorMessage={errors.tel}
+        />
+        <FormInputItem
+          itemTitle="郵便番号"
+          name="postalCode"
+          placeholder="1110900"
+          value={form.postalCode}
+          onChange={handleChange}
+          required
+          error={!!errors.postalCode}
+          errorMessage={errors.postalCode}
+        />
+        <FormInputItem
+          itemTitle="ご住所"
+          name="address"
+          placeholder="京都府京都市左京区 わととマンション 101"
+          value={form.address}
+          onChange={handleChange}
+          required
+          error={!!errors.address}
+          errorMessage={errors.address}
+        />
+        <FormInputItem
+          itemTitle="宿泊人数（大人）"
+          name="headCountAdult"
+          placeholder="5"
+          value={form.headCountAdult}
+          onChange={handleChange}
+          required
+          error={!!errors.headCountAdult}
+          errorMessage={errors.headCountAdult}
+        />
+        <FormInputItem
+          itemTitle="宿泊人数（4~9歳）"
+          name="headCountChild"
+          placeholder="3"
+          value={form.headCountChild}
+          onChange={handleChange}
+          required
+          error={!!errors.headCountChild}
+          errorMessage={errors.headCountChild}
+        />
+        <FormInputItem
+          itemTitle="宿泊人数（3歳以下）"
+          notation="※3歳以下のお子様の宿泊料は無料です"
+          name="headCountBaby"
+          placeholder="1"
+          value={form.headCountBaby}
+          onChange={handleChange}
+          required
+          error={!!errors.headCountBaby}
+          errorMessage={errors.headCountBaby}
+        />
+        <FormInputItem
+          itemTitle="ご希望のチェックイン日"
+          name="checkInDate"
+          placeholder="2025/10/01"
+          value={form.checkInDate}
+          onChange={handleChange}
+          required
+          error={!!errors.checkInDate}
+          errorMessage={errors.checkInDate}
+        />
+        <FormInputItem
+          itemTitle="ご希望のチェックアウト日"
+          name="checkOutDate"
+          placeholder="2025/10/02"
+          value={form.checkOutDate}
+          onChange={handleChange}
+          required
+          error={!!errors.checkOutDate}
+          errorMessage={errors.checkOutDate}
+        />
+        <FormInputItem
+          itemTitle="チェックイン時間"
+          name="checkInTime"
+          placeholder="16:00"
+          value={form.checkInTime}
+          onChange={handleChange}
+          required
+          error={!!errors.checkInTime}
+          errorMessage={errors.checkInTime}
+        />
 
-      <div className={style.ContactForm__confirm}>
-        <p>
-          送信時点でご予約を確定できるものではございません。メール送付による決済完了をもって確定となりますので、あらかじめご了承の上、チェックをお願いします。
-        </p>
-        <label>
-          <input
-            type="checkbox"
-            name="agreeReservationConfirmation"
-            checked={form.agreeReservationConfirmation}
+        <div className={style.ContactForm__textareaItem}>
+          <p className={style.ContactForm__inputItemTitle}>備考欄</p>
+          <textarea
+            name="message"
+            placeholder="自転車3台のレンタル、ピザ窯の使用を希望します。"
+            value={form.message}
             onChange={handleChange}
+            className={style.ContactForm__textarea}
           />
-          確認しました
-        </label>
-        {errors.agreeReservationConfirmation && (
-          <p className={style.ContactForm__errorMessage}>
-            {errors.agreeReservationConfirmation}
+        </div>
+
+        <div className={style.ContactForm__confirm}>
+          <p>
+            送信時点でご予約を確定できるものではございません。メール送付による決済完了をもって確定となりますので、あらかじめご了承の上、チェックをお願いします。
           </p>
-        )}
-      </div>
-      <div className={style.ContactForm__confirm}>
-        <p>
-          <a
-            href={ACCOMMODATION_AGREEMENT_URL}
-            target="_blank"
-            className={style.ContactForm__accommodationLink}
-          >
-            宿泊約款
-          </a>
-          をご確認の上、同意するにチェックをお願いします。
-        </p>
-        <label>
-          <input
-            type="checkbox"
-            name="agreePrivacyPolicy"
-            checked={form.agreePrivacyPolicy}
-            onChange={handleChange}
-            required={true}
-          />
-          同意します
-        </label>
-      </div>
-
-      <button type="submit" className={style.ContactForm__submitButton}>
-        予約を申し込む
-      </button>
-      <p className={style.ContactForm__submitStatus}>{status}</p>
-    </form>
+          <label>
+            <input
+              type="checkbox"
+              name="agreeReservationConfirmation"
+              checked={form.agreeReservationConfirmation}
+              onChange={handleChange}
+            />
+            確認しました
+          </label>
+          {errors.agreeReservationConfirmation && (
+            <p className={style.ContactForm__errorMessage}>
+              {errors.agreeReservationConfirmation}
+            </p>
+          )}
+        </div>
+        <div className={style.ContactForm__confirm}>
+          <p>
+            <a
+              href={ACCOMMODATION_AGREEMENT_URL}
+              target="_blank"
+              className={style.ContactForm__accommodationLink}
+            >
+              宿泊約款
+            </a>
+            をご確認の上、同意するにチェックをお願いします。
+          </p>
+          <label>
+            <input
+              type="checkbox"
+              name="agreePrivacyPolicy"
+              checked={form.agreePrivacyPolicy}
+              onChange={handleChange}
+              required={true}
+            />
+            同意します
+          </label>
+        </div>
+        <button type="submit" className={style.ContactForm__submitButton}>
+          予約を申し込む
+        </button>
+        <p className={style.ContactForm__submitStatus}>{status}</p>
+      </form>
+    </>
   );
 };
 
