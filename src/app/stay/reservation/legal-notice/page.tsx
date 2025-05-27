@@ -89,6 +89,23 @@ export default function Stay() {
         </li>
         <li className={styles.LegalNotice__item}>
           <p className={styles.LegalNotice__itemKey}>
+            交換および返品
+            <br className={styles.LegalNotice__pcOnly} />
+            （返金ポリシー）
+          </p>
+          <p className={styles.LegalNotice__itemValue}>
+            宿泊者が自己の都合により宿泊契約を解除する場合は、当施設が定めるキャンセルポリシーに従い、以下のとおり違約金（取消料）を申し受けます。
+            <br />
+            <br />
+            2日前：宿泊料金の30%
+            <br />
+            前日：宿泊料金の50%
+            <br />
+            当日：宿泊料金の100%
+          </p>
+        </li>
+        <li className={styles.LegalNotice__item}>
+          <p className={styles.LegalNotice__itemKey}>
             販売価格以外で
             <br className={styles.LegalNotice__pcOnly} />
             発生する金銭
