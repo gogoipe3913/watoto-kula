@@ -16,6 +16,9 @@ type FormInputItemProps = {
   errorMessage?: string;
 };
 
+const ACCOMMODATION_AGREEMENT_URL =
+  "https://docs.google.com/document/d/1MhN6JmNrd2s6KkcGALND_3QbkuvfpkE-OUa_4M0hybc/edit?tab=t.0#heading=h.txklqv91ffmf";
+
 const FormInputItem: React.FC<FormInputItemProps> = ({
   itemTitle,
   name,
@@ -83,6 +86,7 @@ const ContactForm: React.FC = () => {
     checkInTime: "",
     message: "",
     agreeReservationConfirmation: false,
+    agreePrivacyPolicy: false,
   });
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
@@ -149,6 +153,9 @@ const ContactForm: React.FC = () => {
     if (!form.agreeReservationConfirmation) {
       newErrors["agreeReservationConfirmation"] = "確認が必要です。";
     }
+    if (!form.agreePrivacyPolicy) {
+      newErrors["agreePrivacyPolicy"] = "確認が必要です。";
+    }
 
     return newErrors;
   };
@@ -188,6 +195,7 @@ const ContactForm: React.FC = () => {
         checkInTime: "",
         message: "",
         agreeReservationConfirmation: false,
+        agreePrivacyPolicy: false,
       });
     } else {
       setStatus("送信失敗");
@@ -347,6 +355,28 @@ const ContactForm: React.FC = () => {
             {errors.agreeReservationConfirmation}
           </p>
         )}
+      </div>
+      <div className={style.ContactForm__confirm}>
+        <p>
+          <a
+            href={ACCOMMODATION_AGREEMENT_URL}
+            target="_blank"
+            className={style.ContactForm__accommodationLink}
+          >
+            宿泊約款
+          </a>
+          をご確認の上、同意するにチェックをお願いします。
+        </p>
+        <label>
+          <input
+            type="checkbox"
+            name="agreePrivacyPolicy"
+            checked={form.agreePrivacyPolicy}
+            onChange={handleChange}
+            required={true}
+          />
+          同意します
+        </label>
       </div>
 
       <button type="submit" className={style.ContactForm__submitButton}>
