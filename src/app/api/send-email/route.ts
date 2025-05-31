@@ -60,8 +60,8 @@ export async function POST(req: Request) {
   try {
     await transporter.sendMail({
       from: email,
-      // to: "cafe.watoto0617@gmail.com",
-      to: "taiki.kishiyama@gmail.com",
+      to: "cafe.watoto0617@gmail.com",
+      // to: "taiki.kishiyama@gmail.com",
       subject: `新しいお問い合わせ from ${name} 様`,
       text: mailTextBody,
     });
