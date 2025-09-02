@@ -66,7 +66,7 @@ export default function Reservation() {
           <br />
           料金や宿情報は、
           <a
-            href="https://www.instagram.com/p/DJQVh_SBqoS/?img_index=1"
+            href="https://www.instagram.com/p/DOBYRt4jzfv/"
             className={style.Reservation__link}
           >
             こちら
