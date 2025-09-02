@@ -31,6 +31,27 @@ type ContactFormProps = {
 const ACCOMMODATION_AGREEMENT_URL =
   "https://docs.google.com/document/d/1MhN6JmNrd2s6KkcGALND_3QbkuvfpkE-OUa_4M0hybc/edit?tab=t.0#heading=h.txklqv91ffmf";
 
+/** ===================== 追加: 日付ユーティリティ ===================== **/
+const normalizeYMD = (input: string): string => {
+  if (!input) return "";
+  const s = input.trim();
+
+  // 20250913 / 2025-9-3 / 2025/9/3 / 2025-09-03 / 2025/09/03 を許容
+  const m = s.match(/^(\d{4})[\/\-]?(\d{1,2})[\/\-]?(\d{1,2})$/);
+  if (!m) return s; // それ以外の文字列はそのまま返す（既に YYYY-MM-DD 等も通す）
+  const [, y, mo, d] = m;
+  const mm = mo.padStart(2, "0");
+  const dd = d.padStart(2, "0");
+  return `${y}-${mm}-${dd}`; // ISO 形式へ正規化
+};
+
+const isValidDate = (input: string): boolean => {
+  const n = normalizeYMD(input);
+  const date = new Date(n);
+  return !Number.isNaN(date.getTime());
+};
+/** =================================================================== **/
+
 const FormInputItem: React.FC<FormInputItemProps> = ({
   itemTitle,
   name,
@@ -168,6 +189,26 @@ const ContactForm: React.FC<ContactFormProps> = ({
       }
     });
 
+    // 追加: 日付妥当性
+    if (form.checkInDate && !isValidDate(form.checkInDate)) {
+      newErrors["checkInDate"] =
+        "日付の形式が正しくありません。（例：2025/10/01 または 20251001）";
+    }
+    if (form.checkOutDate && !isValidDate(form.checkOutDate)) {
+      newErrors["checkOutDate"] =
+        "日付の形式が正しくありません。（例：2025/10/02 または 20251002）";
+    }
+
+    // 追加: チェックイン < チェックアウト
+    if (isValidDate(form.checkInDate) && isValidDate(form.checkOutDate)) {
+      const inD = new Date(normalizeYMD(form.checkInDate));
+      const outD = new Date(normalizeYMD(form.checkOutDate));
+      if (inD >= outD) {
+        newErrors["checkOutDate"] =
+          "チェックアウト日はチェックイン日より後にしてください。";
+      }
+    }
+
     if (!form.agreeReservationConfirmation) {
       newErrors["agreeReservationConfirmation"] = "確認が必要です。";
     }
@@ -190,10 +231,18 @@ const ContactForm: React.FC<ContactFormProps> = ({
     setErrors({});
     setStatus("送信中...");
 
+    // 追加: 送信前に正規化した日付で上書き
+    const payload = {
+      ...form,
+      checkInDate: normalizeYMD(form.checkInDate),
+      checkOutDate: normalizeYMD(form.checkOutDate),
+      totalPrice,
+    };
+
     const res = await fetch("/api/send-email", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
+      body: JSON.stringify(payload),
     });
 
     if (res.ok) {
@@ -222,11 +271,12 @@ const ContactForm: React.FC<ContactFormProps> = ({
   };
 
   useEffect(() => {
+    // 追加: 料金計算の入力を正規化してから渡す
     const price = calculateTotalPrice(
-      form.checkInDate,
-      form.checkOutDate,
-      Number(form.headCountAdult),
-      Number(form.headCountChild)
+      normalizeYMD(form.checkInDate),
+      normalizeYMD(form.checkOutDate),
+      Number(form.headCountAdult || 0),
+      Number(form.headCountChild || 0)
     );
     setTotalPrice(price);
     // eslint-disable-next-line react-hooks/exhaustive-deps
