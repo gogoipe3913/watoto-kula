@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "../styles/globals.scss";
+import "./globals.css";
+import MouseStalker from "@/components/MouseStalker";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" data-custom-cursor="on">
       <head>
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico" />
         <script
@@ -43,6 +44,7 @@ export default function RootLayout({
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}
+        <MouseStalker />
       </body>
     </html>
   );

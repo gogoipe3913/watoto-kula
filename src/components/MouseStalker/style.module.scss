@@ -1,0 +1,56 @@
+/* 任意: 純正カーソルを消したいときは <html data-custom-cursor="on"> を付与 */
+:global(html[data-custom-cursor="on"]) {
+  cursor: none;
+}
+
+.MouseStalker {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  /* ドットの中心合わせ（サイズを変える時はここも同じ半径に） */
+  translate: -6px -6px;
+  width: 8px;
+  height: 8px;
+  z-index: var(--z-index-elevation-4);
+  pointer-events: none;
+  will-change: transform;
+  opacity: 0;
+  backdrop-filter: blur(0px);
+  border: 1px solid rgba(212, 202, 187, 0);
+  border-radius: 50%;
+  transition: width 0.35s ease, height 0.35s ease, backdrop-filter 0.35s ease,
+    opacity 0.3s ease, border 0.35s ease;
+
+  /* マウスが入ったら可視化 */
+  &[data-visible="true"] {
+    opacity: 1;
+  }
+
+  &[data-hover="true"] {
+    width: 56px;
+    height: 56px;
+    backdrop-filter: blur(1.4px);
+    border: 1px solid rgba(212, 202, 187, 1);
+  }
+
+  /* クリック可能要素上で少し強調 */
+  &[data-hover="true"] .MouseStalker__dot {
+    width: 56px;
+    height: 56px;
+    opacity: 0.4;
+  }
+}
+
+.MouseStalker__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+
+  /* グローバル変数を使用（色味は:rootの値で一元管理） */
+  background: var(--color-cream); /* 例: クリーム系 */
+  /* 透け感を出したい場合（対応ブラウザ向け） */
+  /* background: color-mix(in srgb, var(--color-cream) 85%, transparent); */
+
+  transition: width 0.35s ease, height 0.35s ease, opacity 0.35s ease;
+}

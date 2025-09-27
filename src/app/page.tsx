@@ -62,85 +62,57 @@ export default function Home() {
   return (
     <div className={styles.Top}>
       <Image
-        src="/logo/main.svg"
+        src="/logo/watoto-hw.svg"
         alt="ロゴ"
-        width={40}
-        height={120}
+        width={220}
+        height={77}
         className={styles.Top__logo}
       />
       <Link href="/bar" className={styles.Top__link}>
-        <Slider {...barSettings} className={styles.Top__slider}>
-          <Image
-            src="/top/bar_photo_1.webp"
-            alt="バーの写真1"
-            width={720}
-            height={967}
-            className={classNames(
-              styles.Top__image,
-              barActiveIndex == 0 ? styles["Top__image--active"] : ""
-            )}
-          />
-          <Image
-            src="/top/bar_photo_2.webp"
-            alt="バーの写真2"
-            width={720}
-            height={967}
-            className={classNames(
-              styles.Top__image,
-              barActiveIndex == 1 ? styles["Top__image--active"] : ""
-            )}
-          />
-          <Image
-            src="/top/bar_photo_3.webp"
-            alt="バーの写真3"
-            width={720}
-            height={967}
-            className={classNames(
-              styles.Top__image,
-              barActiveIndex == 2 ? styles["Top__image--active"] : ""
-            )}
-          />
-        </Slider>
-        <p className={styles.Top__title}>Bar</p>
+        <div className={styles.Top__media}>
+          <Slider {...barSettings} className={styles.Top__slider}>
+            {[1, 2, 3].map((n, i) => (
+              <div key={n} className={styles.Top__slide}>
+                <Image
+                  src={`/top/taste-${n}.webp`}
+                  alt={`バーの写真${n}`}
+                  fill // ← これが重要
+                  priority={i === 0}
+                  className={classNames(
+                    styles.Top__image,
+                    barActiveIndex === i ? styles["Top__image--active"] : ""
+                  )}
+                />
+              </div>
+            ))}
+          </Slider>
+        </div>
+        <p className={styles.Top__title}>Taste</p>
         <p className={styles.Top__textBar}>
           京都・下鴨に佇む、
           <br />
-          多様な人々のための空間でカクテルを。
+          多様な人々のための空間で味わいのひとときを。
         </p>
       </Link>
       <Link href="/stay" className={styles.Top__link}>
-        <Slider {...staySettings} className={styles.Top__slider}>
-          <Image
-            src="/top/stay_photo_1.webp"
-            alt="宿の写真1"
-            width={720}
-            height={967}
-            className={classNames(
-              styles.Top__image,
-              stayActiveIndex == 0 ? styles["Top__image--active"] : ""
-            )}
-          />
-          <Image
-            src="/top/stay_photo_2.webp"
-            alt="宿の写真2"
-            width={720}
-            height={967}
-            className={classNames(
-              styles.Top__image,
-              stayActiveIndex == 1 ? styles["Top__image--active"] : ""
-            )}
-          />
-          <Image
-            src="/top/stay_photo_3.webp"
-            alt="宿の写真3"
-            width={720}
-            height={967}
-            className={classNames(
-              styles.Top__image,
-              stayActiveIndex == 2 ? styles["Top__image--active"] : ""
-            )}
-          />
-        </Slider>
+        <div className={styles.Top__media}>
+          <Slider {...staySettings} className={styles.Top__slider}>
+            {[1, 2, 3].map((n, i) => (
+              <div key={n} className={styles.Top__slide}>
+                <Image
+                  src={`/top/stay-${n}.webp`}
+                  alt={`宿の写真${n}`}
+                  fill // ← これが重要
+                  priority={i === 0}
+                  className={classNames(
+                    styles.Top__image,
+                    stayActiveIndex === i ? styles["Top__image--active"] : ""
+                  )}
+                />
+              </div>
+            ))}
+          </Slider>
+        </div>
         <p className={styles.Top__title}>Stay</p>
         <p className={styles.Top__textStay}>
           福井・小浜の自然に囲まれて、
