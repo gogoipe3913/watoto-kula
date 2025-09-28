@@ -84,6 +84,12 @@ export default function Home() {
   const [barActive, setBarActive] = useState(0);
   const [stayActive, setStayActive] = useState(0);
   const [singleActive, setSingleActive] = useState(0);
+  const currentMobile = isMobile ? mobileSlides[singleActive] : undefined;
+
+  const mobileTitle = currentMobile?.href === "/bar" ? "TASTE" : "STAY";
+  const mobileLine1 = currentMobile?.href === "/bar" ? "KYOTO" : "FUKUI";
+  const mobileLine2 =
+    currentMobile?.href === "/bar" ? "SHIMOGAMO" : "OBAMA, CHUNO";
 
   // ★ モバイルのタイマー再スタート用（PC用は削除）
   const [singleTick, setSingleTick] = useState(0);
@@ -125,7 +131,7 @@ export default function Home() {
         priority
       />
 
-      {/* PC（タイマー無し） */}
+      {/* PC */}
       {!isMobile && (
         <div className={styles.Top__columns}>
           <Link href="/bar" className={styles.Top__link}>
@@ -188,7 +194,7 @@ export default function Home() {
         </div>
       )}
 
-      {/* SP（タイマー有り） */}
+      {/* SP */}
       {isMobile && (
         <div className={styles.Top__single}>
           <Slider
@@ -197,7 +203,7 @@ export default function Home() {
             className={styles.Top__slider}
             beforeChange={(_, next) => {
               setSingleActive(next);
-              setSingleTick((t) => t + 1); // タイマーをリセット
+              setSingleTick((t) => t + 1);
             }}
           >
             {mobileSlides.map((s, i) => (
@@ -217,9 +223,6 @@ export default function Home() {
                   )}
                   priority={i === 0}
                 />
-                <span className={styles.Top__badge}>
-                  {s.href === "/bar" ? "Taste" : "Stay"}
-                </span>
               </Link>
             ))}
           </Slider>
@@ -231,10 +234,10 @@ export default function Home() {
           />
 
           <div className={styles.Top__mobileInfo}>
-            <p className={styles.Top__mobileTitle}>STAY</p>
+            <p className={styles.Top__mobileTitle}>{mobileTitle}</p>
             <p className={styles.Top__mobileText}>
-              <span className={styles.Top__mobileTextFirst}>KYOTO</span>
-              SHIMOGAMO
+              <span className={styles.Top__mobileTextFirst}>{mobileLine1}</span>
+              {mobileLine2}
             </p>
           </div>
         </div>
