@@ -5,17 +5,21 @@
   top: 50%;
   transform: translateY(-50%);
   right: 40px;
-  z-index: 2;
+  z-index: var(--z-index-elevation-4);
   font-family: var(--font-family-serif, cochin, serif);
   font-size: 18px;
   letter-spacing: 0.02em;
   text-align: right;
 
+  @include m.respondToMd {
+    right: 16px;
+  }
+
   .TasteMenu__line {
     position: absolute;
     top: -80%;
     right: 0;
-    width: 372px;
+    width: 360px;
     max-width: initial;
     height: auto;
   }

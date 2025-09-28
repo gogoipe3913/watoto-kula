@@ -11,23 +11,17 @@ import "slick-carousel/slick/slick-theme.css";
 
 const Slider = dynamic(() => import("react-slick"), { ssr: false });
 
-const AUTOPLAY_MS = 6500; // 必要なら 5500 に
+const AUTOPLAY_MS = 6500;
 
 const TasteTop: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(-1);
   const [isTouch, setIsTouch] = useState(false);
 
-  // スクロール演出用
+  // セクション（200vh）とヒーロー本体（100vh）
   const sectionRef = useRef<HTMLElement | null>(null);
   const stickyRef = useRef<HTMLDivElement | null>(null);
 
-  // CSS Scroll-Linked Animations 対応判定
-  const useCssScrollLinked =
-    typeof window !== "undefined" &&
-    typeof CSS !== "undefined" &&
-    CSS.supports?.("animation-timeline: view()");
-
-  // タッチ環境ではスワイプ可、PCは不可
+  // タッチ環境はスワイプ許可
   useEffect(() => {
     const mql = window.matchMedia("(pointer: coarse)");
     const update = () => setIsTouch(mql.matches);
@@ -36,7 +30,7 @@ const TasteTop: React.FC = () => {
       mql.addEventListener("change", update);
       return () => mql.removeEventListener("change", update);
     } else {
-      // Safari 旧API
+      // Safari 旧 API
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (mql as any).addListener?.(update);
       return () => {
@@ -76,32 +70,68 @@ const TasteTop: React.FC = () => {
     return () => clearTimeout(t);
   }, []);
 
-  // CSS非対応ブラウザ向け：JSで --r を更新（最適化版）
+  // ★ “擬似 sticky” + 円の半径を JS で更新
   useEffect(() => {
-    if (useCssScrollLinked) return; // CSSで動くならJS不要
-
     const section = sectionRef.current;
-    const sticky = stickyRef.current;
-    if (!section || !sticky) return;
+    const hero = stickyRef.current;
+    if (!section || !hero) return;
+
+    // 初期化
+    hero.style.setProperty("--r-js", "0px");
 
     let start = 0;
-    let end = 0;
+    let end = 0; // start + 100vh
     let ticking = false;
 
     const recalc = () => {
-      // このセクションの開始〜 +100vh を演出区間に
-      start = section.offsetTop;
-      end = start + window.innerHeight;
+      // セクション開始位置
+      // offsetTop よりも getBoundingClientRect + scrollY の方が信頼性高い
+      const rect = section.getBoundingClientRect();
+      start =
+        rect.top + (window.scrollY || document.documentElement.scrollTop || 0);
+      end = start + window.innerHeight; // 100vh 分で演出
+    };
+
+    const computeRadius = () =>
+      Math.hypot(window.innerWidth, window.innerHeight) / 2;
+
+    const applyStickyEmulation = (y: number) => {
+      // 区間: [start, end)
+      if (y < start) {
+        // スクロール前：通常フローの先頭にいる状態
+        hero.style.position = "relative";
+        hero.style.top = "0";
+        hero.style.left = "0";
+        hero.style.right = "0";
+      } else if (y >= start && y < end) {
+        // 区間中：画面上部に貼り付け（fixed）
+        hero.style.position = "fixed";
+        hero.style.top = "0";
+        hero.style.left = "0";
+        hero.style.right = "0";
+        // } else {
+        //   // 区間後：セクションの下端に“張り付いた”状態を absolute で再現
+        //   hero.style.position = "absolute";
+        //   hero.style.top = `${window.innerHeight}px`; // 親(.TasteTop)基準で 100vh の位置
+        //   hero.style.left = "0";
+        //   hero.style.right = "0";
+      }
     };
 
     const onScroll = () => {
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(() => {
-        const y = window.scrollY;
-        const progress = Math.min(Math.max((y - start) / (end - start), 0), 1); // 0..1
-        const maxR = Math.hypot(window.innerWidth, window.innerHeight); // 画面対角
-        sticky.style.setProperty("--r", `${maxR * progress}px`);
+        const y = window.scrollY || document.documentElement.scrollTop || 0;
+
+        // 擬似 sticky の適用
+        applyStickyEmulation(y);
+
+        // 円の半径（0..1）→ 0..対角/2
+        const progress = Math.min(Math.max((y - start) / (end - start), 0), 1);
+        const r = computeRadius() * progress;
+        hero.style.setProperty("--r-js", `${r}px`);
+
         ticking = false;
       });
     };
@@ -116,17 +146,18 @@ const TasteTop: React.FC = () => {
 
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onResize);
-
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onResize);
     };
-  }, [useCssScrollLinked]);
+  }, []);
 
   return (
-    // 200vh：前半100vhが演出区間（stickyで貼り付け）
+    // 200vh：前半100vhが演出、後半で離脱
     <section ref={sectionRef} className={styles.TasteTop}>
+      {/* 擬似 sticky 対象 */}
       <div ref={stickyRef} className={styles.TasteTop__sticky}>
+        {/* 背景スライダー（背面） */}
         <Slider {...settings} className={styles.TasteTop__slider}>
           {slides.map((s, i) => (
             <Image
@@ -145,6 +176,10 @@ const TasteTop: React.FC = () => {
           ))}
         </Slider>
 
+        {/* 中央から拡大する円（#E4DFD9） */}
+        <div className={styles.TasteTop__reveal} aria-hidden />
+
+        {/* ロゴ・テキスト */}
         <Image
           src="/logo/watoto-taste-logo.svg"
           alt="わとと京都 ロゴ"

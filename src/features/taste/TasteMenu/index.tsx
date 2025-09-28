@@ -10,7 +10,7 @@ export default function TasteMenu() {
       <Image
         src="/logo/line-hw.svg"
         alt="メニューアイコン"
-        width={372}
+        width={340}
         height={655}
         className={styles.TasteMenu__line}
         priority

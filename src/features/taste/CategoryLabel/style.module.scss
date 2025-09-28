@@ -1,8 +1,8 @@
 @use "../../../styles/mixin" as m;
 
-.CategoryLabel__info {
+.CategoryLabel {
   display: block;
-  position: absolute;
+  position: fixed;
   top: 44px;
   left: 40px;
   font-family: cochin, serif;
@@ -11,6 +11,12 @@
   text-align: left;
   color: var(--color-white);
   z-index: 999;
+
+  @include m.respondToMd {
+    top: 16px;
+    left: 16px;
+    font-size: 12px;
+  }
 
   .CategoryLabel__title {
     position: relative;
@@ -47,8 +53,5 @@
       height: 1px;
       background-color: var(--color-white);
     }
-  }
-
-  @include m.respondToMd {
   }
 }
