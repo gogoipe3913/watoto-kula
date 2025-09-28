@@ -76,7 +76,7 @@ export default function Home() {
                 <Image
                   src={`/top/taste-${n}.webp`}
                   alt={`バーの写真${n}`}
-                  fill // ← これが重要
+                  fill
                   priority={i === 0}
                   className={classNames(
                     styles.Top__image,
@@ -102,7 +102,7 @@ export default function Home() {
                 <Image
                   src={`/top/stay-${n}.webp`}
                   alt={`宿の写真${n}`}
-                  fill // ← これが重要
+                  fill
                   priority={i === 0}
                   className={classNames(
                     styles.Top__image,

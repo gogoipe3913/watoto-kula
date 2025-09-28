@@ -94,6 +94,12 @@ select {
   font: inherit;
 }
 
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+
 /* ===== Body ===== */
 html {
   color-scheme: light;
@@ -105,8 +111,8 @@ html {
 }
 
 body {
-  color: var(--color-black);
-  background: var(--color-base-background);
+  color: var(--foreground);
+  background: var(--background);
   font-family: var(--font-family-text-jp);
   font-weight: 400;
   -webkit-font-smoothing: antialiased;

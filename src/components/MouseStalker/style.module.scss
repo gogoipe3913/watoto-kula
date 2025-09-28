@@ -1,56 +1,103 @@
-/* 任意: 純正カーソルを消したいときは <html data-custom-cursor="on"> を付与 */
-:global(html[data-custom-cursor="on"]) {
-  cursor: none;
-}
+/* カーソル非表示は global.css の html[data-custom-cursor="on"] で実施する前提 */
 
 .MouseStalker {
   position: fixed;
-  top: 0;
-  left: 0;
 
-  /* ドットの中心合わせ（サイズを変える時はここも同じ半径に） */
-  translate: -6px -6px;
-  width: 8px;
-  height: 8px;
-  z-index: var(--z-index-elevation-4);
-  pointer-events: none;
-  will-change: transform;
-  opacity: 0;
-  backdrop-filter: blur(0px);
-  border: 1px solid rgba(212, 202, 187, 0);
+  /* JS が更新する座標と最小サイズ */
+  --x: -9999px; /* 初期は画面外 */
+  --y: -9999px;
+  --size: 8px; /* 最小径 */
+  --blur-amount: 1.3px; /* hover時のブラー量 */
+
+  top: var(--y);
+  left: var(--x);
+  width: var(--size);
+  height: var(--size);
+  transform: translate(-50%, -50%); /* 中心合わせ */
+  transform-origin: center;
+
   border-radius: 50%;
-  transition: width 0.35s ease, height 0.35s ease, backdrop-filter 0.35s ease,
-    opacity 0.3s ease, border 0.35s ease;
+  /* 半透明のベース色（blurが視認できるように必ずアルファを入れる） */
+  background: rgba(240, 239, 234, 0.6); /* var(--color-cream) 相当 */
 
-  /* マウスが入ったら可視化 */
+  /* 枠は常に1px（scaleを使わないので太らない） */
+  border: 1px solid transparent;
+  background-clip: padding-box;
+
+  pointer-events: none;
+  z-index: var(--z-index-elevation-4);
+  opacity: 0;
+
+  will-change: width, height, transform, opacity, backdrop-filter,
+    -webkit-backdrop-filter;
+  transition: width 0.25s ease, height 0.25s ease, border-color 0.25s ease,
+    opacity 0.2s ease;
+
+  /* 表示切替 */
   &[data-visible="true"] {
     opacity: 1;
   }
 
+  /* hover時の共通（サイズ・枠色） */
   &[data-hover="true"] {
     width: 56px;
     height: 56px;
-    backdrop-filter: blur(1.4px);
-    border: 1px solid rgba(212, 202, 187, 1);
+    border: 1px solid rgb(220, 210, 195);
   }
 
-  /* クリック可能要素上で少し強調 */
-  &[data-hover="true"] .MouseStalker__dot {
-    width: 56px;
-    height: 56px;
-    opacity: 0.4;
+  /* ---- Chrome/Edge 等（標準） ---- */
+  @supports (backdrop-filter: blur(0)) {
+    backdrop-filter: blur(0);
+
+    transition: width 0.25s ease, height 0.25s ease, border-color 0.25s ease,
+      backdrop-filter 0.25s ease, opacity 0.2s ease;
+
+    &[data-hover="true"] {
+      backdrop-filter: blur(var(--blur-amount));
+    }
+    &[data-force-blur="true"] {
+      backdrop-filter: blur(var(--blur-amount));
+      border-color: var(--color-gold);
+    }
   }
-}
 
-.MouseStalker__dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
+  /* ---- Safari ---- */
+  @supports (-webkit-backdrop-filter: blur(0)) {
+    -webkit-backdrop-filter: blur(0);
 
-  /* グローバル変数を使用（色味は:rootの値で一元管理） */
-  background: var(--color-cream); /* 例: クリーム系 */
-  /* 透け感を出したい場合（対応ブラウザ向け） */
-  /* background: color-mix(in srgb, var(--color-cream) 85%, transparent); */
+    transition: width 0.25s ease, height 0.25s ease, border-color 0.25s ease,
+      -webkit-backdrop-filter 0.25s ease, opacity 0.2s ease;
 
-  transition: width 0.35s ease, height 0.35s ease, opacity 0.35s ease;
+    &[data-hover="true"] {
+      -webkit-backdrop-filter: blur(var(--blur-amount));
+    }
+    &[data-force-blur="true"] {
+      -webkit-backdrop-filter: blur(var(--blur-amount));
+      border-color: var(--color-gold);
+    }
+  }
+
+  /* ---- Fallback（双方非対応: Firefox 等） ---- */
+  @supports not (backdrop-filter: blur(0)) {
+    @supports not (-webkit-backdrop-filter: blur(0)) {
+      /* フェイクの“ガラス感” */
+      background-image: radial-gradient(
+        40% 40% at 50% 50%,
+        rgba(255, 255, 255, 0.45),
+        rgba(255, 255, 255, 0) 70%
+      );
+
+      &[data-hover="true"] {
+        background-image: radial-gradient(
+          45% 45% at 50% 50%,
+          rgba(255, 255, 255, 0.55),
+          rgba(255, 255, 255, 0) 75%
+        );
+      }
+
+      &[data-force-blur="true"] {
+        border-color: var(--color-gold);
+      }
+    }
+  }
 }

@@ -43,13 +43,15 @@ export default function MouseStalker() {
     window.addEventListener("mouseleave", onLeave, { passive: true });
     document.addEventListener("visibilitychange", onVis);
 
+    // rAF: --x / --y だけ更新（transformはCSS側でcenter合わせ）
     const tick = () => {
       const el = ref.current;
       if (el) {
         const k = reduced ? 1 : 0.18; // reduce時は即追従
         pos.current.x += (target.current.x - pos.current.x) * k;
         pos.current.y += (target.current.y - pos.current.y) * k;
-        el.style.transform = `translate3d(${pos.current.x}px, ${pos.current.y}px, 0)`;
+        el.style.setProperty("--x", `${pos.current.x}px`);
+        el.style.setProperty("--y", `${pos.current.y}px`);
       }
       raf.current = requestAnimationFrame(tick);
     };
@@ -66,8 +68,7 @@ export default function MouseStalker() {
   }, [reduced]);
 
   if (!mounted) return null;
-  // タッチ端末で非表示にしたい場合は下を有効化
-  // if (window.matchMedia("(pointer: coarse)").matches) return null;
+  // if (window.matchMedia("(pointer: coarse)").matches) return null; // タッチで非表示にしたい場合は有効化
 
   return createPortal(
     <div
@@ -76,9 +77,10 @@ export default function MouseStalker() {
       data-visible={visible}
       data-hover={hovering}
       aria-hidden
-    >
-      <div className={styles.MouseStalker__dot} />
-    </div>,
+      /* デバッグ用: 常時ブラーONを確認したい時は↓を付ける
+         data-force-blur="true"
+      */
+    />,
     document.body
   );
 }
