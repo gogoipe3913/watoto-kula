@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import googleCalendarPlugin from "@fullcalendar/google-calendar";
@@ -9,27 +9,27 @@ import ContactForm from "@/components/ContactForm";
 
 export default function Reservation() {
   const [totalPrice, setTotalPrice] = useState(0);
-  const [isFormVisible, setIsFormVisible] = useState(true);
+  // const [isFormVisible, setIsFormVisible] = useState(true);
   const divRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    if (!divRef.current) return;
+  // useEffect(() => {
+  //   if (!divRef.current) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsFormVisible(entry.isIntersecting);
-      },
-      {
-        threshold: 0.1,
-      }
-    );
+  //   const observer = new IntersectionObserver(
+  //     ([entry]) => {
+  //       setIsFormVisible(entry.isIntersecting);
+  //     },
+  //     {
+  //       threshold: 0.1,
+  //     }
+  //   );
 
-    observer.observe(divRef.current);
+  //   observer.observe(divRef.current);
 
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
+  //   return () => {
+  //     observer.disconnect();
+  //   };
+  // }, []);
 
   return (
     <div className={style.Reservation}>
@@ -77,13 +77,13 @@ export default function Reservation() {
           <ContactForm totalPrice={totalPrice} setTotalPrice={setTotalPrice} />
         </div>
 
-        {isFormVisible ? (
+        {/* {isFormVisible ? (
           <div className={style.Reservation__totalPrice}>
             <p className={style.Reservation__totalPriceBody}>
               合計金額：{totalPrice.toLocaleString()} 円
             </p>
           </div>
-        ) : null}
+        ) : null} */}
       </div>
     </div>
   );
