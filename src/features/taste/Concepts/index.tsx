@@ -6,7 +6,7 @@ import Image from "next/image";
 import style from "./style.module.scss";
 import classNames from "classnames";
 
-const BarConcepts: React.FC = ({}) => {
+const TasteConcepts: React.FC = ({}) => {
   const [displayedImageNumber, setDisplayedImageNumber] = useState(1);
   const cocktailRef = useRef<HTMLHeadingElement | null>(null);
   const coffeeRef = useRef<HTMLHeadingElement | null>(null);
@@ -57,72 +57,72 @@ const BarConcepts: React.FC = ({}) => {
   }, []);
 
   return (
-    <div className={style.BarConcepts}>
-      <div className={style.BarConcepts__contents}>
-        <div className={style.BarConcepts__imageWrapper}>
+    <div className={style.TasteConcepts}>
+      <div className={style.TasteConcepts__contents}>
+        <div className={style.TasteConcepts__imageWrapper}>
           <div
             className={classNames(
-              style.BarConcepts__contentImageBox,
+              style.TasteConcepts__contentImageBox,
               displayedImageNumber == 1
-                ? style["BarConcepts__contentImageBox--active"]
+                ? style["TasteConcepts__contentImageBox--active"]
                 : ""
             )}
           >
             <Image
               width={800}
               height={400}
-              src={`/bar/concept/1.JPG`}
+              src={`/taste/concept/1.JPG`}
               alt="コンセプトのバー画像"
-              className={style.BarConcepts__contentImageBody}
+              className={style.TasteConcepts__contentImageBody}
               style={{ transform: `translateY(-${offsetY}px)` }}
             />
           </div>
           <div
             className={classNames(
-              style.BarConcepts__contentImageBox,
+              style.TasteConcepts__contentImageBox,
               displayedImageNumber == 2
-                ? style["BarConcepts__contentImageBox--active"]
+                ? style["TasteConcepts__contentImageBox--active"]
                 : ""
             )}
           >
             <Image
               width={800}
               height={400}
-              src={`/bar/concept/2.JPG`}
+              src={`/taste/concept/2.JPG`}
               alt="コンセプトのバー画像"
-              className={style.BarConcepts__contentImageBody}
+              className={style.TasteConcepts__contentImageBody}
               style={{ transform: `translateY(-${offsetY - 100}px)` }}
             />
           </div>
           <div
             className={classNames(
-              style.BarConcepts__contentImageBox,
+              style.TasteConcepts__contentImageBox,
               displayedImageNumber == 3
-                ? style["BarConcepts__contentImageBox--active"]
+                ? style["TasteConcepts__contentImageBox--active"]
                 : ""
             )}
           >
             <Image
               width={800}
               height={400}
-              src={`/bar/concept/3.JPG`}
+              src={`/taste/concept/3.JPG`}
               alt="コンセプトのバー画像"
-              className={style.BarConcepts__contentImageBody}
+              className={style.TasteConcepts__contentImageBody}
               style={{ transform: `translateY(-${offsetY - 200}px)` }}
             />
           </div>
         </div>
-        <ul className={style.BarConcepts__contentTexts}>
+        <ul className={style.TasteConcepts__contentTexts}>
           <li>
-            <h3 ref={cocktailRef} className={style.BarConcepts__contentTitle}>
+            <h3 ref={cocktailRef} className={style.TasteConcepts__contentTitle}>
               Cocktail
             </h3>
-            <p className={style.BarConcepts__contentTextBodyJa}>
+            <p className={style.TasteConcepts__contentTextBodyJa}>
               わととでは、蒸留器を使い、福井県で育った植物を用いたカクテルを提供しています。
               これらの植物は、「二十四節気七十二候」と呼ばれる、1年を細かく分けた季節の区切りに基づいて選ばれています。
               細やかな季節の移ろいに寄り添う、福井の土地と季節の香りを感じられる特別なカクテルをお楽しみください。
             </p>
-            <p className={style.BarConcepts__contentTextBodyEn}>
+            <p className={style.TasteConcepts__contentTextBodyEn}>
               At watoto, we serve cocktails made with plants grown in Fukui
               Prefecture using a distillation system. These plants are selected
               based on "Nijūshi Sekki Shichijūni Kō" (Twenty-four Solar Terms
@@ -133,34 +133,34 @@ const BarConcepts: React.FC = ({}) => {
             </p>
           </li>
           <li>
-            <h3 ref={coffeeRef} className={style.BarConcepts__contentTitle}>
+            <h3 ref={coffeeRef} className={style.TasteConcepts__contentTitle}>
               Coffee
             </h3>
-            <p className={style.BarConcepts__contentTextBodyJa}>
+            <p className={style.TasteConcepts__contentTextBodyJa}>
               わととでは、自家焙煎した深煎りを中心とするコーヒーを提供しています。
               コーヒーを飲みながら、瞑想のように心を落ち着ける時間を過ごしても、ただ何も考えないひとときを楽しんでも、日常に溢れる情報から距離を置くように過ごしても構いません。
               バータイムにもコーヒーをご利用いただけます。自由に自分のペースで過ごす時間をお楽しみください。
             </p>
-            <p className={style.BarConcepts__contentTextBodyEn}>
+            <p className={style.TasteConcepts__contentTextBodyEn}>
               At watoto, we serve coffee with a focus on our house-roasted dark
               roasts. While enjoying your coffee, you're welcome to spend your
               time as you wish - whether that's calming your mind in
               meditation-like stillness, simply enjoying a moment of
               thoughtlessness, or taking a break from the flood of everyday
-              information. Coffee is also available during bar hours. Please
+              information. Coffee is also available during taste hours. Please
               enjoy spending time at your own pace, in your own way.
             </p>
           </li>
           <li>
-            <h3 ref={lunchRef} className={style.BarConcepts__contentTitle}>
+            <h3 ref={lunchRef} className={style.TasteConcepts__contentTitle}>
               Lunch
             </h3>
-            <p className={style.BarConcepts__contentTextBodyJa}>
+            <p className={style.TasteConcepts__contentTextBodyJa}>
               わととでは、福井県の季節ごとの食材をメインに、薬膳と発酵食品を取り入れたお料理をご提供しています。
               食材は、二十四節気に基づく旬の植物を中心に選び、自然の力を最大限に活かした一皿をお届けします。
               仏教の御斎の考え方を取り入れつつ、決してかしこまったものではなく、肩の力を抜いて楽しんでいただける、リラックスした雰囲気での食事を目指しています。心と体を優しく整える、ラフに味わえる料理をどうぞ。
             </p>
-            <p className={style.BarConcepts__contentTextBodyEn}>
+            <p className={style.TasteConcepts__contentTextBodyEn}>
               At watoto, we serve dishes incorporating Chinese herbal cuisine
               and fermented foods, primarily featuring seasonal ingredients from
               Fukui Prefecture. Our ingredients are selected based on the
@@ -178,4 +178,4 @@ const BarConcepts: React.FC = ({}) => {
   );
 };
 
-export default BarConcepts;
+export default TasteConcepts;

@@ -1,7 +1,7 @@
 @use "../../../styles/mixin" as m;
 
 // About
-.BarAbout {
+.TasteAbout {
   position: relative;
   z-index: var(--z-index-elevation-1);
   padding: 160px 0 100px 220px;
@@ -11,7 +11,7 @@
     padding: 80px 0;
   }
 
-  .BarAbout__body {
+  .TasteAbout__body {
     display: flex;
     justify-content: space-between;
     gap: 60px;
@@ -22,7 +22,7 @@
     }
   }
 
-  .BarAbout__texts {
+  .TasteAbout__texts {
     padding-top: 200px;
     width: 100%;
 
@@ -31,24 +31,24 @@
     }
   }
 
-  .BarAbout__title {
+  .TasteAbout__title {
     padding-bottom: 28px;
     color: var(--color-black);
     border-bottom: 1px solid var(--color-border-gray);
   }
 
-  .BarAbout__titleJp {
+  .TasteAbout__titleJp {
     font-size: 20px;
   }
 
-  .BarAbout__titleEn {
+  .TasteAbout__titleEn {
     margin-top: 4px;
     color: var(--color-text-gray-2);
     font-size: 17px;
     line-height: 1;
   }
 
-  .BarAbout__content {
+  .TasteAbout__content {
     margin-top: 28px;
     display: flex;
     gap: 60px;
@@ -59,7 +59,7 @@
     }
   }
 
-  .BarAbout__contentJp {
+  .TasteAbout__contentJp {
     min-width: 306px;
     font-family: var(--font-family-text-jp);
     font-size: 14px;
@@ -68,7 +68,7 @@
     letter-spacing: var(--letter-space-text-jp);
   }
 
-  .BarAbout__contentEn {
+  .TasteAbout__contentEn {
     min-width: 306px;
     font-family: var(--font-family-text-en);
     font-size: 16px;
@@ -77,7 +77,7 @@
     letter-spacing: var(--letter-space-text-en);
   }
 
-  .BarAbout__parallaxWrapper {
+  .TasteAbout__parallaxWrapper {
     width: 40%;
 
     @include m.respondToSm {
@@ -85,7 +85,7 @@
     }
   }
 
-  .BarAbout__image {
+  .TasteAbout__image {
     max-height: 720px;
     object-fit: cover;
     aspect-ratio: 800 / 1600;
@@ -98,7 +98,7 @@
     }
   }
 
-  .BarAbout__lowerImage {
+  .TasteAbout__lowerImage {
     margin-top: 200px;
     width: calc(100% - 100px);
     max-height: 420px;

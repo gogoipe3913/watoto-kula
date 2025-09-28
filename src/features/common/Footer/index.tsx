@@ -11,7 +11,7 @@ const Footer: React.FC = ({}) => {
       <div>
         <ul className={styles.Footer__menu}>
           <li>
-            <a href="#BarAbout">About</a>
+            <a href="#TasteAbout">About</a>
           </li>
           <li>
             <a href="#concept">Concept</a>

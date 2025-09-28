@@ -1,6 +1,6 @@
 @use "../../../styles/mixin" as m;
 
-.BarAccess {
+.TasteAccess {
   position: relative;
   z-index: var(--z-index-elevation-1);
   padding: 180px 0 100px;
@@ -23,14 +23,14 @@
   // Googleマップの色を変更する
   // --------------------------------------------------------- */
 
-  .BarAccess__map {
+  .TasteAccess__map {
     margin-top: 100px;
     width: 100%;
     height: 500px;
     position: relative;
   }
 
-  .BarAccess__map::after {
+  .TasteAccess__map::after {
     content: "";
     display: block;
     width: 100%;
@@ -43,7 +43,7 @@
     // background: #739ee3; /* 好きな色コードに変更 */
   }
 
-  .BarAccess__mapBody {
+  .TasteAccess__mapBody {
     width: 100%;
     -webkit-filter: grayscale(1);
     filter: grayscale(1); /* Googleマップをグレースケールにする */
@@ -51,7 +51,7 @@
 
   // -----------------------------------------------------------
 
-  .BarAccess__information {
+  .TasteAccess__information {
     margin-top: 80px;
     padding-left: 100px;
     display: flex;
@@ -67,7 +67,7 @@
     }
   }
 
-  .BarAccess__address {
+  .TasteAccess__address {
     margin-top: 20px;
 
     p + p {
@@ -80,7 +80,7 @@
     }
   }
 
-  .BarAccess__roadTime {
+  .TasteAccess__roadTime {
     display: flex;
 
     li {
@@ -91,22 +91,22 @@
       }
     }
 
-    .BarAccess__roadTimeRight {
+    .TasteAccess__roadTimeRight {
       @include m.respondToSm {
         width: 80px;
       }
     }
   }
 
-  .BarAccess__address + .BarAccess__roadTime {
+  .TasteAccess__address + .TasteAccess__roadTime {
     margin-top: 24px;
   }
 
-  .BarAccess__roadTime + .BarAccess__roadTime {
+  .TasteAccess__roadTime + .TasteAccess__roadTime {
     margin-top: 16px;
   }
 
-  .BarAccess__roadTimeTextJp {
+  .TasteAccess__roadTimeTextJp {
     font-family: var(--font-family-text-jp);
     font-size: 14px;
 
@@ -115,13 +115,13 @@
     }
   }
 
-  .BarAccess__roadTimeTextEn {
+  .TasteAccess__roadTimeTextEn {
     margin-top: 2px;
     font-family: var(--font-family-text-en);
     font-size: 12px;
   }
 
-  .BarAccess__openingHours {
+  .TasteAccess__openingHours {
     margin-top: 20px;
     display: flex;
 
@@ -139,17 +139,17 @@
     }
   }
 
-  .BarAccess__openingHoursJp {
+  .TasteAccess__openingHoursJp {
     font-family: var(--font-family-text-jp);
   }
 
-  .BarAccess__openingHoursEn {
+  .TasteAccess__openingHoursEn {
     margin-top: 2px;
     font-family: var(--font-family-text-en);
     font-size: 12px;
   }
 
-  .BarAccess__openingHoursNote {
+  .TasteAccess__openingHoursNote {
     margin-top: 24px;
     font-size: 14px;
     line-height: 1.6;

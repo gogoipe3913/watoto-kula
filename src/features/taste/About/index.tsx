@@ -6,20 +6,20 @@ import styles from "./style.module.scss";
 import FadeInContainer from "@/components/FadeInContainer";
 import { ScrollParallax } from "react-just-parallax";
 
-const BarAbout: React.FC = ({}) => {
+const TasteAbout: React.FC = ({}) => {
   return (
-    <div id="#BarAbout" className={styles.BarAbout}>
-      <div className={styles.BarAbout__body}>
-        <div className={styles.BarAbout__texts}>
+    <div id="#TasteAbout" className={styles.TasteAbout}>
+      <div className={styles.TasteAbout__body}>
+        <div className={styles.TasteAbout__texts}>
           <FadeInContainer>
-            <h2 className={styles.BarAbout__title}>
-              <p className={styles.BarAbout__titleJp}>わととについて</p>
-              <p className={styles.BarAbout__titleEn}>about watoto</p>
+            <h2 className={styles.TasteAbout__title}>
+              <p className={styles.TasteAbout__titleJp}>わととについて</p>
+              <p className={styles.TasteAbout__titleEn}>about watoto</p>
             </h2>
           </FadeInContainer>
           <FadeInContainer>
-            <div className={styles.BarAbout__content}>
-              <p className={styles.BarAbout__contentJp}>
+            <div className={styles.TasteAbout__content}>
+              <p className={styles.TasteAbout__contentJp}>
                 {/* あとでJson化したい */}
                 京都下鴨本通沿いに位置する「わとと」は、
                 <br />
@@ -53,7 +53,7 @@ const BarAbout: React.FC = ({}) => {
                 <br />
                 寄り添っていきたいと考えています。
               </p>
-              <p className={styles.BarAbout__contentEn}>
+              <p className={styles.TasteAbout__contentEn}>
                 Located along Shimogamo-Hondori in Kyoto,
                 <br />
                 watoto is an establishment that focuses on
@@ -97,28 +97,28 @@ const BarAbout: React.FC = ({}) => {
           </FadeInContainer>
         </div>
 
-        <div className={styles.BarAbout__parallaxWrapper}>
+        <div className={styles.TasteAbout__parallaxWrapper}>
           <ScrollParallax strength={0.09}>
             <Image
-              src="/bar/about/1.JPG"
+              src="/taste/about/1.JPG"
               alt="About バー店内の写真"
               width={720}
               height={967}
-              className={styles.BarAbout__image}
+              className={styles.TasteAbout__image}
             />
           </ScrollParallax>
         </div>
       </div>
       {/* 
       <Image
-        src="/bar/about/2.JPG"
+        src="/taste/about/2.JPG"
         alt="About バー店内の写真"
         width={720}
         height={420}
-        className={styles.BarAbout__lowerImage}
+        className={styles.TasteAbout__lowerImage}
       /> */}
     </div>
   );
 };
 
-export default BarAbout;
+export default TasteAbout;

@@ -11,7 +11,7 @@
   --color-brown: #795542;
   --color-base-background: var(--color-white);
 
-  /* Bar colors */
+  /* Taste colors */
   --color-text-black: var(--color-black);
   --color-text-gray: #616161;
   --color-text-gray-2: #d8d8d8;
@@ -27,6 +27,7 @@
   /* Fonts */
   --font-family-title: ltc-nicholas-cochin-pro, hina-mincho, sans-serif;
   --font-family-gothic: mr-eaves-sans, hina-mincho, sans-serif;
+  --font-family-serif: cochin, hina-mincho, serif;
   --font-family-text-jp: hina-mincho, sans-serif;
   --font-family-text-en: hina-mincho, sans-serif;
 

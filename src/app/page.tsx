@@ -50,17 +50,17 @@ function useResponsiveBreakpoint(breakpoint = 768) {
   return isMobile;
 }
 
-type Slide = { src: string; alt: string; href: "/bar" | "/stay" };
+type Slide = { src: string; alt: string; href: "/taste" | "/stay" };
 
 export default function Home() {
   const isMobile = useResponsiveBreakpoint(768);
 
   const AUTOPLAY_MS = 6500; // slick の autoplaySpeed と合わせる
 
-  const barSlides: Slide[] = [
-    { src: "/top/taste-1.webp", alt: "バーの写真1", href: "/bar" },
-    { src: "/top/taste-2.webp", alt: "バーの写真2", href: "/bar" },
-    { src: "/top/taste-3.webp", alt: "バーの写真3", href: "/bar" },
+  const tasteSlides: Slide[] = [
+    { src: "/top/taste-1.webp", alt: "バーの写真1", href: "/taste" },
+    { src: "/top/taste-2.webp", alt: "バーの写真2", href: "/taste" },
+    { src: "/top/taste-3.webp", alt: "バーの写真3", href: "/taste" },
   ];
   const staySlides: Slide[] = [
     { src: "/top/stay-1.webp", alt: "宿の写真1", href: "/stay" },
@@ -70,10 +70,10 @@ export default function Home() {
 
   // SP 用は TASTE/STAY を交互に
   const mobileSlides = useMemo<Slide[]>(() => {
-    const max = Math.max(barSlides.length, staySlides.length);
+    const max = Math.max(tasteSlides.length, staySlides.length);
     const mixed: Slide[] = [];
     for (let i = 0; i < max; i++) {
-      if (barSlides[i]) mixed.push(barSlides[i]);
+      if (tasteSlides[i]) mixed.push(tasteSlides[i]);
       if (staySlides[i]) mixed.push(staySlides[i]);
     }
     return mixed;
@@ -81,22 +81,22 @@ export default function Home() {
   }, []);
 
   // アクティブ制御（ピンチアウト用）
-  const [barActive, setBarActive] = useState(0);
+  const [tasteActive, setTasteActive] = useState(0);
   const [stayActive, setStayActive] = useState(0);
   const [singleActive, setSingleActive] = useState(0);
   const currentMobile = isMobile ? mobileSlides[singleActive] : undefined;
 
-  const mobileTitle = currentMobile?.href === "/bar" ? "TASTE" : "STAY";
-  const mobileLine1 = currentMobile?.href === "/bar" ? "KYOTO" : "FUKUI";
+  const mobileTitle = currentMobile?.href === "/taste" ? "TASTE" : "STAY";
+  const mobileLine1 = currentMobile?.href === "/taste" ? "KYOTO" : "FUKUI";
   const mobileLine2 =
-    currentMobile?.href === "/bar" ? "SHIMOGAMO" : "OBAMA, CHUNO";
+    currentMobile?.href === "/taste" ? "SHIMOGAMO" : "OBAMA, CHUNO";
 
   // ★ モバイルのタイマー再スタート用（PC用は削除）
   const [singleTick, setSingleTick] = useState(0);
 
   useEffect(() => {
     const t = setTimeout(() => {
-      setBarActive(0);
+      setTasteActive(0);
       setStayActive(0);
       setSingleActive(0);
     }, 300);
@@ -134,14 +134,14 @@ export default function Home() {
       {/* PC */}
       {!isMobile && (
         <div className={styles.Top__columns}>
-          <Link href="/bar" className={styles.Top__link}>
+          <Link href="/taste" className={styles.Top__link}>
             <Slider
-              key="pc-bar"
+              key="pc-taste"
               {...pcSettings}
               className={styles.Top__slider}
-              beforeChange={(_, next) => setBarActive(next)}
+              beforeChange={(_, next) => setTasteActive(next)}
             >
-              {barSlides.map((s, i) => (
+              {tasteSlides.map((s, i) => (
                 <Image
                   key={s.src}
                   src={s.src}
@@ -150,13 +150,13 @@ export default function Home() {
                   height={967}
                   className={classNames(
                     styles.Top__image,
-                    barActive === i && styles["Top__image--active"]
+                    tasteActive === i && styles["Top__image--active"]
                   )}
                 />
               ))}
             </Slider>
             <p className={styles.Top__title}>Taste</p>
-            <p className={styles.Top__textBar}>
+            <p className={styles.Top__textTaste}>
               京都・下鴨に佇む、
               <br />
               多様な人々のための空間で味わいのひとときを。

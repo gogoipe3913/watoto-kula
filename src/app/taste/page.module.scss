@@ -1,6 +1,6 @@
 @use "../../styles/mixin" as m;
 
-.Bar {
+.Taste {
   $padding-frame-vertical: 40px;
   $padding-frame-horizontal: 48px;
 
@@ -14,7 +14,7 @@
     // overflow: hidden;
   }
 
-  .Bar__contents {
+  .Taste__contents {
     position: relative;
     z-index: var(--z-index-elevation-1);
     margin-top: -52px;

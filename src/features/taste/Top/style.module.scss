@@ -1,0 +1,138 @@
+/* カスタムプロパティを補間可能にする */
+@property --r {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+/* CSSスクロール連動が使える環境では “--r” をスクロールで動かす */
+@supports (animation-timeline: view()) {
+  .TasteTop__sticky {
+    animation-name: hero-reveal;
+    animation-timeline: view(); /* ビューポート基準 */
+    animation-range: cover 0% cover 100%; /* 0→100% で再生 */
+    animation-fill-mode: both;
+  }
+
+  @keyframes hero-reveal {
+    from {
+      --r: 0px;
+    }
+    to {
+      --r: 150vmax;
+    } /* 画面対角より少し大きい値 */
+  }
+}
+
+.TasteTop {
+  position: relative;
+  height: 100vh; /* fallback */
+  overflow: hidden;
+
+  /* 実視野高（SPで下が切れないように） */
+  @media (max-width: 768px) {
+    height: 100vh; /* fallback */
+    height: 100dvh; /* 実視野高 */
+  }
+}
+
+/* スライダーを全面に */
+.TasteTop__slider {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+}
+
+/* slick 内部まで高さを 100% 伝播（高さ0対策） */
+.TasteTop__slider :global(.slick-slider),
+.TasteTop__slider :global(.slick-list),
+.TasteTop__slider :global(.slick-track),
+.TasteTop__slider :global(.slick-slide),
+.TasteTop__slider :global(.slick-slide > div) {
+  height: 100%;
+}
+
+/* 画像フィット＆ゆっくりズームアウト */
+.TasteTop__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 45%;
+  transform: scale(1.18); /* 初期は拡大 */
+  transition: transform 6s ease-out; /* ゆっくり縮む */
+  will-change: transform;
+}
+.TasteTop__image--active {
+  transform: scale(1.05); /* 1.0だと端が出やすいので少し残す */
+}
+
+.TasteTop__logo {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  transform: translateY(-50%);
+  width: 4.2%;
+  max-width: 60px;
+  min-width: 40px;
+  height: auto;
+  z-index: 2;
+}
+
+/* テキストオーバーレイ */
+.TasteTop__text {
+  position: absolute;
+  left: 40px;
+  bottom: 44px;
+  z-index: 2;
+  color: var(--color-white);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+.TasteTop__textEn {
+  font-family: var(--font-family-serif, cochin, serif);
+  font-size: clamp(11px, 1.2vw, 12px);
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+
+/* br の出し分け */
+.TasteTop__spBr {
+  display: none;
+}
+.TasteTop__pcBr {
+  display: inline;
+}
+
+@media (max-width: 768px) {
+  .TasteTop__text {
+    left: 16px;
+    right: 16px;
+    bottom: 32px;
+  }
+  .TasteTop__spBr {
+    display: inline;
+  }
+  .TasteTop__pcBr {
+    display: none;
+  }
+}
+
+/* スクロールインジケータ */
+.TasteTop__scrollIndicator {
+  position: absolute !important;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 16px;
+  z-index: 2;
+}
+
+/* 低モーション環境はズームを控えめに */
+@media (prefers-reduced-motion: reduce) {
+  .TasteTop__image,
+  .TasteTop__image--active {
+    transition: none;
+    transform: none;
+  }
+}

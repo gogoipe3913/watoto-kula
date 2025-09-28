@@ -6,17 +6,17 @@ import styles from "./style.module.scss";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-const BarGallery: React.FC = ({}) => {
+const TasteGallery: React.FC = ({}) => {
   return (
-    <div className={styles.BarGallery}>
+    <div className={styles.TasteGallery}>
       <h2>Gallery</h2>
-      <ul className={styles.BarGallery__images}>
+      <ul className={styles.TasteGallery__images}>
         <li>
           <a href="https://www.instagram.com/p/DFjze_xypKR/" target="_blank">
             <Image
               width={200}
               height={250}
-              src="/bar/gallery/1.jpg"
+              src="/taste/gallery/1.jpg"
               alt="コンセプトのバー画像1"
             />
           </a>
@@ -26,7 +26,7 @@ const BarGallery: React.FC = ({}) => {
             <Image
               width={200}
               height={250}
-              src="/bar/gallery/2.jpg"
+              src="/taste/gallery/2.jpg"
               alt="コンセプトのバー画像2"
             />
           </a>
@@ -36,7 +36,7 @@ const BarGallery: React.FC = ({}) => {
             <Image
               width={200}
               height={250}
-              src="/bar/gallery/3.jpg"
+              src="/taste/gallery/3.jpg"
               alt="コンセプトのバー画像3"
             />
           </a>
@@ -46,7 +46,7 @@ const BarGallery: React.FC = ({}) => {
             <Image
               width={200}
               height={250}
-              src="/bar/gallery/4.jpg"
+              src="/taste/gallery/4.jpg"
               alt="コンセプトのバー画像4"
             />
           </a>
@@ -56,7 +56,7 @@ const BarGallery: React.FC = ({}) => {
             <Image
               width={200}
               height={250}
-              src="/bar/gallery/5.jpg"
+              src="/taste/gallery/5.jpg"
               alt="コンセプトのバー画像5"
             />
           </a>
@@ -66,7 +66,7 @@ const BarGallery: React.FC = ({}) => {
             <Image
               width={200}
               height={250}
-              src="/bar/gallery/6.jpg"
+              src="/taste/gallery/6.jpg"
               alt="コンセプトのバー画像6"
             />
           </a>
@@ -76,7 +76,7 @@ const BarGallery: React.FC = ({}) => {
             <Image
               width={200}
               height={250}
-              src="/bar/gallery/7.jpg"
+              src="/taste/gallery/7.jpg"
               alt="コンセプトのバー画像7"
             />
           </a>
@@ -86,7 +86,7 @@ const BarGallery: React.FC = ({}) => {
             <Image
               width={200}
               height={250}
-              src="/bar/gallery/8.jpg"
+              src="/taste/gallery/8.jpg"
               alt="コンセプトのバー画像8"
             />
           </a>
@@ -96,7 +96,7 @@ const BarGallery: React.FC = ({}) => {
             <Image
               width={200}
               height={250}
-              src="/bar/gallery/9.jpg"
+              src="/taste/gallery/9.jpg"
               alt="コンセプトのバー画像9"
             />
           </a>
@@ -106,7 +106,7 @@ const BarGallery: React.FC = ({}) => {
             <Image
               width={200}
               height={250}
-              src="/bar/gallery/10.jpg"
+              src="/taste/gallery/10.jpg"
               alt="コンセプトのバー画像10"
             />
           </a>
@@ -116,7 +116,7 @@ const BarGallery: React.FC = ({}) => {
             <Image
               width={200}
               height={250}
-              src="/bar/gallery/11.jpg"
+              src="/taste/gallery/11.jpg"
               alt="コンセプトのバー画像11"
             />
           </a>
@@ -126,7 +126,7 @@ const BarGallery: React.FC = ({}) => {
             <Image
               width={200}
               height={250}
-              src="/bar/gallery/12.jpg"
+              src="/taste/gallery/12.jpg"
               alt="コンセプトのバー画像12"
             />
           </a>
@@ -135,13 +135,13 @@ const BarGallery: React.FC = ({}) => {
       <a
         target="_blank"
         href="https://www.instagram.com/watoto_kyoto/"
-        className={styles.BarGallery__link}
+        className={styles.TasteGallery__link}
       >
         <span>View Instagram</span>
-        <span className={styles.BarGallery__linkArrow} />
+        <span className={styles.TasteGallery__linkArrow} />
       </a>
     </div>
   );
 };
 
-export default BarGallery;
+export default TasteGallery;
