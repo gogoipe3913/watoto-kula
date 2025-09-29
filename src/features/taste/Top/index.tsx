@@ -21,6 +21,10 @@ const TasteTop: React.FC = () => {
   const sectionRef = useRef<HTMLElement | null>(null);
   const stickyRef = useRef<HTMLDivElement | null>(null);
 
+  // ▼ 追加：背景色の退避＆ラッチ状態を保持
+  const origBgRef = useRef<string | null>(null);
+  const latchedRef = useRef(false);
+
   // タッチ環境はスワイプ許可
   useEffect(() => {
     const mql = window.matchMedia("(pointer: coarse)");
@@ -70,7 +74,7 @@ const TasteTop: React.FC = () => {
     return () => clearTimeout(t);
   }, []);
 
-  // ★ “擬似 sticky” + 円の半径を JS で更新
+  // ★ “擬似 sticky” + 円の半径を JS で更新 + 見た目切替のフラグ付与
   useEffect(() => {
     const section = sectionRef.current;
     const hero = stickyRef.current;
@@ -79,13 +83,17 @@ const TasteTop: React.FC = () => {
     // 初期化
     hero.style.setProperty("--r-js", "0px");
 
+    // ▼ 追加：初期の body 背景を退避
+    if (!origBgRef.current) {
+      origBgRef.current = getComputedStyle(document.body).backgroundColor || "";
+    }
+
     let start = 0;
     let end = 0; // start + 100vh
     let ticking = false;
 
     const recalc = () => {
       // セクション開始位置
-      // offsetTop よりも getBoundingClientRect + scrollY の方が信頼性高い
       const rect = section.getBoundingClientRect();
       start =
         rect.top + (window.scrollY || document.documentElement.scrollTop || 0);
@@ -109,12 +117,12 @@ const TasteTop: React.FC = () => {
         hero.style.top = "0";
         hero.style.left = "0";
         hero.style.right = "0";
-        // } else {
-        //   // 区間後：セクションの下端に“張り付いた”状態を absolute で再現
-        //   hero.style.position = "absolute";
-        //   hero.style.top = `${window.innerHeight}px`; // 親(.TasteTop)基準で 100vh の位置
-        //   hero.style.left = "0";
-        //   hero.style.right = "0";
+      } else {
+        // （必要に応じて absolute で離脱させる場合はここを復活）
+        // hero.style.position = "absolute";
+        // hero.style.top = `${window.innerHeight}px`;
+        // hero.style.left = "0";
+        // hero.style.right = "0";
       }
     };
 
@@ -131,6 +139,24 @@ const TasteTop: React.FC = () => {
         const progress = Math.min(Math.max((y - start) / (end - start), 0), 1);
         const r = computeRadius() * progress;
         hero.style.setProperty("--r-js", `${r}px`);
+
+        // ▼ 追加：円が広がり切ったら（ラッチ）見た目切替フラグを立てる
+        const shouldLatch = progress >= 0.999; // しきい値は好みで 0.995〜1.0
+        if (shouldLatch !== latchedRef.current) {
+          latchedRef.current = shouldLatch;
+          hero.dataset.latched = shouldLatch ? "true" : "false";
+
+          const de = document.documentElement;
+          if (shouldLatch) {
+            // 背景を #E4DFD9 にバトンタッチ & 全体フラグをON
+            document.body.style.backgroundColor = "#E4DFD9";
+            de.setAttribute("data-hero-latched", "taste");
+          } else {
+            // 戻りスクロール時は元へ
+            document.body.style.backgroundColor = origBgRef.current || "";
+            de.removeAttribute("data-hero-latched");
+          }
+        }
 
         ticking = false;
       });
@@ -149,6 +175,12 @@ const TasteTop: React.FC = () => {
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onResize);
+      // ▼ 追加：ページ離脱時の掃除
+      const de = document.documentElement;
+      de.removeAttribute("data-hero-latched");
+      if (origBgRef.current) {
+        document.body.style.backgroundColor = origBgRef.current;
+      }
     };
   }, []);
 

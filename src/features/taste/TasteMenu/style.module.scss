@@ -10,6 +10,7 @@
   font-size: 18px;
   letter-spacing: 0.02em;
   text-align: right;
+  transition-duration: 2s;
 
   @include m.respondToMd {
     right: 16px;
@@ -24,13 +25,14 @@
     height: auto;
   }
 
-  .TasteMenu__icon {
-  }
-
   ul {
     margin-top: 60px;
     display: flex;
     flex-direction: column;
     gap: 28px;
   }
+}
+
+html[data-hero-latched] .TasteMenu {
+  color: var(--color-dark);
 }
