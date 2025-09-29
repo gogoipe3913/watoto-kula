@@ -22,12 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      data-custom-cursor="on"
-      // ★ これで dev/prod どちらでも css より強く上書きできます
-      style={{ overflowY: "visible", overflowX: "hidden" }}
-    >
+    <html lang="en" data-custom-cursor="on">
       <head>
         <link rel="icon" href="/favicon.ico" />
       </head>

@@ -3,6 +3,7 @@
 import TasteTop from "@/features/taste/Top";
 import CategoryLabel from "@/features/taste/CategoryLabel";
 import TasteMenu from "@/features/taste/TasteMenu";
+import TastePhilosophy from "@/features/taste/Philosophy";
 import styles from "./page.module.scss";
 
 import "slick-carousel/slick/slick.css";
@@ -14,6 +15,7 @@ export default function Taste() {
       <CategoryLabel />
       <TasteMenu />
       <TasteTop />
+      <TastePhilosophy />
       {/* <TasteTopSecond />
       <div className={styles.Taste__contents}>
         <TasteAbout />

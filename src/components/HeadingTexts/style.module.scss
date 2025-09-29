@@ -1,0 +1,18 @@
+@use "../../styles/mixin.scss" as m;
+
+.HeadingTexts {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4em;
+
+  .HeadingTexts__textFirst,
+  .HeadingTexts__textSecond,
+  .HeadingTexts__textThird {
+    display: block;
+    font-size: 32px;
+  }
+
+  .HeadingTexts__letter + .HeadingTexts__letter {
+    margin-left: 1.4em;
+  }
+}

@@ -9,8 +9,6 @@
 .TasteTop {
   position: relative;
   height: 200vh;
-  /* ★ sticky をやめ、JS で固定するので overflow 制約は不要 */
-  overflow: visible;
 }
 
 /* ★ 擬似 sticky 対象（初期は相対配置。JSが fixed/absolute に切替） */

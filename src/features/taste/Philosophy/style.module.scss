@@ -1,0 +1,56 @@
+@use "../../../styles/mixin" as m;
+
+.TastePhilosophy {
+  padding: 200px 320px;
+  color: var(--color-dark);
+
+  display: grid;
+  grid-template-columns: 1fr 380px; /* 左=見出し / 右=本文 */
+  column-gap: 80px;
+
+  @include m.respondToMd {
+    grid-template-columns: 1fr;
+    column-gap: 0;
+  }
+
+  .TastePhilosophy__left {
+  }
+
+  .TastePhilosophy__sticky {
+    position: sticky;
+    top: 200px;
+    z-index: 999;
+  }
+
+  .TastePhilosophy__heading {
+  }
+
+  .TastePhilosophy__category {
+    margin-top: 88px;
+    font-size: 16px;
+    font-family: var(--font-family-serif, cochin, serif);
+    font-style: italic;
+    letter-spacing: 0.04em;
+  }
+
+  .TastePhilosophy__right {
+    position: relative;
+    z-index: 999;
+    align-self: start;
+  }
+
+  .TastePhilosophy__bodyWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 100vh;
+    max-width: 380px;
+  }
+
+  .TastePhilosophy__body {
+    font-size: 16px;
+    line-height: 2;
+    letter-spacing: 0.04em;
+    white-space: pre-wrap;
+  }
+}
