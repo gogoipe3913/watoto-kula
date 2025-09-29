@@ -28,8 +28,12 @@
   /* スクロール進捗（JS から 0→1） */
   --p: 0;
 
-  /* 入場に使う割合（例：最初の 20% を入場用に） */
-  --enter-range: 0.2;
+  /* 入場に使う割合 */
+  --enter-range: 0.8;
+
+  /* 入場進捗のレンジを X/Y で分ける */
+  --enter-range-y: 0.7; /* ← 早く到着（小さめ） */
+  --enter-range-x: 0.9; /* ← 遅く到着（大きめ） */
 }
 
 /* 入場：右下 → 正位置（フェード無し）
@@ -38,22 +42,24 @@
   width: 100%;
   height: 100%;
 
-  /* e = 入場進捗（0→1）*/
-  --e: clamp(0, calc(var(--p) / var(--enter-range)), 1);
+  /* 別々の進捗（0→1） */
+  --ey: clamp(0, calc(var(--p) / var(--enter-range-y)), 1);
+  --ex: clamp(0, calc(var(--p) / var(--enter-range-x)), 1);
 
   /* 右下オフセット量（自身サイズ基準） */
-  --dx: 140%;
-  --dy: 140%;
+  --dx: 120%;
+  --dy: 120%;
 
   /* フェード無し */
   opacity: 1;
 
   /* 右下からの平行移動（+ お好みで軽いスケール） */
   transform: translate(
-      calc((1 - var(--e)) * var(--dx)),
-      calc((1 - var(--e)) * var(--dy))
+      calc((1 - var(--ex)) * var(--dx)),
+      calc((1 - var(--ey)) * var(--dy))
     )
-    scale(calc(0.92 + 0.08 * var(--e))); /* 不要ならこの行を削除 */
+    /* スケールは“縦の到着度”に合わせるのが自然 */
+    scale(calc(0.4 + 0.6 * var(--ey)));
   transform-origin: center;
   will-change: transform;
 }
