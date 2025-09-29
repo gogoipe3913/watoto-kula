@@ -26,11 +26,11 @@
   --color-stay-placeholder: #a6a6a6;
 
   /* Fonts */
-  --font-family-title: ltc-nicholas-cochin-pro, hina-mincho, sans-serif;
-  --font-family-gothic: mr-eaves-sans, hina-mincho, sans-serif;
-  --font-family-serif: cochin, hina-mincho, serif;
-  --font-family-text-jp: hina-mincho, sans-serif;
-  --font-family-text-en: hina-mincho, sans-serif;
+  --font-family-title: ltc-nicholas-cochin-pro, shippori-mincho-b1, sans-serif;
+  --font-family-gothic: mr-eaves-sans, shippori-mincho-b1, sans-serif;
+  --font-family-serif: cochin, shippori-mincho-b1, serif;
+  --font-family-text-jp: shippori-mincho-b1, sans-serif;
+  --font-family-text-en: shippori-mincho-b1, sans-serif;
 
   /* Letter spacing */
   --letter-space-text-jp: 0.02em;
