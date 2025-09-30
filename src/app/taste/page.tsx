@@ -12,10 +12,14 @@ import styles from "./page.module.scss";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import TasteAccess from "@/features/taste/Access";
+import TasteAnotherPageLink from "@/features/taste/AnotherPageLink";
 
 export default function Taste() {
   return (
     <div className={styles.Taste}>
+      <div className={styles.Taste__noise}>
+        <div className={styles.Taste__noiseGif} />
+      </div>
       <CategoryLabel />
       <TasteMenu />
       <TasteTop />
@@ -24,6 +28,7 @@ export default function Taste() {
       <TasteServices />
       <TasteGallery />
       <TasteAccess />
+      <TasteAnotherPageLink />
     </div>
   );
 }

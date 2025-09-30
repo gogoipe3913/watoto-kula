@@ -4,9 +4,8 @@
   padding: 200px 320px;
   color: var(--color-dark);
 
-  display: grid;
-  grid-template-columns: 1fr 380px; /* 左=見出し / 右=本文 */
-  column-gap: 80px;
+  display: flex;
+  gap: 200px;
 
   @include m.respondToMd {
     grid-template-columns: 1fr;
@@ -14,15 +13,13 @@
   }
 
   .TastePhilosophy__left {
+    width: fit-content;
   }
 
   .TastePhilosophy__sticky {
     position: sticky;
     top: 200px;
     z-index: 999;
-  }
-
-  .TastePhilosophy__heading {
   }
 
   .TastePhilosophy__category {
@@ -37,6 +34,7 @@
     position: relative;
     z-index: 999;
     align-self: start;
+    width: 380px;
   }
 
   .TastePhilosophy__bodyWrapper {

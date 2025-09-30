@@ -11,7 +11,23 @@
   @include m.respondToSm {
     width: 100%;
     min-width: initial;
-    // overflow: hidden;
+  }
+
+  .Taste__noise {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    opacity: 0.03;
+  }
+
+  .Taste__noiseGif {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url(/public/taste/noise.gif);
   }
 
   .Taste__contents {
