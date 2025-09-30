@@ -3,143 +3,137 @@
 import React from "react";
 import Image from "next/image";
 import styles from "./style.module.scss";
+import contents from "@/contents/TasteGallery.ja.json";
+import HeadingTexts from "@/components/HeadingTexts";
+
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+const photos = [
+  {
+    src: "/taste/gallery/1.png",
+    alt: "ギャラリーの画像1",
+    width: 270,
+    height: 672,
+    href: "https://www.instagram.com/watoto_kyoto/",
+  },
+  {
+    src: "/taste/gallery/2.png",
+    alt: "ギャラリーの画像1",
+    width: 270,
+    height: 403,
+    href: "https://www.instagram.com/watoto_kyoto/",
+  },
+  {
+    src: "/taste/gallery/3.png",
+    alt: "ギャラリーの画像1",
+    width: 270,
+    height: 586,
+    href: "https://www.instagram.com/watoto_kyoto/",
+  },
+  {
+    src: "/taste/gallery/4.png",
+    alt: "ギャラリーの画像1",
+    width: 270,
+    height: 405,
+    href: "https://www.instagram.com/watoto_kyoto/",
+  },
+  {
+    src: "/taste/gallery/5.png",
+    alt: "ギャラリーの画像1",
+    width: 270,
+    height: 338,
+    href: "https://www.instagram.com/watoto_kyoto/",
+  },
+  {
+    src: "/taste/gallery/6.png",
+    alt: "ギャラリーの画像1",
+    width: 270,
+    height: 403,
+    href: "https://www.instagram.com/watoto_kyoto/",
+  },
+  {
+    src: "/taste/gallery/7.jpg",
+    alt: "ギャラリーの画像1",
+    width: 270,
+    height: 405,
+    href: "https://www.instagram.com/watoto_kyoto/",
+  },
+  {
+    src: "/taste/gallery/8.png",
+    alt: "ギャラリーの画像1",
+    width: 270,
+    height: 335,
+    href: "https://www.instagram.com/watoto_kyoto/",
+  },
+  {
+    src: "/taste/gallery/9.png",
+    alt: "ギャラリーの画像1",
+    width: 270,
+    height: 740,
+    href: "https://www.instagram.com/watoto_kyoto/",
+  },
+  {
+    src: "/taste/gallery/10.png",
+    alt: "ギャラリーの画像1",
+    width: 270,
+    height: 812,
+    href: "https://www.instagram.com/watoto_kyoto/",
+  },
+  {
+    src: "/taste/gallery/11.jpg",
+    alt: "ギャラリーの画像1",
+    width: 270,
+    height: 405,
+    href: "https://www.instagram.com/watoto_kyoto/",
+  },
+  {
+    src: "/taste/gallery/12.jpg",
+    alt: "ギャラリーの画像1",
+    width: 270,
+    height: 405,
+    href: "https://www.instagram.com/watoto_kyoto/",
+  },
+];
+
+const renderWithBr = (text: string) =>
+  text.split("\n").map((line, i, arr) => (
+    <React.Fragment key={i}>
+      {line}
+      {i < arr.length - 1 && <br />}
+    </React.Fragment>
+  ));
+
 const TasteGallery: React.FC = ({}) => {
+  const { heading, category } = contents;
   return (
     <div className={styles.TasteGallery}>
-      <h2>Gallery</h2>
+      <div className={styles.TasteGallery__heading}>
+        <div className={styles.TasteGallery__stickyHeading}>
+          <HeadingTexts
+            textFirst={heading.first}
+            textSecond={heading.second}
+            textThird={heading.third}
+          />
+          <h2 className={styles.TasteGallery__category}>
+            {renderWithBr(category)}
+          </h2>
+        </div>
+      </div>
       <ul className={styles.TasteGallery__images}>
-        <li>
-          <a href="https://www.instagram.com/p/DFjze_xypKR/" target="_blank">
-            <Image
-              width={200}
-              height={250}
-              src="/taste/gallery/1.jpg"
-              alt="コンセプトのバー画像1"
-            />
-          </a>
-        </li>
-        <li>
-          <a href="https://www.instagram.com/p/DFbZXqGyMIj" target="_blank">
-            <Image
-              width={200}
-              height={250}
-              src="/taste/gallery/2.jpg"
-              alt="コンセプトのバー画像2"
-            />
-          </a>
-        </li>
-        <li>
-          <a href="https://www.instagram.com/p/DFB7XYdyGWC" target="_blank">
-            <Image
-              width={200}
-              height={250}
-              src="/taste/gallery/3.jpg"
-              alt="コンセプトのバー画像3"
-            />
-          </a>
-        </li>
-        <li>
-          <a href="https://www.instagram.com/p/DEjaS-1y1eg" target="_blank">
-            <Image
-              width={200}
-              height={250}
-              src="/taste/gallery/4.jpg"
-              alt="コンセプトのバー画像4"
-            />
-          </a>
-        </li>
-        <li>
-          <a href="https://www.instagram.com/p/DEPuQrASVaT/" target="_blank">
-            <Image
-              width={200}
-              height={250}
-              src="/taste/gallery/5.jpg"
-              alt="コンセプトのバー画像5"
-            />
-          </a>
-        </li>
-        <li>
-          <a href="https://www.instagram.com/p/DDp70RSzExZ/" target="_blank">
-            <Image
-              width={200}
-              height={250}
-              src="/taste/gallery/6.jpg"
-              alt="コンセプトのバー画像6"
-            />
-          </a>
-        </li>
-        <li>
-          <a href="https://www.instagram.com/p/DCvf0PfSjTS/" target="_blank">
-            <Image
-              width={200}
-              height={250}
-              src="/taste/gallery/7.jpg"
-              alt="コンセプトのバー画像7"
-            />
-          </a>
-        </li>
-        <li>
-          <a href="https://www.instagram.com/p/DAhbIv8yacy/" target="_blank">
-            <Image
-              width={200}
-              height={250}
-              src="/taste/gallery/8.jpg"
-              alt="コンセプトのバー画像8"
-            />
-          </a>
-        </li>
-        <li>
-          <a href="https://www.instagram.com/p/C_0TxwrS68B/" target="_blank">
-            <Image
-              width={200}
-              height={250}
-              src="/taste/gallery/9.jpg"
-              alt="コンセプトのバー画像9"
-            />
-          </a>
-        </li>
-        <li>
-          <a href="https://www.instagram.com/p/C83p-loyQ0R/" target="_blank">
-            <Image
-              width={200}
-              height={250}
-              src="/taste/gallery/10.jpg"
-              alt="コンセプトのバー画像10"
-            />
-          </a>
-        </li>
-        <li>
-          <a href="https://www.instagram.com/p/C8g-PmDyIf_/" target="_blank">
-            <Image
-              width={200}
-              height={250}
-              src="/taste/gallery/11.jpg"
-              alt="コンセプトのバー画像11"
-            />
-          </a>
-        </li>
-        <li>
-          <a href="https://www.instagram.com/p/C7Vzjb0S-bq/" target="_blank">
-            <Image
-              width={200}
-              height={250}
-              src="/taste/gallery/12.jpg"
-              alt="コンセプトのバー画像12"
-            />
-          </a>
-        </li>
+        {photos.map((photo, index) => (
+          <li key={index}>
+            <a href={photo.href} target="_blank">
+              <Image
+                width={photo.width}
+                height={photo.height}
+                src={photo.src}
+                alt={photo.alt}
+              />
+            </a>
+          </li>
+        ))}
       </ul>
-      <a
-        target="_blank"
-        href="https://www.instagram.com/watoto_kyoto/"
-        className={styles.TasteGallery__link}
-      >
-        <span>View Instagram</span>
-        <span className={styles.TasteGallery__linkArrow} />
-      </a>
     </div>
   );
 };

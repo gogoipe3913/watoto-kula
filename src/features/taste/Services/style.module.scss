@@ -2,17 +2,20 @@
 
 .TasteServices {
   position: relative;
-  padding: 25vh 300px 200px;
+  padding: 30vh 300px 40vh;
   margin-top: -1px;
   z-index: 10;
   color: var(--color-dark);
   background-color: var(--color-taste-background);
 
-  .TasteServices__stickyHeading {
+  .TasteServices__heading {
     position: sticky;
     top: 200px;
     z-index: 1;
-    height: 50vh;
+    width: fit-content;
+  }
+
+  .TasteServices__stickyHeading {
   }
 
   .TasteServices__category {
@@ -24,7 +27,7 @@
   }
 
   .TasteServices__contents {
-    margin-top: 200px;
+    margin: 50vh 0;
     position: relative;
   }
 

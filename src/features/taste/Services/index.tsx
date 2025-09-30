@@ -36,16 +36,17 @@ const TasteServices: React.FC = () => {
 
   return (
     <div className={styles.TasteServices}>
-      <div className={styles.TasteServices__stickyHeading}>
-        <HeadingTexts
-          textFirst={heading.first}
-          textSecond={heading.second}
-          textThird={heading.third}
-          className={styles.TasteServices__heading}
-        />
-        <h2 className={styles.TasteServices__category}>
-          {renderWithBr(category)}
-        </h2>
+      <div className={styles.TasteServices__heading}>
+        <div className={styles.TasteServices__stickyHeading}>
+          <HeadingTexts
+            textFirst={heading.first}
+            textSecond={heading.second}
+            textThird={heading.third}
+          />
+          <h2 className={styles.TasteServices__category}>
+            {renderWithBr(category)}
+          </h2>
+        </div>
       </div>
 
       <div className={styles.TasteServices__contents} ref={contentsRef}>
