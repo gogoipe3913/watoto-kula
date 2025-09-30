@@ -10,7 +10,9 @@
   --color-blue: #263d5f;
   --color-red: #7b342e;
   --color-brown: #795542;
+  --color-beige: #e4dfd9;
   --color-base-background: var(--color-white);
+  --color-taste-background: var(--color-beige);
 
   /* Taste colors */
   --color-text-black: var(--color-black);

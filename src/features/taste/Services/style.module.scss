@@ -1,0 +1,105 @@
+@use "../../../styles/mixin" as m;
+
+.TasteServices {
+  position: relative;
+  padding: 25vh 300px 200px;
+  margin-top: -1px;
+  z-index: 10;
+  color: var(--color-dark);
+  background-color: var(--color-taste-background);
+
+  .TasteServices__stickyHeading {
+    position: sticky;
+    top: 200px;
+    z-index: 1;
+    height: 50vh;
+  }
+
+  .TasteServices__category {
+    margin-top: 88px;
+    font-size: 16px;
+    font-family: var(--font-family-serif, cochin, serif);
+    font-style: italic;
+    letter-spacing: 0.04em;
+  }
+
+  .TasteServices__contents {
+    margin-top: 200px;
+    position: relative;
+  }
+
+  .TasteServices__descriptionBlock {
+    margin-left: 100px;
+    display: flex;
+    gap: 80px;
+  }
+
+  .TasteServices__text {
+    padding-top: 300px;
+    width: 16vw;
+    min-width: 280px;
+  }
+
+  .TasteServices__subHeading {
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    writing-mode: vertical-rl;
+    font-size: 22px;
+    letter-spacing: 0.3em;
+  }
+
+  .TasteServices__description {
+    margin-top: 56px;
+    padding-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    font-size: 18px;
+    letter-spacing: 0.02em;
+    white-space: pre-wrap;
+    border-top: 1px solid var(--color-dark);
+
+    p {
+      line-height: 2;
+    }
+  }
+
+  .TasteServices__img {
+    &--2 {
+      margin-top: 100px;
+      margin-left: auto;
+      margin-right: 20px;
+    }
+
+    &--3 {
+      margin-top: 160px;
+      margin-left: 40px;
+      margin-bottom: 280px;
+    }
+
+    &--6 {
+      margin-top: -40px;
+      margin-left: -40px;
+    }
+
+    &--7 {
+      margin-top: 160px;
+      margin-left: auto;
+      margin-right: 20px;
+      margin-bottom: 280px;
+    }
+
+    &--9 {
+      margin-top: 160px;
+    }
+
+    &--10 {
+      margin-top: 160px;
+      margin-left: auto;
+      margin-right: 60px;
+      margin-bottom: 280px;
+    }
+  }
+}
