@@ -2,160 +2,27 @@
 
 .TasteAccess {
   position: relative;
-  z-index: var(--z-index-elevation-1);
-  padding: 180px 0 100px;
-  width: 100%;
-  background-color: var(--color-base-background);
+  padding: 40vh 300px;
+  margin-top: -1px;
+  z-index: 10;
+  color: var(--color-dark);
+  background-color: var(--color-taste-background);
 
-  @include m.respondToSm {
-    padding-top: 100px;
-  }
-
-  h2 {
-    padding-left: 100px;
-
-    @include m.respondToSm {
-      padding-left: 20px;
-    }
-  }
-
-  /* ---------------------------------------------------------
-  // Googleマップの色を変更する
-  // --------------------------------------------------------- */
-
-  .TasteAccess__map {
-    margin-top: 100px;
-    width: 100%;
-    height: 500px;
-    position: relative;
-  }
-
-  .TasteAccess__map::after {
-    content: "";
-    display: block;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
+  .TasteAccess__heading {
+    position: sticky;
+    top: 200px;
     z-index: 1;
-    pointer-events: none;
-    mix-blend-mode: overlay;
-    // background: #739ee3; /* 好きな色コードに変更 */
+    width: fit-content;
   }
 
-  .TasteAccess__mapBody {
-    width: 100%;
-    -webkit-filter: grayscale(1);
-    filter: grayscale(1); /* Googleマップをグレースケールにする */
+  .TasteAccess__stickyHeading {
   }
 
-  // -----------------------------------------------------------
-
-  .TasteAccess__information {
-    margin-top: 80px;
-    padding-left: 100px;
-    display: flex;
-    gap: 60px;
-
-    @include m.respondToSm {
-      flex-direction: column;
-      padding-left: 20px;
-
-      h3 {
-        font-size: 16px;
-      }
-    }
-  }
-
-  .TasteAccess__address {
-    margin-top: 20px;
-
-    p + p {
-      margin-top: 4px;
-    }
-
-    @include m.respondToSm {
-      margin-top: 28px;
-      font-size: 14px;
-    }
-  }
-
-  .TasteAccess__roadTime {
-    display: flex;
-
-    li {
-      width: 280px;
-
-      @include m.respondToSm {
-        width: 240px;
-      }
-    }
-
-    .TasteAccess__roadTimeRight {
-      @include m.respondToSm {
-        width: 80px;
-      }
-    }
-  }
-
-  .TasteAccess__address + .TasteAccess__roadTime {
-    margin-top: 24px;
-  }
-
-  .TasteAccess__roadTime + .TasteAccess__roadTime {
-    margin-top: 16px;
-  }
-
-  .TasteAccess__roadTimeTextJp {
-    font-family: var(--font-family-text-jp);
-    font-size: 14px;
-
-    @include m.respondToSm {
-      font-size: 13px;
-    }
-  }
-
-  .TasteAccess__roadTimeTextEn {
-    margin-top: 2px;
-    font-family: var(--font-family-text-en);
-    font-size: 12px;
-  }
-
-  .TasteAccess__openingHours {
-    margin-top: 20px;
-    display: flex;
-
-    li {
-      @include m.respondToSm {
-        font-size: 14px;
-      }
-    }
-
-    li + li {
-      margin-left: 40px;
-    }
-    p + p {
-      margin-top: 4px;
-    }
-  }
-
-  .TasteAccess__openingHoursJp {
-    font-family: var(--font-family-text-jp);
-  }
-
-  .TasteAccess__openingHoursEn {
-    margin-top: 2px;
-    font-family: var(--font-family-text-en);
-    font-size: 12px;
-  }
-
-  .TasteAccess__openingHoursNote {
-    margin-top: 24px;
-    font-size: 14px;
-    line-height: 1.6;
-
-    @include m.respondToSm {
-      font-size: 13px;
-    }
+  .TasteAccess__category {
+    margin-top: 88px;
+    font-size: 16px;
+    font-family: var(--font-family-serif, cochin, serif);
+    font-style: italic;
+    letter-spacing: 0.04em;
   }
 }
