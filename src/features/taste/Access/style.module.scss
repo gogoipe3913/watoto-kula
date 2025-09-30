@@ -4,6 +4,8 @@
   position: relative;
   padding: 40vh 300px;
   margin-top: -1px;
+  display: flex;
+  justify-content: space-between;
   z-index: 10;
   color: var(--color-dark);
   background-color: var(--color-taste-background);
@@ -24,5 +26,127 @@
     font-family: var(--font-family-serif, cochin, serif);
     font-style: italic;
     letter-spacing: 0.04em;
+  }
+
+  .TasteAccess__contents {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+    margin-top: 50vh;
+    max-width: 380px;
+  }
+
+  .TasteAccess__subHeader {
+    font-family: var(--font-family-serif, cochin, serif);
+    font-size: 24px;
+  }
+
+  .TasteAccess__description {
+    margin-top: 20px;
+    padding-top: 36px;
+    border-top: 1px solid var(--color-dark);
+    font-family: var(--font-family-serif, cochin, serif);
+
+    .TasteAccess__addressJa {
+      font-size: 18px;
+
+      span + span {
+        margin-top: 8px;
+      }
+    }
+
+    .TasteAccess__addressEn {
+      margin-top: 28px;
+      color: #6c6c6c;
+
+      span + span {
+        margin-top: 4px;
+      }
+    }
+
+    span {
+      display: block;
+    }
+
+    a {
+      margin-top: 36px;
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      font-size: 24px;
+      color: var(--color-dark);
+    }
+
+    .TasteAccess__buttonArrow {
+      position: relative;
+      display: block;
+      width: 80px;
+      height: 1px;
+      background-color: var(--color-dark);
+      transition-duration: 0.5s;
+      transition-timing-function: cubic-bezier(0.83, 0, 0.17, 1);
+
+      &:hover {
+        transform: translate(12px);
+        background-color: var(--color-gold);
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: -5px;
+        right: -2px;
+        display: block;
+        width: 22px;
+        height: 1px;
+        background-color: var(--color-dark);
+        transform: rotate(30deg);
+        transition-duration: 1s;
+        transition-timing-function: cubic-bezier(0.83, 0, 0.17, 1);
+
+        &:hover {
+          transform: rotate(390deg);
+          background-color: var(--color-gold);
+        }
+      }
+    }
+
+    .TasteAccess__descriptionFlex {
+      display: flex;
+      align-items: center;
+      gap: 60px;
+      font-size: 18px;
+      text-align: left;
+    }
+
+    .TasteAccess__descriptionFlex + .TasteAccess__descriptionFlex {
+      margin-top: 20px;
+    }
+
+    .TasteAccess__descriptionRubi {
+      font-size: 12px;
+      color: #6c6c6c;
+    }
+
+    .TasteAccess__descriptionTexts {
+      margin-top: 36px;
+      font-size: 14px;
+
+      .TasteAccess__descriptionText {
+        line-height: 1.8;
+      }
+
+      .TasteAccess__descriptionText + span {
+        margin-top: 20px;
+      }
+
+      span {
+        letter-spacing: 0.02em;
+      }
+    }
+
+    .TasteAccess__InformationBox {
+      min-width: 224px;
+    }
   }
 }

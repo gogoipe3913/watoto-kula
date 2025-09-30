@@ -85,8 +85,8 @@ const TasteServices: React.FC = () => {
         <Image
           src="/taste/services/2.jpg"
           alt="わとと京都 お料理の写真2"
-          width={448}
-          height={299}
+          width={377}
+          height={251}
           data-speed="0.15"
           className={classNames(
             "js-parallax",
@@ -144,8 +144,8 @@ const TasteServices: React.FC = () => {
         <Image
           src="/taste/services/6.jpg"
           alt="わとと京都 珈琲の写真3"
-          width={501}
-          height={334}
+          width={364}
+          height={243}
           data-speed="0.3"
           className={classNames(
             "js-parallax",
@@ -195,8 +195,8 @@ const TasteServices: React.FC = () => {
         <Image
           src="/taste/services/9.jpg"
           alt="わとと京都 お酒の写真2"
-          width={530}
-          height={354}
+          width={358}
+          height={239}
           data-speed="0.25"
           className={classNames(
             "js-parallax",
@@ -207,8 +207,8 @@ const TasteServices: React.FC = () => {
         <Image
           src="/taste/services/10.jpg"
           alt="わとと京都 お酒の写真3"
-          width={380}
-          height={570}
+          width={332}
+          height={498}
           data-speed="0.1"
           className={classNames(
             "js-parallax",
