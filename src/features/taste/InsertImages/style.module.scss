@@ -1,19 +1,13 @@
-/* style.module.scss
-   注意：
-   - 祖先（html/body/#__next/main など）に overflow や transform を付けないこと（sticky が無効化されます）
-   - 縦いっぱい表示（100dvh）＋ “右下から入場 → 上端に着いたら横に流れる” 挙動
-*/
+/* 祖先(html/body/#__next/main 等)に overflow/transform を置かないこと！ */
 
-/* ラッパ：縦スクロール量 = 100vh + 横移動距離(--scrollLen) */
+/* ラッパ：縦スクロール量 = 100dvh + 横移動距離 + リビール距離 */
 .TasteInsertImages {
-  --scrollLen: 0px; /* JS が px でセット（track.scrollWidth - window.innerWidth） */
+  --scrollLen: 0px; /* JS sets: track.scrollWidth - innerWidth */
+  --revealLen: 0px; /* JS sets: ~0.8 * innerWidth */
 
-  /* フォールバック → dvh で上書き（モバイルUIの高さ変動に追従） */
-  height: calc(100vh + var(--scrollLen));
-  height: calc(100dvh + var(--scrollLen));
-
-  /* sticky 殺し回避のため、ここでは overflow を持たない */
-  overflow: visible;
+  height: calc(100vh + var(--scrollLen) + var(--revealLen));
+  height: calc(100dvh + var(--scrollLen) + var(--revealLen));
+  overflow: visible; /* sticky殺し回避 */
 }
 
 /* 固定領域（全画面） */
@@ -23,48 +17,47 @@
   height: 100vh;
   height: 100dvh;
   width: 100%;
-  overflow: hidden; /* はみ出しはこのボックス内で裁く（root には付けない） */
+  overflow: hidden;
 
-  /* スクロール進捗（JS から 0→1） */
-  --p: 0;
+  /* フェーズ進捗 */
+  --p: 0; /* 横流し 0→1 */
+  --q: 0; /* リビール 0→1 */
+  --vel: 0; /* スクロール速度 0..1 */
 
-  /* 入場に使う割合 */
-  --enter-range: 0.8;
+  /* 入場タイミング（XとYで到着時期を分ける） */
+  --enter-range-y: 0.7; /* 早く到着（Y） */
+  --enter-range-x: 0.9; /* 遅く到着（X） */
 
-  /* 入場進捗のレンジを X/Y で分ける */
-  --enter-range-y: 0.7; /* ← 早く到着（小さめ） */
-  --enter-range-x: 0.9; /* ← 遅く到着（大きめ） */
+  /* 横スクロール開始の遅延（上端が着いてからにする） */
+  --x-start: 0.65;
 }
 
 /* 入場：右下 → 正位置（フェード無し）
-   120% 右下から入るので、必ず画面外スタートになる */
+   120% 右下から入るので必ず画面外スタート */
 .TasteInsertImages__frame {
   width: 100%;
   height: 100%;
 
-  /* 別々の進捗（0→1） */
-  --ey: clamp(0, calc(var(--p) / var(--enter-range-y)), 1);
-  --ex: clamp(0, calc(var(--p) / var(--enter-range-x)), 1);
+  /* 別々の入場進捗（0→1） */
+  --ey: clamp(0, calc(var(--p) / var(--enter-range-y)), 1); /* Y先着 */
+  --ex: clamp(0, calc(var(--p) / var(--enter-range-x)), 1); /* X後着 */
 
   /* 右下オフセット量（自身サイズ基準） */
   --dx: 120%;
   --dy: 120%;
 
-  /* フェード無し */
   opacity: 1;
-
-  /* 右下からの平行移動（+ お好みで軽いスケール） */
   transform: translate(
       calc((1 - var(--ex)) * var(--dx)),
       calc((1 - var(--ey)) * var(--dy))
     )
-    /* スケールは“縦の到着度”に合わせるのが自然 */
+    /* スケールは“縦の到着度”に合わせる。不要なら次行を削除 */
     scale(calc(0.4 + 0.6 * var(--ey)));
   transform-origin: center;
   will-change: transform;
 }
 
-/* 横トラック：入場完了後に流れ始める */
+/* 横トラック：入場が十分終わってから流れ始める */
 .TasteInsertImages__track {
   position: absolute;
   inset: 0;
@@ -73,12 +66,8 @@
   height: 100%;
   will-change: transform;
 
-  /* mp = 横移動の正規化進捗（入場完了までは 0 のまま） */
-  --mp: clamp(
-    0,
-    calc((var(--p) - var(--enter-range)) / (1 - var(--enter-range))),
-    1
-  );
+  /* mp：横移動の正規化進捗。--x-start までは 0。 */
+  --mp: clamp(0, calc((var(--p) - var(--x-start)) / (1 - var(--x-start))), 1);
 
   /* 横移動距離 = --scrollLen * mp */
   transform: translateX(calc(-1 * var(--mp) * var(--scrollLen)));
@@ -94,12 +83,42 @@
   overflow: hidden;
 }
 
-/* 画像はスライドを cover で埋める（Next/Image の fill 前提） */
+/* 画像はスライド内を cover で埋める（Next/Image の fill 前提） */
 .TasteInsertImages__img {
   object-fit: cover;
 }
 
-/* 省モーション：入場の移動/スケールを停止（横流しは維持） */
+/* 右から新背景(#e4dfd9)を押し出すレイヤー（スクロール速度で丸み可変） */
+.TasteInsertImages__reveal {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+
+  &::before {
+    content: "";
+    position: absolute;
+    /* 右側に数 px 余白を持たせて、丸みの見切れを防止 */
+    left: -1px;
+    right: -1px;
+    top: 0;
+    bottom: 0;
+
+    background: #e4dfd9;
+
+    /* q: 0→1 で “右外(100%) → 0” に平行移動 */
+    transform: translateX(calc(100% - 100% * var(--q)));
+    will-change: transform;
+
+    /* ← JS から入る最終値（最小値は保険で clamp） */
+    border-top-left-radius: clamp(12px, var(--curveX, 16px), 50vw) /
+      clamp(16px, var(--curveY, 24px), 80vh);
+    border-bottom-left-radius: clamp(12px, var(--curveX, 16px), 50vw) /
+      clamp(16px, var(--curveY, 24px), 80vh);
+  }
+}
+
+/* 省モーション：入場の移動/スケールを停止（横流し＆リビールは維持） */
 @media (prefers-reduced-motion: reduce) {
   .TasteInsertImages__frame {
     transform: none;
