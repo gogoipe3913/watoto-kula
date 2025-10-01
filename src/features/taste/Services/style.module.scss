@@ -57,12 +57,13 @@
 
   .TasteServices__subHeading {
     margin-left: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
     writing-mode: vertical-rl;
     font-size: 18px;
     letter-spacing: 0.3em;
+
+    p + p {
+      margin-right: 16px;
+    }
 
     @include m.respondToMd {
       font-size: 14px;
