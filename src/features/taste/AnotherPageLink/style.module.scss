@@ -2,11 +2,17 @@
 
 .TasteAnotherPageLink {
   position: relative;
-  padding: 40vh 0 44px;
+  margin-top: 40vh;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100dvh;
   z-index: 10;
   background-color: var(--color-taste-background);
 
   @include m.respondToMd {
+    margin: initial;
     padding: 20vh 36px;
     display: flex;
     justify-content: center;
@@ -133,16 +139,16 @@
   }
 
   .TasteAnotherPageLink__copyright {
-    margin: 12vh auto 0;
-    width: fit-content;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    bottom: 44px;
     font-size: 10px;
+    text-align: center;
     color: var(--color-dark);
 
     @include m.respondToMd {
-      position: absolute;
-      left: 0;
-      right: 0;
-      margin: 0 auto;
       bottom: 24px;
     }
   }
