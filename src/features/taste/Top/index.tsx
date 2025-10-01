@@ -185,11 +185,8 @@ const TasteTop: React.FC = () => {
   }, []);
 
   return (
-    // 200vh：前半100vhが演出、後半で離脱
     <section ref={sectionRef} className={styles.TasteTop}>
-      {/* 擬似 sticky 対象 */}
       <div ref={stickyRef} className={styles.TasteTop__sticky}>
-        {/* 背景スライダー（背面） */}
         <Slider {...settings} className={styles.TasteTop__slider}>
           {slides.map((s, i) => (
             <Image
@@ -207,10 +204,8 @@ const TasteTop: React.FC = () => {
           ))}
         </Slider>
 
-        {/* 中央から拡大する円（#E4DFD9） */}
         <div className={styles.TasteTop__reveal} aria-hidden />
 
-        {/* ロゴ・テキスト */}
         <Image
           src="/logo/watoto-taste-logo.svg"
           alt="わとと京都 ロゴ"

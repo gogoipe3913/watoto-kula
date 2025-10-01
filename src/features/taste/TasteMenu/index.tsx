@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import HamburgerIcon from "@/components/HamburgerIcon";
 import styles from "./style.module.scss";
 
 export default function TasteMenu() {
@@ -16,14 +17,7 @@ export default function TasteMenu() {
         priority
       />
       <button>
-        <Image
-          src="/logo/menu-icon-white.svg"
-          alt="メニューアイコン"
-          width={60}
-          height={27}
-          className={styles.TasteMenu__icon}
-          priority
-        />
+        <HamburgerIcon className={styles.TasteMenu__icon} />
       </button>
       <ul>
         <li>

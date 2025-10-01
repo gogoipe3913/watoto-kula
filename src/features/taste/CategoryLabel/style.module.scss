@@ -12,6 +12,7 @@
   color: var(--color-white);
   z-index: 2;
   transition-duration: 2s;
+  transition-property: color;
 
   @include m.respondToMd {
     top: 16px;
