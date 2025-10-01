@@ -96,7 +96,7 @@ const photos = [
 const TasteGallery: React.FC = ({}) => {
   const { heading, category } = contents;
   return (
-    <div className={styles.TasteGallery}>
+    <section id="gallery" data-section className={styles.TasteGallery}>
       <div className={styles.TasteGallery__heading}>
         <div className={styles.TasteGallery__stickyHeading}>
           <HeadingTexts
@@ -121,7 +121,7 @@ const TasteGallery: React.FC = ({}) => {
           </li>
         ))}
       </ul>
-    </div>
+    </section>
   );
 };
 

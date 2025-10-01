@@ -26,10 +26,18 @@ export default function TasteMenu() {
         />
       </button>
       <ul>
-        <li>Philosophy</li>
-        <li>Services</li>
-        <li>Gallery</li>
-        <li>Access</li>
+        <li>
+          <a href="#philosophy">Philosophy</a>
+        </li>
+        <li>
+          <a href="#services">Services</a>
+        </li>
+        <li>
+          <a href="#gallery">Gallery</a>
+        </li>
+        <li>
+          <a href="#access">Access</a>
+        </li>
       </ul>
     </div>
   );

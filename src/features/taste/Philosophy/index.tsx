@@ -28,7 +28,7 @@ const TastePhilosophy: React.FC = () => {
   const { heading, category, body } = contents;
 
   return (
-    <section className={styles.TastePhilosophy}>
+    <section id="philosophy" data-section className={styles.TastePhilosophy}>
       <div className={styles.TastePhilosophy__left}>
         <div className={styles.TastePhilosophy__sticky}>
           <HeadingTexts

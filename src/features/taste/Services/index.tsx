@@ -35,7 +35,7 @@ const TasteServices: React.FC = () => {
   useParallax({ root: contentsRef.current });
 
   return (
-    <div className={styles.TasteServices}>
+    <section id="services" data-section className={styles.TasteServices}>
       <div className={styles.TasteServices__heading}>
         <div className={styles.TasteServices__stickyHeading}>
           <HeadingTexts
@@ -227,7 +227,7 @@ const TasteServices: React.FC = () => {
           )}
         />
       </div>
-    </div>
+    </section>
   );
 };
 

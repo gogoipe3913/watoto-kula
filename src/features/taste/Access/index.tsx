@@ -8,7 +8,7 @@ import styles from "./style.module.scss";
 const TasteAccess: React.FC = ({}) => {
   const { heading, category } = contents;
   return (
-    <div className={styles.TasteAccess}>
+    <section id="access" data-section className={styles.TasteAccess}>
       <div className={styles.TasteAccess__heading}>
         <div className={styles.TasteAccess__stickyHeading}>
           <HeadingTexts
@@ -119,7 +119,7 @@ const TasteAccess: React.FC = ({}) => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
