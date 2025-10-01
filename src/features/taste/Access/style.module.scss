@@ -12,7 +12,7 @@
   background-color: var(--color-taste-background);
 
   @include m.respondToMd {
-    padding: 200px 28px;
+    padding: 200px 28px 100vh;
     gap: initial;
   }
 

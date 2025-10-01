@@ -4,15 +4,18 @@ import React from "react";
 import Image from "next/image";
 import styles from "./style.module.scss";
 import Link from "next/link";
+import HeadingTexts from "@/components/HeadingTexts";
 
 const TasteAnotherPageLink: React.FC = ({}) => {
   return (
     <div className={styles.TasteAnotherPageLink}>
-      <h2 className={styles.TasteAnotherPageLink__title}>
-        <p>watoto</p>
-        <p>stay</p>
-        <p>lita</p>
-      </h2>
+      <HeadingTexts
+        textFirst="わとと"
+        textSecond="に"
+        textThird="泊まる"
+        category="link to stay"
+        className={styles.TasteAnotherPageLink__title}
+      />
       <Link href="/stay" className={styles.TasteAnotherPageLink__body}>
         <Image
           width={1010}

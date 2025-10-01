@@ -7,7 +7,7 @@
   background-color: var(--color-taste-background);
 
   @include m.respondToMd {
-    padding: 20vh 28px;
+    padding: 20vh 36px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -23,12 +23,6 @@
       top: 44px;
       left: 28px;
       color: var(--color-dark);
-      font-size: 20px;
-      letter-spacing: 0.02em;
-
-      p + p {
-        margin-top: 16px;
-      }
     }
   }
 
