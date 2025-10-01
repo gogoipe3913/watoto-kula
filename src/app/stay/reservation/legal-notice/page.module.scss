@@ -4,6 +4,7 @@
   padding-bottom: 200px;
   width: 100%;
   height: auto;
+  color: var(--color-dark);
   background-color: var(--color-stay-background);
 
   @include m.respondToMd {

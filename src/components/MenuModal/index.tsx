@@ -40,10 +40,10 @@ const MenuModal: React.FC<MenuModalProps> = ({
         <div className={style.MenuModal__info}>
           <div className={style.MenuModal__sections}>
             <div className={style.MenuModal__section}>
-              <p>Bar</p>
+              <p>Taste</p>
               <ul>
                 <li>
-                  <a href="#BarAbout">About</a>
+                  <a href="#TasteAbout">About</a>
                 </li>
                 <li>
                   <a href="#concept">Concept</a>
