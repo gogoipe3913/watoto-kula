@@ -10,7 +10,9 @@
   font-size: 18px;
   letter-spacing: 0.02em;
   text-align: right;
+  opacity: 0;
   transition-duration: 2s;
+  transition-property: color, opacity;
 
   @include m.respondToMd {
     top: 180px;
@@ -133,6 +135,7 @@
   }
 }
 
+// 円アニメーションが終わった後
 html[data-hero-latched] .TasteMenu {
   color: var(--color-dark);
 
@@ -143,4 +146,11 @@ html[data-hero-latched] .TasteMenu {
   .TasteMenu__line {
     opacity: 0;
   }
+}
+
+// 初期描画のアニメーション
+:root[data-taste-ready="true"] .TasteMenu {
+  opacity: 1;
+  pointer-events: auto;
+  transition-delay: 400ms;
 }

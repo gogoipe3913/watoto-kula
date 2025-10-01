@@ -17,11 +17,15 @@ const TasteTop: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(-1);
   const [isTouch, setIsTouch] = useState(false);
 
+  // 初期描画アニメ用
+  const [firstImageLoaded, setFirstImageLoaded] = useState(false);
+  const [initReady, setInitReady] = useState(false);
+
   // セクション（200vh）とヒーロー本体（100vh）
   const sectionRef = useRef<HTMLElement | null>(null);
   const stickyRef = useRef<HTMLDivElement | null>(null);
 
-  // ▼ 追加：背景色の退避＆ラッチ状態を保持
+  // 背景色の退避＆ラッチ状態
   const origBgRef = useRef<string | null>(null);
   const latchedRef = useRef(false);
 
@@ -74,7 +78,7 @@ const TasteTop: React.FC = () => {
     return () => clearTimeout(t);
   }, []);
 
-  // ★ “擬似 sticky” + 円の半径を JS で更新 + 見た目切替のフラグ付与
+  // “擬似 sticky” + 円の半径を JS で更新 + 見た目切替のフラグ付与
   useEffect(() => {
     const section = sectionRef.current;
     const hero = stickyRef.current;
@@ -83,7 +87,7 @@ const TasteTop: React.FC = () => {
     // 初期化
     hero.style.setProperty("--r-js", "0px");
 
-    // ▼ 追加：初期の body 背景を退避
+    // 初期の body 背景を退避
     if (!origBgRef.current) {
       origBgRef.current = getComputedStyle(document.body).backgroundColor || "";
     }
@@ -93,7 +97,6 @@ const TasteTop: React.FC = () => {
     let ticking = false;
 
     const recalc = () => {
-      // セクション開始位置
       const rect = section.getBoundingClientRect();
       start =
         rect.top + (window.scrollY || document.documentElement.scrollTop || 0);
@@ -104,21 +107,18 @@ const TasteTop: React.FC = () => {
       Math.hypot(window.innerWidth, window.innerHeight) / 2;
 
     const applyStickyEmulation = (y: number) => {
-      // 区間: [start, end)
       if (y < start) {
-        // スクロール前：通常フローの先頭にいる状態
         hero.style.position = "relative";
         hero.style.top = "0";
         hero.style.left = "0";
         hero.style.right = "0";
       } else if (y >= start && y < end) {
-        // 区間中：画面上部に貼り付け（fixed）
         hero.style.position = "fixed";
         hero.style.top = "0";
         hero.style.left = "0";
         hero.style.right = "0";
       } else {
-        // （必要に応じて absolute で離脱させる場合はここを復活）
+        // 必要なら離脱時の absolute を有効化
         // hero.style.position = "absolute";
         // hero.style.top = `${window.innerHeight}px`;
         // hero.style.left = "0";
@@ -140,19 +140,17 @@ const TasteTop: React.FC = () => {
         const r = computeRadius() * progress;
         hero.style.setProperty("--r-js", `${r}px`);
 
-        // ▼ 追加：円が広がり切ったら（ラッチ）見た目切替フラグを立てる
-        const shouldLatch = progress >= 0.999; // しきい値は好みで 0.995〜1.0
+        // 円が広がり切ったら（ラッチ）見た目切替
+        const shouldLatch = progress >= 0.999;
         if (shouldLatch !== latchedRef.current) {
           latchedRef.current = shouldLatch;
           hero.dataset.latched = shouldLatch ? "true" : "false";
 
           const de = document.documentElement;
           if (shouldLatch) {
-            // 背景を #E4DFD9 にバトンタッチ & 全体フラグをON
             document.body.style.backgroundColor = "#E4DFD9";
             de.setAttribute("data-hero-latched", "taste");
           } else {
-            // 戻りスクロール時は元へ
             document.body.style.backgroundColor = origBgRef.current || "";
             de.removeAttribute("data-hero-latched");
           }
@@ -175,7 +173,7 @@ const TasteTop: React.FC = () => {
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onResize);
-      // ▼ 追加：ページ離脱時の掃除
+      // ページ離脱時の掃除
       const de = document.documentElement;
       de.removeAttribute("data-hero-latched");
       if (origBgRef.current) {
@@ -184,23 +182,67 @@ const TasteTop: React.FC = () => {
     };
   }, []);
 
+  // 初期描画アニメ：最初の画像＋フォント準備を待ってから開始
+  useEffect(() => {
+    let cancelled = false;
+    const waitFonts = () =>
+      (document.fonts?.ready as Promise<unknown>) ?? Promise.resolve();
+    if (firstImageLoaded) {
+      waitFonts().finally(() => {
+        if (!cancelled) {
+          // 次フレームで ready → CSS トランジションを確実に発火
+          requestAnimationFrame(() => setInitReady(true));
+        }
+      });
+    }
+    return () => {
+      cancelled = true;
+    };
+  }, [firstImageLoaded]);
+
+  useEffect(() => {
+    const de = document.documentElement;
+    if (initReady) {
+      de.setAttribute("data-taste-ready", "true");
+    } else {
+      de.removeAttribute("data-taste-ready");
+    }
+    return () => {
+      de.removeAttribute("data-taste-ready");
+    };
+  }, [initReady]);
+
   return (
-    <section ref={sectionRef} className={styles.TasteTop}>
+    <section
+      ref={sectionRef}
+      className={styles.TasteTop}
+      data-ready={initReady ? "true" : "false"}
+    >
       <div ref={stickyRef} className={styles.TasteTop__sticky}>
         <Slider {...settings} className={styles.TasteTop__slider}>
           {slides.map((s, i) => (
-            <Image
+            <div
               key={s.src}
-              src={s.src}
-              alt={s.alt}
-              fill
-              sizes="100vw"
-              priority={i === 0}
               className={classNames(
-                styles.TasteTop__image,
-                activeIndex === i && styles["TasteTop__image--active"]
+                styles.TasteTop__slide,
+                activeIndex === i && styles["TasteTop__slide--active"]
               )}
-            />
+            >
+              <Image
+                src={s.src}
+                alt={s.alt}
+                fill
+                sizes="100vw"
+                priority={i === 0}
+                onLoadingComplete={() => {
+                  if (i === 0) setFirstImageLoaded(true);
+                }}
+                className={classNames(
+                  styles.TasteTop__image,
+                  activeIndex === i && styles["TasteTop__image--active"]
+                )}
+              />
+            </div>
           ))}
         </Slider>
 

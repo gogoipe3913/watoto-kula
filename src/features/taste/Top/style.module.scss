@@ -22,8 +22,7 @@
   position: relative;
   height: 100vh; /* fallback */
   height: 100dvh; /* SPのアドレスバー対策 */
-  /* JS 初期化で --r-js を 0 にするが、念のため初期値も 0 を想定 */
-  --r-js: 0px;
+  --r-js: 0px; /* 念のため初期値 */
 }
 
 /* スライダーは全面に（背面） */
@@ -43,7 +42,15 @@
   height: 100%;
 }
 
-/* 画像：常に全面 + ゆっくりズームアウト */
+/* スライドラッパー（入場アニメの起点） */
+.TasteTop__slide {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* 端を隠す */
+}
+
+/* 画像：常に全面 + ゆっくりズームアウト（Ken Burns） */
 .TasteTop__image {
   width: 100%;
   height: 100%;
@@ -55,7 +62,7 @@
 }
 
 .TasteTop__image--active {
-  transform: scale(1.05); /* 完全 1.0 だと端が出やすいので微拡大 */
+  transform: scale(1.05); /* 端が出にくい微拡大 */
 }
 
 /* 中央から拡大する円（#E4DFD9）— clip-path を使わず width/height で拡大 */
@@ -81,7 +88,7 @@
   left: 0;
   right: 0;
   margin: 0 auto;
-  transform: translateY(-50%);
+  transform: translateY(-40%);
   width: 4.2%;
   max-width: 60px;
   min-width: 40px;
@@ -128,10 +135,44 @@
   }
 }
 
-/* 低モーション環境は演出控えめ */
+/* ===== 初期描画アニメ（ロード完了後に一度だけ） ===== */
+/* 初期状態：うっすら非表示＆わずかに下げる */
+.TasteTop__slider,
+.TasteTop__logo,
+.TasteTop__text {
+  opacity: 0;
+  transition: opacity 1s ease, transform 1s ease;
+  will-change: opacity, transform;
+}
+
+.TasteTop__slider,
+.TasteTop__text {
+  transform: translateY(8px);
+}
+
+/* ready になったら順番にフェードイン */
+:root[data-taste-ready="true"] {
+  .TasteTop__slider {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 40ms;
+  }
+  .TasteTop__logo {
+    opacity: 1;
+    transform: translateY(-50%);
+    transition-delay: 300ms; /* ロゴは少し遅らせて気持ちよく */
+  }
+  .TasteTop__text {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 400ms; /* テキストはさらに後ろ */
+  }
+}
+
+/* 低モーション環境は演出控えめ（即時表示） */
 @media (prefers-reduced-motion: reduce) {
   .TasteTop {
-    height: 100vh;
+    height: 100vh; /* 高さも通常化 */
   }
   .TasteTop__image,
   .TasteTop__image--active {
@@ -141,5 +182,12 @@
   .TasteTop__reveal {
     width: 0;
     height: 0;
+  }
+  .TasteTop__slider,
+  .TasteTop__logo,
+  .TasteTop__text {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
 }

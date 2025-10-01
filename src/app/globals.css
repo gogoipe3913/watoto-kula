@@ -166,9 +166,3 @@ body {
     cursor: auto !important;
   }
 }
-
-/* ===== Optional Helpers ===== */
-/* ::selection {
-  background: var(--color-gold);
-  color: var(--color-white);
-} */

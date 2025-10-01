@@ -9,7 +9,7 @@ const line2 = "SHIMOGAMO";
 
 export default function CategoryLabel() {
   return (
-    <div data-reveal className={styles.CategoryLabel}>
+    <div className={styles.CategoryLabel}>
       <p className={styles.CategoryLabel__title}>{title}</p>
       <p className={styles.CategoryLabel__text}>
         <span className={styles.CategoryLabel__textFirst}>{line1}</span>
