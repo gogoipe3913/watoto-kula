@@ -31,7 +31,7 @@ const Header: React.FC<HeaderProps> = ({
       )}
     >
       <li>
-        <a href="#BarAbout">About</a>
+        <a href="#TasteAbout">About</a>
       </li>
       <li>
         <a href="#concept">Concept</a>
