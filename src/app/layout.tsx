@@ -3,10 +3,12 @@ import { Geist, Geist_Mono } from "next/font/google";
 import MouseStalker from "@/components/MouseStalker";
 import AdobeFontsLoader from "@/components/AdobeFontsLoader";
 import RevealBoot from "@/components/RevealBoot";
-import "../styles/reveal.scss";
 
+import "lenis/dist/lenis.css";
+import "../styles/reveal.scss";
 import "./globals.css";
 import "@/styles/globals.scss";
+import LenisProvider from "./lenis-provider";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({
@@ -30,10 +32,12 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <AdobeFontsLoader />
-        <RevealBoot />
-        {children}
-        <MouseStalker />
+        <LenisProvider>
+          <AdobeFontsLoader />
+          <RevealBoot />
+          {children}
+          <MouseStalker />
+        </LenisProvider>
       </body>
     </html>
   );

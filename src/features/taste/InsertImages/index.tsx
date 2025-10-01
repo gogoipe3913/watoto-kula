@@ -10,6 +10,9 @@ const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 const clamp = (n: number, min = 0, max = 1) => Math.min(max, Math.max(min, n));
 const pageY = (el: Element) => el.getBoundingClientRect().top + window.scrollY;
 
+// ★ このセクションを“重く”する倍率（1.0=通常, 2.0=2倍重い 等）
+const WEIGHT = 3;
+
 const TasteInsertImages: React.FC = () => {
   const wrapperRef = useRef<HTMLElement | null>(null);
   const stickyRef = useRef<HTMLDivElement | null>(null);
@@ -27,12 +30,22 @@ const TasteInsertImages: React.FC = () => {
     const measure = () => {
       // 横に動く最大距離(px) = トラック総幅 - 画面幅
       const totalX = Math.max(0, track.scrollWidth - window.innerWidth);
-      wrapper.style.setProperty("--scrollLen", `${totalX}px`);
+
+      // 実際の横移動距離（見た目の移動量）
+      wrapper.style.setProperty("--trackLenX", `${totalX}px`);
+
+      // セクション完走に必要な縦スクロール量 = 重みを乗せる
+      wrapper.style.setProperty(
+        "--scrollLen",
+        `${Math.round(totalX * WEIGHT)}px`
+      );
+
       // リビール距離（右パネルの押し出しに必要な縦スクロール量）
       wrapper.style.setProperty(
         "--revealLen",
         `${Math.round(window.innerWidth * 0.8)}px`
       );
+
       onScroll();
     };
 
@@ -76,7 +89,7 @@ const TasteInsertImages: React.FC = () => {
         const curveX = Math.round(lerp(16, maxCurveX, curveMix));
         const curveY = Math.round(lerp(24, maxCurveY, curveMix));
 
-        // ★ ここが重要：reveal に直接セット（単位付き）
+        // reveal に直接セット（単位付き）
         reveal.style.setProperty("--q", q.toFixed(3));
         reveal.style.setProperty("--vel", velNorm.toFixed(3));
         reveal.style.setProperty("--curveX", `${curveX}px`);

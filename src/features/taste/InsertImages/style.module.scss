@@ -1,8 +1,7 @@
-/* 祖先(html/body/#__next/main 等)に overflow/transform を置かないこと！ */
-
-/* ラッパ：縦スクロール量 = 100dvh + 横移動距離 + リビール距離 */
+/* ラッパ：縦スクロール量 = 100dvh + “必要スクロール量(scrollLen)” + リビール距離 */
 .TasteInsertImages {
-  --scrollLen: 0px; /* JS sets: track.scrollWidth - innerWidth */
+  --trackLenX: 0px; /* JS sets: track.scrollWidth - innerWidth（実移動距離） */
+  --scrollLen: 0px; /* JS sets: trackLenX * WEIGHT（重さ適用） */
   --revealLen: 0px; /* JS sets: ~0.8 * innerWidth */
 
   height: calc(100vh + var(--scrollLen) + var(--revealLen));
@@ -32,8 +31,7 @@
   --x-start: 0.65;
 }
 
-/* 入場：右下 → 正位置（フェード無し）
-   120% 右下から入るので必ず画面外スタート */
+/* 入場：右下 → 正位置（フェード無し） */
 .TasteInsertImages__frame {
   width: 100%;
   height: 100%;
@@ -51,7 +49,6 @@
       calc((1 - var(--ex)) * var(--dx)),
       calc((1 - var(--ey)) * var(--dy))
     )
-    /* スケールは“縦の到着度”に合わせる。不要なら次行を削除 */
     scale(calc(0.4 + 0.6 * var(--ey)));
   transform-origin: center;
   will-change: transform;
@@ -69,8 +66,8 @@
   /* mp：横移動の正規化進捗。--x-start までは 0。 */
   --mp: clamp(0, calc((var(--p) - var(--x-start)) / (1 - var(--x-start))), 1);
 
-  /* 横移動距離 = --scrollLen * mp */
-  transform: translateX(calc(-1 * var(--mp) * var(--scrollLen)));
+  /* 横移動距離 = trackLenX * mp（見た目の移動量は trackLenX を使う） */
+  transform: translateX(calc(-1 * var(--mp) * var(--trackLenX)));
 }
 
 /* スライド：縦いっぱい（高さ 100dvh）、幅は aspect-ratio で自動 */
@@ -78,12 +75,12 @@
   position: relative;
   height: 100vh;
   height: 100dvh;
-  aspect-ratio: var(--ratio, 3 / 4); /* 例：1184/1480 ≒ 0.8（縦長） */
+  aspect-ratio: var(--ratio, 3 / 4);
   flex: 0 0 auto;
   overflow: hidden;
 }
 
-/* 画像はスライド内を cover で埋める（Next/Image の fill 前提） */
+/* 画像はスライド内を cover で埋める */
 .TasteInsertImages__img {
   object-fit: cover;
 }
@@ -98,7 +95,6 @@
   &::before {
     content: "";
     position: absolute;
-    /* 右側に数 px 余白を持たせて、丸みの見切れを防止 */
     left: -1px;
     right: -1px;
     top: 0;
@@ -106,11 +102,9 @@
 
     background: #e4dfd9;
 
-    /* q: 0→1 で “右外(100%) → 0” に平行移動 */
     transform: translateX(calc(100% - 100% * var(--q)));
     will-change: transform;
 
-    /* ← JS から入る最終値（最小値は保険で clamp） */
     border-top-left-radius: clamp(12px, var(--curveX, 16px), 50vw) /
       clamp(16px, var(--curveY, 24px), 80vh);
     border-bottom-left-radius: clamp(12px, var(--curveX, 16px), 50vw) /
@@ -118,7 +112,7 @@
   }
 }
 
-/* 省モーション：入場の移動/スケールを停止（横流し＆リビールは維持） */
+/* 省モーション */
 @media (prefers-reduced-motion: reduce) {
   .TasteInsertImages__frame {
     transform: none;
