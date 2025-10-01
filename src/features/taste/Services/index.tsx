@@ -108,7 +108,7 @@ const TasteServices: React.FC = () => {
         <div className={styles.TasteServices__descriptionBlock}>
           <div data-speed="0.2">
             <Image
-              src="/taste/services/4.jpg"
+              src="/taste/services/4.JPG"
               alt="わとと京都 珈琲の写真1"
               width={492}
               height={328}
@@ -160,7 +160,7 @@ const TasteServices: React.FC = () => {
           )}
         />
         <Image
-          src="/taste/services/7.jpg"
+          src="/taste/services/7.JPG"
           alt="わとと京都 珈琲の写真4"
           width={448}
           height={299}
