@@ -26,6 +26,8 @@
     max-width: initial;
     height: auto;
     pointer-events: none; // 下に透過させる
+    transition-duration: 2s;
+    transition-property: opacity;
 
     @include m.respondToMd {
       display: none;
@@ -136,5 +138,9 @@ html[data-hero-latched] .TasteMenu {
 
   .TasteMenu__icon {
     color: var(--color-dark);
+  }
+
+  .TasteMenu__line {
+    opacity: 0;
   }
 }
