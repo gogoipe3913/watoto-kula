@@ -44,7 +44,7 @@ const TastePhilosophy: React.FC = () => {
       <div className={styles.TastePhilosophy__right}>
         <div className={styles.TastePhilosophy__bodyWrapper}>
           {body.map((p, i) => (
-            <p key={i} className={styles.TastePhilosophy__body}>
+            <p data-reveal key={i} className={styles.TastePhilosophy__body}>
               {renderWithBr(p)}
             </p>
           ))}

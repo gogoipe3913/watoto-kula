@@ -21,7 +21,7 @@ const TasteAccess: React.FC = ({}) => {
       </div>
 
       <div className={styles.TasteAccess__contents}>
-        <div>
+        <div data-reveal>
           <h3 className={styles.TasteAccess__subHeader}>Address</h3>
           <div className={styles.TasteAccess__description}>
             <p className={styles.TasteAccess__addressJa}>
@@ -40,7 +40,7 @@ const TasteAccess: React.FC = ({}) => {
           </div>
         </div>
 
-        <div>
+        <div data-reveal>
           <h3 className={styles.TasteAccess__subHeader}>Opening hour</h3>
           <div className={styles.TasteAccess__description}>
             <div className={styles.TasteAccess__descriptionFlex}>
@@ -80,7 +80,7 @@ const TasteAccess: React.FC = ({}) => {
             </a>
           </div>
         </div>
-        <div className={styles.TasteAccess__information}>
+        <div data-reveal className={styles.TasteAccess__information}>
           <h3 className={styles.TasteAccess__subHeader}>Information</h3>
           <div className={styles.TasteAccess__description}>
             <div className={styles.TasteAccess__descriptionFlexInfo}>

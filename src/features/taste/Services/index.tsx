@@ -56,6 +56,7 @@ const TasteServices: React.FC = () => {
             height={689}
             // ゆっくり動く（奥）
             data-speed="0.18"
+            data-reveal
             className={classNames(
               "js-parallax",
               styles.TasteServices__img,
@@ -66,6 +67,7 @@ const TasteServices: React.FC = () => {
             className={classNames("js-parallax", styles.TasteServices__text)}
             // 逆方向にほんの少し（視差強調）
             data-speed="0.12"
+            data-reveal
           >
             <h3 className={styles.TasteServices__subHeading}>
               {lunchHeading.map((line, i) => (
@@ -86,6 +88,7 @@ const TasteServices: React.FC = () => {
           width={377}
           height={251}
           data-speed="0.15"
+          data-reveal
           className={classNames(
             "js-parallax",
             styles.TasteServices__img,
@@ -98,6 +101,7 @@ const TasteServices: React.FC = () => {
           width={407}
           height={610}
           data-speed="0.3"
+          data-reveal
           className={classNames(
             "js-parallax",
             styles.TasteServices__img,
@@ -106,7 +110,7 @@ const TasteServices: React.FC = () => {
         />
 
         <div className={styles.TasteServices__descriptionBlock}>
-          <div data-speed="0.2">
+          <div data-speed="0.2" data-reveal>
             <Image
               src="/taste/services/4.JPG"
               alt="わとと京都 珈琲の写真1"
@@ -133,6 +137,7 @@ const TasteServices: React.FC = () => {
           <div
             className={classNames("js-parallax", styles.TasteServices__text)}
             data-speed="0.12"
+            data-reveal
           >
             <h3 className={styles.TasteServices__subHeading}>
               {coffeeHeading.map((line, i) => (
@@ -153,6 +158,7 @@ const TasteServices: React.FC = () => {
           width={364}
           height={243}
           data-speed="0.3"
+          data-reveal
           className={classNames(
             "js-parallax",
             styles.TasteServices__img,
@@ -165,6 +171,7 @@ const TasteServices: React.FC = () => {
           width={448}
           height={299}
           data-speed="0.15"
+          data-reveal
           className={classNames(
             "js-parallax",
             styles.TasteServices__img,
@@ -179,6 +186,7 @@ const TasteServices: React.FC = () => {
             width={460}
             height={689}
             data-speed="0.2"
+            data-reveal
             className={classNames(
               "js-parallax",
               styles.TasteServices__img,
@@ -188,6 +196,7 @@ const TasteServices: React.FC = () => {
           <div
             className={classNames("js-parallax", styles.TasteServices__text)}
             data-speed="0.12"
+            data-reveal
           >
             <h3 className={styles.TasteServices__subHeading}>
               {cocktailHeading.map((line, i) => (
@@ -208,6 +217,7 @@ const TasteServices: React.FC = () => {
           width={358}
           height={239}
           data-speed="0.25"
+          data-reveal
           className={classNames(
             "js-parallax",
             styles.TasteServices__img,
@@ -220,6 +230,7 @@ const TasteServices: React.FC = () => {
           width={332}
           height={498}
           data-speed="0.1"
+          data-reveal
           className={classNames(
             "js-parallax",
             styles.TasteServices__img,

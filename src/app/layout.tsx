@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import "@/styles/globals.scss";
 import MouseStalker from "@/components/MouseStalker";
 import AdobeFontsLoader from "@/components/AdobeFontsLoader";
+import RevealBoot from "@/components/RevealBoot";
+import "../styles/reveal.scss";
+
+import "./globals.css";
+import "@/styles/globals.scss";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({
@@ -28,6 +31,7 @@ export default function RootLayout({
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <AdobeFontsLoader />
+        <RevealBoot />
         {children}
         <MouseStalker />
       </body>

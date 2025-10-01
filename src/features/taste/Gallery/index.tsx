@@ -116,6 +116,7 @@ const TasteGallery: React.FC = ({}) => {
                 height={photo.height}
                 src={photo.src}
                 alt={photo.alt}
+                data-reveal
               />
             </a>
           </li>

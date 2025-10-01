@@ -41,7 +41,11 @@ const HeadingTexts: React.FC<HeadingTextsProps> = ({
 
   return (
     <h2 className={classNames(styles.HeadingTexts, className)}>
-      <p className={styles.HeadingTexts__headingBody} aria-label={ariaLabel}>
+      <p
+        className={styles.HeadingTexts__headingBody}
+        aria-label={ariaLabel}
+        data-reveal
+      >
         <span className={styles.HeadingTexts__textFirst} aria-hidden="true">
           {splitToSpans(textFirst, styles.HeadingTexts__letter)}
         </span>
@@ -56,7 +60,9 @@ const HeadingTexts: React.FC<HeadingTextsProps> = ({
           </span>
         )}
       </p>
-      <p className={styles.HeadingTexts__category}>{renderWithBr(category)}</p>
+      <p className={styles.HeadingTexts__category} data-reveal>
+        {renderWithBr(category)}
+      </p>
     </h2>
   );
 };

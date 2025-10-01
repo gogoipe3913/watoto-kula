@@ -22,9 +22,12 @@ const TasteAnotherPageLink: React.FC = ({}) => {
           height={673}
           src="/taste/anotherPageLink/1.png"
           alt="stayページの画像"
+          data-reveal
         />
-        <p className={styles.TasteAnotherPageLink__text}>わととに泊まる。</p>
-        <p className={styles.TasteAnotherPageLink__imitationButton}>
+        <p data-reveal className={styles.TasteAnotherPageLink__text}>
+          わととに泊まる。
+        </p>
+        <p data-reveal className={styles.TasteAnotherPageLink__imitationButton}>
           <span className={styles.TasteAnotherPageLink__buttonText}>
             watoto stay lita
           </span>
