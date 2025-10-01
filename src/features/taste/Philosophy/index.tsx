@@ -5,11 +5,22 @@ import styles from "./style.module.scss";
 import HeadingTexts from "@/components/HeadingTexts";
 import contents from "@/contents/TastePhilosophy.ja.json";
 
-const renderWithBr = (text: string) =>
+const renderWithBr = (text: string, isCategory?: boolean) =>
   text.split("\n").map((line, i, arr) => (
     <React.Fragment key={i}>
       {line}
-      {i < arr.length - 1 && <br />}
+      {i < arr.length - 1 ? (
+        <>
+          {isCategory ? (
+            <span
+              className={styles.TastePhilosophy__categoryBr}
+              aria-hidden="true"
+            />
+          ) : (
+            <br />
+          )}
+        </>
+      ) : null}
     </React.Fragment>
   ));
 
@@ -24,11 +35,9 @@ const TastePhilosophy: React.FC = () => {
             textFirst={heading.first}
             textSecond={heading.second}
             textThird={heading.third}
+            category={category}
             className={styles.TastePhilosophy__heading}
           />
-          <h2 className={styles.TastePhilosophy__category}>
-            {renderWithBr(category)}
-          </h2>
         </div>
       </div>
 

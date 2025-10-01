@@ -8,6 +8,11 @@ import Link from "next/link";
 const TasteAnotherPageLink: React.FC = ({}) => {
   return (
     <div className={styles.TasteAnotherPageLink}>
+      <h2 className={styles.TasteAnotherPageLink__title}>
+        <p>watoto</p>
+        <p>stay</p>
+        <p>lita</p>
+      </h2>
       <Link href="/stay" className={styles.TasteAnotherPageLink__body}>
         <Image
           width={1010}

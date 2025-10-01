@@ -13,6 +13,8 @@
   transition-duration: 2s;
 
   @include m.respondToMd {
+    top: 180px;
+    transform: translateY(0);
     right: 16px;
   }
 
@@ -23,6 +25,17 @@
     width: 360px;
     max-width: initial;
     height: auto;
+
+    @include m.respondToMd {
+      display: none;
+    }
+  }
+
+  .TasteMenu__icon {
+    @include m.respondToMd {
+      width: 48px;
+      height: 22px;
+    }
   }
 
   ul {
@@ -30,6 +43,10 @@
     display: flex;
     flex-direction: column;
     gap: 28px;
+
+    @include m.respondToMd {
+      display: none;
+    }
   }
 }
 

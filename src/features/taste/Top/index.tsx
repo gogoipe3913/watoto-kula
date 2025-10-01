@@ -196,8 +196,7 @@ const TasteTop: React.FC = () => {
               key={s.src}
               src={s.src}
               alt={s.alt}
-              width={1920}
-              height={1080}
+              fill
               sizes="100vw"
               priority={i === 0}
               className={classNames(

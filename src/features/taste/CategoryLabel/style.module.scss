@@ -9,7 +9,6 @@
   font-size: 14px;
   letter-spacing: 0.06em;
   text-align: left;
-  // color: var(--color-white);
   color: var(--color-white);
   z-index: 2;
   transition-duration: 2s;
@@ -67,12 +66,34 @@ html[data-hero-latched] .CategoryLabel {
   z-index: 999;
 
   @include m.respondToMd {
-    bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    top: initial;
+    left: initial;
+    right: -216px;
+    bottom: 272px;
+    font-size: 12px;
+    transform-origin: bottom left;
+    transform: rotate(90deg);
   }
 
   .CategoryLabel__title {
     &::after {
       background-color: var(--color-dark);
+
+      @include m.respondToMd {
+        bottom: -2px;
+      }
+    }
+  }
+
+  .CategoryLabel__text {
+    @include m.respondToMd {
+      margin-top: initial;
+      display: flex;
+      align-items: center;
+      gap: 44px;
     }
   }
 

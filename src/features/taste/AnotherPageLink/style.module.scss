@@ -6,6 +6,32 @@
   z-index: 10;
   background-color: var(--color-taste-background);
 
+  @include m.respondToMd {
+    padding: 20vh 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100dvh;
+  }
+
+  .TasteAnotherPageLink__title {
+    display: none;
+
+    @include m.respondToMd {
+      position: absolute;
+      display: block;
+      top: 44px;
+      left: 28px;
+      color: var(--color-dark);
+      font-size: 20px;
+      letter-spacing: 0.02em;
+
+      p + p {
+        margin-top: 16px;
+      }
+    }
+  }
+
   .TasteAnotherPageLink__body {
     position: relative;
     margin: 0 auto;
@@ -15,6 +41,11 @@
     align-items: center;
     aspect-ratio: 1010 / 673;
     width: calc(100vw * 1010px / 1440px);
+
+    @include m.respondToMd {
+      margin: auto;
+      width: 100%;
+    }
   }
 
   img {
@@ -26,6 +57,10 @@
     display: block;
     max-width: 1010px;
     width: 100%;
+
+    @include m.respondToMd {
+      height: auto;
+    }
   }
 
   .TasteAnotherPageLink__text {
@@ -33,8 +68,13 @@
     padding-left: 20px;
     width: fit-content;
     font-size: 32px;
-    letter-spacing: 4px;
+    letter-spacing: 0.04em;
     z-index: 2;
+
+    @include m.respondToMd {
+      margin-top: 36px;
+      font-size: 18px;
+    }
   }
 
   .TasteAnotherPageLink__imitationButton {
@@ -47,11 +87,21 @@
     z-index: 2;
     border: 1px solid var(--color-white);
     border-radius: 40px;
+
+    @include m.respondToMd {
+      margin-top: initial;
+      gap: 12px;
+      border: none;
+    }
   }
 
   .TasteAnotherPageLink__buttonText {
     display: block;
     font-size: 18px;
+
+    @include m.respondToMd {
+      font-size: 14px;
+    }
   }
 
   .TasteAnotherPageLink__buttonArrow {
@@ -62,6 +112,10 @@
     background-color: var(--color-white);
     transition-duration: 0.5s;
     transition-timing-function: cubic-bezier(0.83, 0, 0.17, 1);
+
+    @include m.respondToMd {
+      width: 56px;
+    }
 
     &::after {
       content: "";
@@ -75,6 +129,12 @@
       transform: rotate(30deg);
       transition-duration: 1s;
       transition-timing-function: cubic-bezier(0.83, 0, 0.17, 1);
+
+      @include m.respondToMd {
+        width: 16px;
+        top: -4px;
+        right: -1px;
+      }
     }
   }
 
@@ -83,5 +143,13 @@
     width: fit-content;
     font-size: 10px;
     color: var(--color-dark);
+
+    @include m.respondToMd {
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      bottom: 24px;
+    }
   }
 }

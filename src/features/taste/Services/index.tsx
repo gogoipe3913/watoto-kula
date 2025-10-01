@@ -42,10 +42,8 @@ const TasteServices: React.FC = () => {
             textFirst={heading.first}
             textSecond={heading.second}
             textThird={heading.third}
+            category={category}
           />
-          <h2 className={styles.TasteServices__category}>
-            {renderWithBr(category)}
-          </h2>
         </div>
       </div>
 
@@ -114,14 +112,22 @@ const TasteServices: React.FC = () => {
               alt="わとと京都 珈琲の写真1"
               width={492}
               height={328}
-              className={classNames("js-parallax", styles.TasteServices__img)}
+              className={classNames(
+                "js-parallax",
+                styles.TasteServices__img,
+                styles["TasteServices__img--4"]
+              )}
             />
             <Image
               src="/taste/services/5.jpg"
               alt="わとと京都 珈琲の写真2"
               width={492}
               height={328}
-              className={classNames("js-parallax", styles.TasteServices__img)}
+              className={classNames(
+                "js-parallax",
+                styles.TasteServices__img,
+                styles["TasteServices__img--5"]
+              )}
             />
           </div>
           <div
@@ -173,7 +179,11 @@ const TasteServices: React.FC = () => {
             width={460}
             height={689}
             data-speed="0.2"
-            className={classNames("js-parallax", styles.TasteServices__img)}
+            className={classNames(
+              "js-parallax",
+              styles.TasteServices__img,
+              styles["TasteServices__img--8"]
+            )}
           />
           <div
             className={classNames("js-parallax", styles.TasteServices__text)}

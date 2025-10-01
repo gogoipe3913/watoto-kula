@@ -4,16 +4,6 @@ import React from "react";
 import HeadingTexts from "@/components/HeadingTexts";
 import contents from "@/contents/TasteAccess.ja.json";
 import styles from "./style.module.scss";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-
-const renderWithBr = (text: string) =>
-  text.split("\n").map((line, i, arr) => (
-    <React.Fragment key={i}>
-      {line}
-      {i < arr.length - 1 && <br />}
-    </React.Fragment>
-  ));
 
 const TasteAccess: React.FC = ({}) => {
   const { heading, category } = contents;
@@ -25,10 +15,8 @@ const TasteAccess: React.FC = ({}) => {
             textFirst={heading.first}
             textSecond={heading.second}
             textThird={heading.third}
+            category={category}
           />
-          <h2 className={styles.TasteAccess__category}>
-            {renderWithBr(category)}
-          </h2>
         </div>
       </div>
 
@@ -92,10 +80,10 @@ const TasteAccess: React.FC = ({}) => {
             </a>
           </div>
         </div>
-        <div>
+        <div className={styles.TasteAccess__information}>
           <h3 className={styles.TasteAccess__subHeader}>Information</h3>
           <div className={styles.TasteAccess__description}>
-            <div className={styles.TasteAccess__descriptionFlex}>
+            <div className={styles.TasteAccess__descriptionFlexInfo}>
               <p className={styles.TasteAccess__InformationBox}>
                 <span>京都駅より市バス205/4系統</span>
                 <span className={styles.TasteAccess__descriptionRubi}>
@@ -109,7 +97,7 @@ const TasteAccess: React.FC = ({}) => {
                 </span>
               </p>
             </div>
-            <div className={styles.TasteAccess__descriptionFlex}>
+            <div className={styles.TasteAccess__descriptionFlexInfo}>
               <p className={styles.TasteAccess__InformationBox}>
                 <span>京阪出町柳駅より徒歩</span>
                 <span className={styles.TasteAccess__descriptionRubi}>

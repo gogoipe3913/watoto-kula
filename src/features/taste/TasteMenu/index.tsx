@@ -9,7 +9,7 @@ export default function TasteMenu() {
     <div className={styles.TasteMenu}>
       <Image
         src="/logo/line-hw.svg"
-        alt="メニューアイコン"
+        alt="線"
         width={340}
         height={655}
         className={styles.TasteMenu__line}

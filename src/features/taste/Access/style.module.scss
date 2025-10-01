@@ -11,19 +11,22 @@
   color: var(--color-dark);
   background-color: var(--color-taste-background);
 
+  @include m.respondToMd {
+    padding: 200px 28px;
+    gap: initial;
+  }
+
   .TasteAccess__heading {
+    flex-shrink: 0;
     position: sticky;
     top: 200px;
     z-index: 1;
     width: fit-content;
-  }
 
-  .TasteAccess__category {
-    margin-top: 88px;
-    font-size: 16px;
-    font-family: var(--font-family-serif, cochin, serif);
-    font-style: italic;
-    letter-spacing: 0.04em;
+    @include m.respondToMd {
+      top: 60px;
+      margin-left: 16px;
+    }
   }
 
   .TasteAccess__contents {
@@ -32,11 +35,20 @@
     gap: 80px;
     margin-top: 100vh;
     max-width: 380px;
+
+    @include m.respondToMd {
+      margin-left: -52px;
+      width: 56vw;
+    }
   }
 
   .TasteAccess__subHeader {
     font-family: var(--font-family-serif, cochin, serif);
     font-size: 24px;
+
+    @include m.respondToMd {
+      font-size: 20px;
+    }
   }
 
   .TasteAccess__description {
@@ -48,6 +60,14 @@
     .TasteAccess__addressJa {
       font-size: 18px;
 
+      @include m.respondToMd {
+        font-size: 14px;
+
+        &:last-of-type {
+          padding-bottom: 200px;
+        }
+      }
+
       span + span {
         margin-top: 8px;
       }
@@ -56,6 +76,10 @@
     .TasteAccess__addressEn {
       margin-top: 28px;
       color: #6c6c6c;
+
+      @include m.respondToMd {
+        font-size: 14px;
+      }
 
       span + span {
         margin-top: 4px;
@@ -73,6 +97,10 @@
       gap: 16px;
       font-size: 24px;
       color: var(--color-dark);
+
+      @include m.respondToMd {
+        font-size: 16px;
+      }
     }
 
     .TasteAccess__buttonArrow {
@@ -109,26 +137,47 @@
       }
     }
 
-    .TasteAccess__descriptionFlex {
+    .TasteAccess__descriptionFlex,
+    .TasteAccess__descriptionFlexInfo {
       display: flex;
       align-items: center;
       gap: 60px;
       font-size: 18px;
       text-align: left;
+
+      @include m.respondToMd {
+        font-size: 14px;
+      }
     }
 
     .TasteAccess__descriptionFlex + .TasteAccess__descriptionFlex {
       margin-top: 20px;
     }
 
+    .TasteAccess__descriptionFlexInfo + .TasteAccess__descriptionFlexInfo {
+      margin-top: 20px;
+
+      @include m.respondToMd {
+        margin-top: 28px;
+      }
+    }
+
     .TasteAccess__descriptionRubi {
       font-size: 12px;
       color: #6c6c6c;
+
+      @include m.respondToMd {
+        font-size: 11px;
+      }
     }
 
     .TasteAccess__descriptionTexts {
       margin-top: 36px;
       font-size: 14px;
+
+      @include m.respondToMd {
+        font-size: 13px;
+      }
 
       .TasteAccess__descriptionText {
         line-height: 1.8;
@@ -143,8 +192,27 @@
       }
     }
 
+    .TasteAccess__descriptionFlexInfo {
+      @include m.respondToMd {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 12px;
+      }
+    }
+
     .TasteAccess__InformationBox {
       min-width: 224px;
+
+      @include m.respondToMd {
+        min-width: initial;
+      }
+    }
+  }
+
+  .TasteAccess__information {
+    @include m.respondToMd {
+      padding-bottom: 260px;
     }
   }
 }

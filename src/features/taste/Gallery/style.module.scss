@@ -7,6 +7,10 @@
   color: var(--color-dark);
   background-color: var(--color-taste-background);
 
+  @include m.respondToMd {
+    padding: 200px 28px;
+  }
+
   .TasteGallery__heading {
     width: fit-content;
     height: 100vh;
@@ -16,14 +20,11 @@
     position: sticky;
     top: 200px;
     z-index: 1;
-  }
 
-  .TasteGallery__category {
-    margin-top: 88px;
-    font-size: 16px;
-    font-family: var(--font-family-serif, cochin, serif);
-    font-style: italic;
-    letter-spacing: 0.04em;
+    @include m.respondToMd {
+      top: 60px;
+      margin-left: 16px;
+    }
   }
 
   .TasteGallery__images {
@@ -31,8 +32,21 @@
     column-count: 3;
     column-gap: 16px;
 
+    @include m.respondToMd {
+      column-count: 2;
+    }
+
+    @include m.respondToSm {
+      column-count: 1;
+    }
+
     li {
       max-width: 360px;
+
+      @include m.respondToSm {
+        margin: 0 auto;
+        max-width: 320px;
+      }
 
       img {
         width: 100%;

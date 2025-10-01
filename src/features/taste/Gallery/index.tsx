@@ -6,9 +6,6 @@ import styles from "./style.module.scss";
 import contents from "@/contents/TasteGallery.ja.json";
 import HeadingTexts from "@/components/HeadingTexts";
 
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-
 const photos = [
   {
     src: "/taste/gallery/1.png",
@@ -96,14 +93,6 @@ const photos = [
   },
 ];
 
-const renderWithBr = (text: string) =>
-  text.split("\n").map((line, i, arr) => (
-    <React.Fragment key={i}>
-      {line}
-      {i < arr.length - 1 && <br />}
-    </React.Fragment>
-  ));
-
 const TasteGallery: React.FC = ({}) => {
   const { heading, category } = contents;
   return (
@@ -114,10 +103,8 @@ const TasteGallery: React.FC = ({}) => {
             textFirst={heading.first}
             textSecond={heading.second}
             textThird={heading.third}
+            category={category}
           />
-          <h2 className={styles.TasteGallery__category}>
-            {renderWithBr(category)}
-          </h2>
         </div>
       </div>
       <ul className={styles.TasteGallery__images}>

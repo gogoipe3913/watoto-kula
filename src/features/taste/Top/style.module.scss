@@ -1,3 +1,5 @@
+@use "../../../styles/mixin" as m;
+
 /* JS が更新する半径（直径は *2） */
 @property --r-js {
   syntax: "<length>";
@@ -9,6 +11,10 @@
 .TasteTop {
   position: relative;
   height: 200vh;
+
+  @include m.respondToMd {
+    overflow: hidden;
+  }
 }
 
 /* ★ 擬似 sticky 対象（初期は相対配置。JSが fixed/absolute に切替） */
@@ -47,6 +53,7 @@
   transition: transform 6s ease-out;
   will-change: transform;
 }
+
 .TasteTop__image--active {
   transform: scale(1.05); /* 完全 1.0 だと端が出やすいので微拡大 */
 }

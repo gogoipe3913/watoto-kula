@@ -3,16 +3,16 @@
 .TastePhilosophy {
   padding: 200px 320px;
   color: var(--color-dark);
-
   display: flex;
   gap: 200px;
 
   @include m.respondToMd {
-    grid-template-columns: 1fr;
-    column-gap: 0;
+    padding: 200px 28px;
+    gap: initial;
   }
 
   .TastePhilosophy__left {
+    flex-shrink: 0;
     width: fit-content;
   }
 
@@ -20,14 +20,11 @@
     position: sticky;
     top: 200px;
     z-index: 999;
-  }
 
-  .TastePhilosophy__category {
-    margin-top: 88px;
-    font-size: 16px;
-    font-family: var(--font-family-serif, cochin, serif);
-    font-style: italic;
-    letter-spacing: 0.04em;
+    @include m.respondToMd {
+      top: 60px;
+      margin-left: 16px;
+    }
   }
 
   .TastePhilosophy__right {
@@ -35,6 +32,11 @@
     z-index: 999;
     align-self: start;
     width: 380px;
+
+    @include m.respondToMd {
+      margin-left: -52px;
+      width: 56vw;
+    }
   }
 
   .TastePhilosophy__bodyWrapper {
@@ -50,5 +52,9 @@
     line-height: 2;
     letter-spacing: 0.04em;
     white-space: pre-wrap;
+
+    @include m.respondToMd {
+      font-size: 13px;
+    }
   }
 }
