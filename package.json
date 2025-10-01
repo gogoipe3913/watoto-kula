@@ -12,6 +12,7 @@
     "@fullcalendar/daygrid": "^6.1.17",
     "@fullcalendar/google-calendar": "^6.1.17",
     "@fullcalendar/react": "^6.1.17",
+    "@studio-freight/lenis": "^1.0.42",
     "classnames": "^2.5.1",
     "date-holidays": "^3.24.3",
     "gsap": "^3.12.7",
