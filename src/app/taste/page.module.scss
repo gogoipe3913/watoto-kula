@@ -15,19 +15,22 @@
 
   .Taste__noise {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    inset: 0;
+    z-index: var(--z-index-elevation-5);
     pointer-events: none;
-    opacity: 0.03;
+    mix-blend-mode: soft-light;
+    opacity: 0.12;
   }
 
   .Taste__noiseGif {
     position: absolute;
-    width: 100%;
-    height: 100%;
-    background-image: url(/public/taste/noise.gif);
+    inset: 0;
+    background-image: url("/taste/noise.gif");
+    background-repeat: repeat;
+    background-size: 240px 240px;
+    animation: noiseJitter 1.6s steps(2, end) infinite;
+    will-change: background-position;
+    transform: translateZ(0);
   }
 
   .Taste__contents {
