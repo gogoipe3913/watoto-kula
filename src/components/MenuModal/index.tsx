@@ -1,84 +1,138 @@
+// MenuModal.tsx
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
+import ReactDOM from "react-dom";
 import classNames from "classnames";
-import { CSSTransition } from "react-transition-group";
-import style from "./style.module.scss";
-import Logo from "../logo";
+import styles from "./style.module.scss";
 
 type MenuModalProps = {
-  isOpen?: boolean;
   className?: string;
-  closeModal?(): void;
+  isOpen: boolean;
+  onClose: () => void;
 };
 
 const MenuModal: React.FC<MenuModalProps> = ({
-  isOpen = false,
   className = "",
-  closeModal = () => {},
+  isOpen,
+  onClose,
 }) => {
-  const [mounted, setMounted] = useState(false);
-  const nodeRef = useRef(null);
+  const [isMounted, setIsMounted] = React.useState(false);
+  const [active, setActive] = React.useState(false);
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-  return (
-    <CSSTransition
-      in={isOpen && mounted}
-      timeout={200}
-      classNames={style.MenuModalTransition}
-      unmountOnExit
-      nodeRef={nodeRef}
+  // ★ 2段階 rAF で確実に「初期→開」のフレーム分離（Safari/iOS対策）
+  React.useEffect(() => {
+    if (isOpen) {
+      setIsMounted(true);
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => setActive(true));
+      });
+    } else {
+      setActive(false);
+    }
+  }, [isOpen]);
+
+  React.useEffect(() => {
+    if (!isMounted) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [isMounted, onClose]);
+
+  React.useEffect(() => {
+    if (!isMounted) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [isMounted]);
+
+  const handleTransitionEnd = () => {
+    if (!active) setIsMounted(false);
+  };
+
+  if (!isMounted) return null;
+
+  const modalNode = (
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label="Menu"
+      className={classNames(styles.MenuModalRoot, className)}
     >
-      <div ref={nodeRef} className={classNames(style.MenuModal, className)}>
-        <Logo isColored={true} className={style.MenuModal__logo} />
-        <button onClick={closeModal} className={style.MenuModal__button}>
-          <span></span>
-          <span></span>
+      <div
+        className={classNames(styles.Overlay, active && styles.isOpen)}
+        onClick={onClose}
+        onTransitionEnd={handleTransitionEnd}
+      />
+      <aside
+        className={classNames(styles.Panel, active && styles.isOpen)}
+        onTransitionEnd={handleTransitionEnd}
+      >
+        <button
+          className={styles.CloseButton}
+          aria-label="Close menu"
+          onClick={onClose}
+        >
+          ×
         </button>
-        <div className={style.MenuModal__info}>
-          <div className={style.MenuModal__sections}>
-            <div className={style.MenuModal__section}>
-              <p>Taste</p>
-              <ul>
-                <li>
-                  <a href="#TasteAbout">About</a>
-                </li>
-                <li>
-                  <a href="#concept">Concept</a>
-                </li>
-                <li>
-                  <a href="#gallery">Gallery</a>
-                </li>
-                <li>
-                  <a href="#access">Access</a>
-                </li>
-              </ul>
-            </div>
-            <div className={style.MenuModal__section}>
-              <p>Stay</p>
-              <ul>
-                <li className={style.MenuModal__underConstruction}>
-                  現在準備中
-                </li>
-              </ul>
-            </div>
+
+        {/* ここから既存の中身 */}
+        <div className={styles.MenuModal__info}>
+          <div className={styles.MenuModal__selectedPage}>
+            <p>taste</p>
+            <p>stay</p>
           </div>
-          <div className={style.MenuModal__commonSection}>
-            <p>
-              <a href="mailto:watoto.kyoto@gmail.com">contact</a>
-            </p>
-            <p>
-              <a target="_blank" href="https://www.instagram.com/watoto_kyoto/">
+          <ul className={styles.MenuModal__links}>
+            <li>
+              <a href="#philosophy">Philosophy</a>
+            </li>
+            <li>
+              <a href="#services">Services</a>
+            </li>
+            <li>
+              <a href="#gallery">Gallery</a>
+            </li>
+            <li>
+              <a href="#access">Access</a>
+            </li>
+          </ul>
+          <ul className={styles.MenuModal__links}>
+            <li>
+              <a
+                target="_blank"
+                rel="noreferrer"
+                href="https://www.instagram.com/watoto_kyoto/"
+              >
                 instagram
               </a>
+            </li>
+            <li>
+              <a href="mailto:watoto.kyoto@gmail.com">contact</a>
+            </li>
+          </ul>
+          <div className={styles.MenuModal__address}>
+            <p className={styles.MenuModal__addressJa}>
+              <span>〒606-0805</span>
+              <span>京都府京都市左京区下鴨森本町9</span>
+            </p>
+            <p className={styles.MenuModal__addressEn}>
+              <span>9, Morimoto-cho, Shimogamo,</span>
+              <span>Sakyo-ku, Kyoto</span>
+              <span>606-0805, Japan</span>
             </p>
           </div>
         </div>
-      </div>
-    </CSSTransition>
+      </aside>
+    </div>
   );
+
+  // ★ Portal
+  if (typeof document !== "undefined") {
+    return ReactDOM.createPortal(modalNode, document.body);
+  }
+  return null;
 };
 
 export default MenuModal;
