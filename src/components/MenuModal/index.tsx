@@ -86,16 +86,24 @@ const MenuModal: React.FC<MenuModalProps> = ({
           </div>
           <ul className={styles.MenuModal__links}>
             <li>
-              <a href="#philosophy">Philosophy</a>
+              <a href="#philosophy" onClick={onClose}>
+                Philosophy
+              </a>
             </li>
             <li>
-              <a href="#services">Services</a>
+              <a href="#services" onClick={onClose}>
+                Services
+              </a>
             </li>
             <li>
-              <a href="#gallery">Gallery</a>
+              <a href="#gallery" onClick={onClose}>
+                Gallery
+              </a>
             </li>
             <li>
-              <a href="#access">Access</a>
+              <a href="#access" onClick={onClose}>
+                Access
+              </a>
             </li>
           </ul>
           <ul className={styles.MenuModal__links}>
@@ -104,12 +112,15 @@ const MenuModal: React.FC<MenuModalProps> = ({
                 target="_blank"
                 rel="noreferrer"
                 href="https://www.instagram.com/watoto_kyoto/"
+                onClick={onClose}
               >
                 instagram
               </a>
             </li>
             <li>
-              <a href="mailto:watoto.kyoto@gmail.com">contact</a>
+              <a href="mailto:watoto.kyoto@gmail.com" onClick={onClose}>
+                contact
+              </a>
             </li>
           </ul>
           <div className={styles.MenuModal__address}>
