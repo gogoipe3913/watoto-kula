@@ -20,7 +20,7 @@ export async function POST(req: Request) {
     message,
     agreeReservationConfirmation,
     agreePrivacyPolicy,
-    totalPrice,
+    // totalPrice,
   } = data;
 
   const mailTextBody = `
@@ -46,7 +46,7 @@ export async function POST(req: Request) {
     宿泊約款の同意: ${agreePrivacyPolicy ? "同意しました" : "同意していません"}
     -----------------
 
-    合計金額: ${totalPrice} 円
+    合計金額: 自動計算を行ってないので、都度計算をお願いします。
   `;
 
   const transporter = nodemailer.createTransport({
