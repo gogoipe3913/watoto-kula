@@ -17,7 +17,7 @@
   --panel-w: 500px;
 
   /* 段階フェード用の基準 */
-  --delay-unit: 80ms; /* ステップ間隔（好みで 60–100ms） */
+  --delay-unit: 120ms; /* ステップ間隔（好みで 60–100ms） */
 
   /* ハンバーガー（閉じる）ボタン */
   .MenuModal__button {
@@ -127,7 +127,7 @@
   /* 初期状態（非表示） */
   opacity: 0;
   transform: translateY(8px);
-  transition: opacity 0.45s ease, transform 0.45s ease;
+  transition: opacity 1s ease, transform 1s ease;
 
   /* 子要素の初期値（まとめて） */
   > .MenuModal__selectedPage,
@@ -167,7 +167,7 @@
       li {
         opacity: 0;
         transform: translateY(6px);
-        transition: opacity 0.45s ease, transform 0.45s ease;
+        transition: opacity 1s ease, transform 1s ease;
       }
       li:nth-child(1) {
         transition-delay: calc(var(--li-base) + var(--delay-unit) * 0);
@@ -196,7 +196,7 @@
       li {
         opacity: 0;
         transform: translateY(6px);
-        transition: opacity 0.45s ease, transform 0.45s ease;
+        transition: opacity 1s ease, transform 1s ease;
       }
       li:nth-child(1) {
         transition-delay: calc(var(--li-base) + var(--delay-unit) * 0);
