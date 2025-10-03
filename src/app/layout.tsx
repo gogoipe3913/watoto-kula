@@ -1,4 +1,5 @@
-import type { Metadata } from "next";
+// app/layout.tsx
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import MouseStalker from "@/components/MouseStalker";
 import AdobeFontsLoader from "@/components/AdobeFontsLoader";
@@ -17,8 +18,87 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Watoto",
-  description: "京都・下鴨のバー、福井・小浜の宿についてのウェブページです。",
+  metadataBase: new URL("https://watoto-kula.com"),
+
+  title: {
+    default: "わとと | 京都・下鴨の飲食店 & 福井・小浜の宿",
+    template: "%s | わとと",
+  },
+  description:
+    "京都・下鴨の飲食店、福井・小浜の宿を運営するわととについて紹介する公式サイト。人と人とのつながりを大切にし、食・音楽・文化・滞在を通して多様な時間を提供します。",
+  keywords: [
+    "わとと",
+    "watoto",
+    "京都",
+    "下鴨",
+    "カフェ",
+    "バー",
+    "宿",
+    "小浜",
+    "福井",
+    "薬膳",
+    "発酵食品",
+    "イベント",
+  ],
+
+  // 著者・制作者・発行主体
+  authors: [{ name: "taiki kishiyama" }],
+  creator: "taiki kishiyama",
+  publisher: "watoto",
+
+  alternates: {
+    canonical: "/",
+  },
+
+  openGraph: {
+    type: "website",
+    url: "/",
+    title: "わとと | 京都・下鴨の飲食店 & 福井・小浜の宿",
+    description:
+      "京都・下鴨のカフェ＆バー「わとと」と、福井・小浜の宿「わとと宿」。食・文化・滞在を通じて、人と人のつながりを大切にします。",
+    siteName: "わとと",
+    locale: "ja_JP",
+    images: [
+      {
+        url: "/og/watoto-og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "わとと（watoto）イメージ",
+      },
+    ],
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-snippet": -1,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
+    },
+  },
+
+  icons: {
+    icon: [
+      { url: "/icons/favicon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/icons/favicon-16.png", sizes: "16x16", type: "image/png" },
+    ],
+    apple: [
+      {
+        url: "/icons/apple-touch-icon.png",
+        sizes: "180x180",
+        type: "image/png",
+      },
+    ],
+  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#ffffff",
 };
 
 export default function RootLayout({
@@ -27,7 +107,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" data-custom-cursor="on">
+    <html lang="ja" data-custom-cursor="on">
       <head>
         <link rel="icon" href="/favicon.ico" />
       </head>

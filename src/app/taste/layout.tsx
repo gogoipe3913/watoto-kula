@@ -29,7 +29,6 @@ export const metadata: Metadata = {
     "イベント",
   ],
 
-  // 著者・制作者・発行主体
   authors: [{ name: "taiki kishiyama" }],
   creator: "taiki kishiyama",
   publisher: "watoto",
@@ -41,7 +40,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "/taste",
-    title: "わとと | 京都・下鴨のカフェ＆バー",
+    title: "わとと | 京都・下鴨の飲食店",
     description:
       "お酒とコーヒー、こだわりの薬膳・発酵食。イベントも開かれる京都・下鴨の「わとと」。",
     siteName: "わとと",
@@ -81,7 +80,6 @@ export const metadata: Metadata = {
       },
     ],
   },
-  // manifest: "/site.webmanifest", ← 削除しました
 };
 
 export const viewport: Viewport = {
