@@ -130,6 +130,9 @@ const TasteInsertImages: React.FC = () => {
                 alt="わとと京都の店舗写真1"
                 fill
                 priority
+                loading="eager"
+                fetchPriority="high"
+                decoding="sync"
                 className={styles.TasteInsertImages__img}
                 sizes="100vw"
               />
@@ -139,6 +142,9 @@ const TasteInsertImages: React.FC = () => {
                 src="/taste/philosophy/2.webp"
                 alt="わとと京都の店舗写真2"
                 fill
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
                 className={styles.TasteInsertImages__img}
                 sizes="100vw"
               />
@@ -148,6 +154,9 @@ const TasteInsertImages: React.FC = () => {
                 src="/taste/philosophy/3.webp"
                 alt="わとと京都の店舗写真3"
                 fill
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
                 className={styles.TasteInsertImages__img}
                 sizes="100vw"
               />

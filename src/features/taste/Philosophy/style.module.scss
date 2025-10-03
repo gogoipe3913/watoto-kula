@@ -59,6 +59,7 @@
   }
 
   .TastePhilosophy__bodyWrapperSp {
+    display: none;
     @include m.respondToMd {
       display: flex;
       flex-direction: column;
