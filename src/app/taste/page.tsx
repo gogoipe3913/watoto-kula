@@ -7,12 +7,13 @@ import TastePhilosophy from "@/features/taste/Philosophy";
 import TasteInsertImages from "@/features/taste/InsertImages";
 import TasteServices from "@/features/taste/Services";
 import TasteGallery from "@/features/taste/Gallery";
+import TasteAccess from "@/features/taste/Access";
+import TasteAnotherPageLink from "@/features/taste/AnotherPageLink";
+import CategoryLabelLatched from "@/features/taste/CategoryLabelLatched";
 import styles from "./page.module.scss";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import TasteAccess from "@/features/taste/Access";
-import TasteAnotherPageLink from "@/features/taste/AnotherPageLink";
 
 export default function Taste() {
   return (
@@ -21,6 +22,7 @@ export default function Taste() {
         <div className={styles.Taste__noiseGif} />
       </div>
       <CategoryLabel />
+      <CategoryLabelLatched />
       <TasteMenu />
       <TasteTop />
       <TastePhilosophy />

@@ -15,7 +15,10 @@ const TasteAnotherPageLink: React.FC = ({}) => {
         category="link to stay"
         className={styles.TasteAnotherPageLink__title}
       />
-      <Link href="/stay" className={styles.TasteAnotherPageLink__body}>
+      <Link
+        href="https://www.instagram.com/watoto_stay_lita/"
+        className={styles.TasteAnotherPageLink__body}
+      >
         <Image
           width={1010}
           height={673}

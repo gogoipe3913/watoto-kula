@@ -12,8 +12,20 @@ $breakpoint-xlg: 1700px;
   }
 }
 
+@mixin respondToOverSm {
+  @media (min-width: $breakpoint-sm) {
+    @content;
+  }
+}
+
 @mixin respondToMd {
   @media (max-width: $breakpoint-md) {
+    @content;
+  }
+}
+
+@mixin respondToOverMd {
+  @media (min-width: $breakpoint-md) {
     @content;
   }
 }

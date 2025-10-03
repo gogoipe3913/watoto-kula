@@ -62,46 +62,30 @@
 }
 
 html[data-hero-latched] .CategoryLabel {
-  top: initial;
-  bottom: 44px;
-  color: var(--color-dark);
-  z-index: 999;
+  @include m.respondToOverMd {
+    top: initial;
+    bottom: 44px;
+    color: var(--color-dark);
+    z-index: 999;
+  }
 
   @include m.respondToMd {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    top: initial;
-    left: initial;
-    right: -216px;
-    bottom: 272px;
-    font-size: 12px;
-    transform-origin: bottom left;
-    transform: rotate(90deg);
+    opacity: 0;
   }
 
   .CategoryLabel__title {
     &::after {
-      background-color: var(--color-dark);
-
-      @include m.respondToMd {
-        bottom: -2px;
+      @include m.respondToOverMd {
+        background-color: var(--color-dark);
       }
-    }
-  }
-
-  .CategoryLabel__text {
-    @include m.respondToMd {
-      margin-top: initial;
-      display: flex;
-      align-items: center;
-      gap: 44px;
     }
   }
 
   .CategoryLabel__textFirst {
     &::after {
-      background-color: var(--color-dark);
+      @include m.respondToOverMd {
+        background-color: var(--color-dark);
+      }
     }
   }
 }
@@ -111,4 +95,10 @@ html[data-hero-latched] .CategoryLabel {
   opacity: 1;
   pointer-events: auto;
   transition-delay: 400ms;
+}
+
+html[data-hero-latched][data-hero-latched] .CategoryLabel {
+  @include m.respondToMd {
+    opacity: 0;
+  }
 }
