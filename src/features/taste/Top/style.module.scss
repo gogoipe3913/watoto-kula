@@ -105,6 +105,11 @@
   z-index: 2;
   color: var(--color-white, #fff);
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+
+  @include m.respondToMd {
+    left: 16px;
+    bottom: 16px;
+  }
 }
 
 .TasteTop__textEn {
@@ -116,21 +121,15 @@
 
 .TasteTop__spBr {
   display: none;
+
+  @include m.respondToMd {
+    display: inline;
+  }
 }
 .TasteTop__pcBr {
   display: inline;
-}
 
-@media (max-width: 768px) {
-  .TasteTop__text {
-    left: 16px;
-    right: 16px;
-    bottom: 32px;
-  }
-  .TasteTop__spBr {
-    display: inline;
-  }
-  .TasteTop__pcBr {
+  @include m.respondToMd {
     display: none;
   }
 }
