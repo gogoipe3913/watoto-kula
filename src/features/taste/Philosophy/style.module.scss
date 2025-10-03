@@ -11,6 +11,13 @@
     gap: initial;
   }
 
+  @include m.respondToOverXlg {
+    margin: 0 auto;
+    padding-left: 0;
+    padding-right: 0;
+    width: 1100px;
+  }
+
   .TastePhilosophy__left {
     flex-shrink: 0;
     width: fit-content;
