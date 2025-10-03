@@ -20,7 +20,7 @@ const TasteAnotherPageLink: React.FC = ({}) => {
         <Image
           width={1010}
           height={673}
-          src="/taste/anotherPageLink/1.png"
+          src="/taste/anotherPageLink/1.webp"
           alt="stayページの画像"
           data-reveal
         />

@@ -126,7 +126,7 @@ const TasteInsertImages: React.FC = () => {
           <div ref={trackRef} className={styles.TasteInsertImages__track}>
             <div className={styles.TasteInsertImages__slide} style={slideStyle}>
               <Image
-                src="/taste/philosophy/1.jpg"
+                src="/taste/philosophy/1.webp"
                 alt="わとと京都の店舗写真1"
                 fill
                 priority
@@ -136,7 +136,7 @@ const TasteInsertImages: React.FC = () => {
             </div>
             <div className={styles.TasteInsertImages__slide} style={slideStyle}>
               <Image
-                src="/taste/philosophy/2.jpg"
+                src="/taste/philosophy/2.webp"
                 alt="わとと京都の店舗写真2"
                 fill
                 className={styles.TasteInsertImages__img}
@@ -145,7 +145,7 @@ const TasteInsertImages: React.FC = () => {
             </div>
             <div className={styles.TasteInsertImages__slide} style={slideStyle}>
               <Image
-                src="/taste/philosophy/3.jpg"
+                src="/taste/philosophy/3.webp"
                 alt="わとと京都の店舗写真3"
                 fill
                 className={styles.TasteInsertImages__img}

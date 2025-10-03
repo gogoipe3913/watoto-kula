@@ -1,8 +1,9 @@
 // デバイスブレイクポイントの設定
-$breakpoint-sm: 576px; // スマートフォン以下
-$breakpoint-md: 767px; // タブレット以下
-$breakpoint-lg: 992px; // 小さいデスクトップ以下
-$breakpoint-llg: 1150px; // デスクトップ以下
+$breakpoint-sm: 576px; // スマートフォン
+$breakpoint-md: 767px; // タブレット
+$breakpoint-lg: 992px; // 小さいデスクトップ
+$breakpoint-llg: 1150px; // デスクトップ
+$breakpoint-xlg: 1700px;
 
 // レスポンシブスタイルのmixin
 @mixin respondToSm {
@@ -25,6 +26,12 @@ $breakpoint-llg: 1150px; // デスクトップ以下
 
 @mixin respondToLlg {
   @media (max-width: $breakpoint-llg) {
+    @content;
+  }
+}
+
+@mixin respondToOverXlg {
+  @media (min-width: $breakpoint-xlg) {
     @content;
   }
 }
