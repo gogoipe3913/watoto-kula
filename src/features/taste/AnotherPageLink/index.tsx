@@ -10,9 +10,8 @@ const TasteAnotherPageLink: React.FC = ({}) => {
   return (
     <div className={styles.TasteAnotherPageLink}>
       <HeadingTexts
-        textFirst="わとと"
-        textSecond="に"
-        textThird="泊まる"
+        textFirst="わととに"
+        textSecond="泊まる"
         category="link to stay"
         className={styles.TasteAnotherPageLink__title}
       />
