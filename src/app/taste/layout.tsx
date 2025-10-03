@@ -1,29 +1,100 @@
-import type { Metadata } from "next";
+// app/taste/layout.tsx
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
+const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "Watoto | 京都",
+  metadataBase: new URL("https://watoto-kula.com"),
+
+  title: {
+    default: "わとと | 京都",
+    template: "%s | わとと（京都・下鴨）",
+  },
   description:
-    "京都下鴨本通沿いに位置する「watoto」は、訪れる人々に焦点を当てた飲食店です。私たちは、人と人とのつながり、そこで生まれる時間を大切にしています。watotoではお酒とコーヒー、体をいたわる薬膳食や発酵食品を提供していますが、ある時には音楽のイベントが開かれ、またある時には習字教室が開かれたり、その活動は一つの言葉では表せません。既定の形にとらわれず、水のように柔軟に形を変え、さまざまな人々の過ごし方に寄り添っていきたいと考えています。",
+    "京都・下鴨本通沿いの「わとと（watoto）」は、人と人とのつながりを大切にする飲食店。お酒とコーヒー、薬膳・発酵食、音楽イベントや習字教室など、多様な過ごし方に寄り添います。",
+  keywords: [
+    "わとと",
+    "watoto",
+    "京都",
+    "下鴨",
+    "カフェ",
+    "バー",
+    "薬膳",
+    "発酵食品",
+    "イベント",
+  ],
+
+  // 著者・制作者・発行主体
+  authors: [{ name: "taiki kishiyama" }],
+  creator: "taiki kishiyama",
+  publisher: "watoto",
+
+  alternates: {
+    canonical: "/taste",
+  },
+
+  openGraph: {
+    type: "website",
+    url: "/taste",
+    title: "わとと | 京都・下鴨のカフェ＆バー",
+    description:
+      "お酒とコーヒー、こだわりの薬膳・発酵食。イベントも開かれる京都・下鴨の「わとと」。",
+    siteName: "わとと",
+    locale: "ja_JP",
+    images: [
+      {
+        url: "/og/watoto-og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "わとと（watoto）店内イメージ",
+      },
+    ],
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-snippet": -1,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
+    },
+  },
+
+  icons: {
+    icon: [
+      { url: "/icons/favicon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/icons/favicon-16.png", sizes: "16x16", type: "image/png" },
+    ],
+    apple: [
+      {
+        url: "/icons/apple-touch-icon.png",
+        sizes: "180x180",
+        type: "image/png",
+      },
+    ],
+  },
+  // manifest: "/site.webmanifest", ← 削除しました
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#ffffff",
 };
 
 export default function TasteLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="ja">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}
       </body>
