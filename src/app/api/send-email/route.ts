@@ -64,8 +64,8 @@ watoto stay Lita ホームページからの予約リクエストがありまし
 
     await transporter.sendMail({
       from: `"watoto stay Lita" <${process.env.EMAIL_USER!}>`,
-      // to: "cafe.watoto@gmail.com",
-      to: "taiki.kishiyama@gmail.com",
+      to: "cafe.watoto@gmail.com",
+      // to: "taiki.kishiyama@gmail.com",
       subject: `新しいお問い合わせ from ${name} 様`,
       text: mailTextBody,
       replyTo: email?.replace(/[\r\n]/g, "") || undefined,
