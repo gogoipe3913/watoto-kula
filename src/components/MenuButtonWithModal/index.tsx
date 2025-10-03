@@ -15,7 +15,11 @@ const MenuButtonWithModal: React.FC = () => {
         aria-haspopup="dialog"
         aria-expanded={open}
         onClick={() => setOpen(true)}
-        className={classNames(styles.MenuButtonWithModal, "menu-open-button")}
+        className={classNames(
+          styles.MenuButtonWithModal,
+          "menu-open-button",
+          open ? styles["MenuButtonWithModal--opened"] : ""
+        )}
       >
         <HamburgerIcon className={styles.MenuButtonWithModal__icon} />
       </button>

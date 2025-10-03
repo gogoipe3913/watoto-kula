@@ -1,6 +1,8 @@
 @use "../../styles/mixin" as m;
 
 .MenuButtonWithModal {
+  position: relative;
+
   .MenuButtonWithModal__icon {
     color: var(--color-white);
     width: 82px;
@@ -11,6 +13,12 @@
     @include m.respondToMd {
       width: 61px;
       height: 32px;
+    }
+  }
+
+  &--opened {
+    .MenuButtonWithModal__icon {
+      color: var(--color-dark);
     }
   }
 }
