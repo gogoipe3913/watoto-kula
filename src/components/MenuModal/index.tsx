@@ -122,7 +122,7 @@ const MenuModal: React.FC<MenuModalProps> = ({
           <div className={styles.MenuModal__selectedPage}>
             <p className={styles.MenuModal__selectedPageText}>Taste</p>
             <p>
-              <a href="/stay">Stay</a>
+              <a href="https://www.instagram.com/watoto_stay_lita/">Stay</a>
             </p>
           </div>
           <ul className={styles.MenuModal__links}>
