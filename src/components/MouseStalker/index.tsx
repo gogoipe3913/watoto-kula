@@ -68,7 +68,7 @@ export default function MouseStalker() {
   }, [reduced]);
 
   if (!mounted) return null;
-  // if (window.matchMedia("(pointer: coarse)").matches) return null; // タッチで非表示にしたい場合は有効化
+  if (window.matchMedia("(pointer: coarse)").matches) return null; // タッチで非表示にしたい場合は有効化
 
   return createPortal(
     <div
