@@ -25,7 +25,7 @@ const renderWithBr = (text: string, isCategory?: boolean) =>
   ));
 
 const TastePhilosophy: React.FC = () => {
-  const { heading, category, body } = contents;
+  const { heading, category, body, bodySp } = contents;
 
   return (
     <section id="philosophy" data-section className={styles.TastePhilosophy}>
@@ -44,6 +44,13 @@ const TastePhilosophy: React.FC = () => {
       <div className={styles.TastePhilosophy__right}>
         <div className={styles.TastePhilosophy__bodyWrapper}>
           {body.map((p, i) => (
+            <p data-reveal key={i} className={styles.TastePhilosophy__body}>
+              {renderWithBr(p)}
+            </p>
+          ))}
+        </div>
+        <div className={styles.TastePhilosophy__bodyWrapperSp}>
+          {bodySp.map((p, i) => (
             <p data-reveal key={i} className={styles.TastePhilosophy__body}>
               {renderWithBr(p)}
             </p>

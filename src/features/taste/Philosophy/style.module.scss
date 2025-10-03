@@ -52,6 +52,20 @@
     gap: 24px;
     padding: 100vh 0;
     max-width: 380px;
+
+    @include m.respondToMd {
+      display: none;
+    }
+  }
+
+  .TastePhilosophy__bodyWrapperSp {
+    @include m.respondToMd {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      padding: 100vh 0;
+      max-width: 380px;
+    }
   }
 
   .TastePhilosophy__body {
