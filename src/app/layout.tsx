@@ -20,10 +20,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://watoto-kula.com"),
 
-  title: {
-    default: "わとと | 京都・下鴨の飲食店 & 福井・小浜の宿",
-    template: "%s | わとと",
-  },
+  title: "わとと | 京都・下鴨の飲食店 & 福井・小浜の宿",
   description:
     "京都・下鴨の飲食店、福井・小浜の宿を運営するわととについて紹介する公式サイト。人と人とのつながりを大切にし、食・音楽・文化・滞在を通して多様な時間を提供します。",
   keywords: [
