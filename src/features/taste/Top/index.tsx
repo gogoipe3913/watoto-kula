@@ -49,9 +49,9 @@ const TasteTop: React.FC = () => {
   }, []);
 
   const slides = [
-    { src: "/taste/top-slides/bar/2.JPG", alt: "トップ画像 バーの画像" },
-    { src: "/taste/top-slides/coffee/1.JPG", alt: "トップ画像 コーヒーの画像" },
-    { src: "/taste/top-slides/vegetables/3.JPG", alt: "トップ画像 野菜の画像" },
+    { src: "/taste/top-slides/1.webp", alt: "トップ画像 コーヒーの画像" },
+    { src: "/taste/top-slides/2.webp", alt: "トップ画像 バーの画像" },
+    { src: "/taste/top-slides/3.webp", alt: "トップ画像 野菜の画像" },
   ];
 
   const settings = {
