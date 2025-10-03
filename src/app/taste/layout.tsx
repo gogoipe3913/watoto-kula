@@ -11,10 +11,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://watoto-kula.com"),
 
-  title: {
-    default: "わとと | 京都",
-    template: "%s | わとと（京都・下鴨）",
-  },
+  title: "わとと | 京都",
   description:
     "京都・下鴨本通沿いの「わとと（watoto）」は、人と人とのつながりを大切にする飲食店。お酒とコーヒー、薬膳・発酵食、音楽イベントや習字教室など、多様な過ごし方に寄り添います。",
   keywords: [
