@@ -50,6 +50,7 @@
   }
 
   ul {
+    position: relative;
     margin-top: 60px;
     display: flex;
     flex-direction: column;
@@ -138,10 +139,6 @@
 // 円アニメーションが終わった後
 html[data-hero-latched] .TasteMenu {
   color: var(--color-dark);
-
-  .TasteMenu__icon {
-    color: var(--color-dark);
-  }
 
   .TasteMenu__line {
     opacity: 0;

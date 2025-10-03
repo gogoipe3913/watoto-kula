@@ -2,8 +2,8 @@
 
 import React from "react";
 import Image from "next/image";
-import HamburgerIcon from "@/components/HamburgerIcon";
 import styles from "./style.module.scss";
+import MenuButtonWithModal from "@/components/MenuButtonWithModal";
 
 export default function TasteMenu() {
   return (
@@ -16,9 +16,7 @@ export default function TasteMenu() {
         className={styles.TasteMenu__line}
         priority
       />
-      <button>
-        <HamburgerIcon className={styles.TasteMenu__icon} />
-      </button>
+      <MenuButtonWithModal />
       <ul>
         <li>
           <a href="#philosophy">Philosophy</a>
