@@ -91,6 +91,71 @@ export default function TasteLayout({
   return (
     <html lang="ja">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "CafeOrCoffeeShop",
+              name: "わとと（watoto）",
+              alternateName: "watoto",
+              url: "https://watoto-kula.com/taste",
+              image: "https://watoto-kula.com/og/watoto-og.jpg",
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: "左京区下鴨森本町9",
+                addressLocality: "京都市",
+                addressRegion: "京都府",
+                postalCode: "606-0805",
+                addressCountry: "JP",
+              },
+              telephone: "080-2957-4909",
+              priceRange: "¥2800 ~ ¥4000",
+              servesCuisine: ["Japanese", "Healthy"],
+              openingHoursSpecification: [
+                {
+                  "@type": "OpeningHoursSpecification",
+                  dayOfWeek: [
+                    "Monday",
+                    "Tuesday",
+                    "Friday",
+                    "Saturday",
+                    "Sunday",
+                  ],
+                  opens: "11:00",
+                  closes: "23:00",
+                },
+              ],
+              sameAs: [
+                "https://www.instagram.com/watoto_kyoto/",
+                "https://maps.app.goo.gl/MmXUtciuRGBJvrUu9",
+              ],
+            }),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                {
+                  "@type": "ListItem",
+                  position: 1,
+                  name: "わとと",
+                  item: "https://watoto-kula.com/",
+                },
+                {
+                  "@type": "ListItem",
+                  position: 2,
+                  name: "京都・下鴨の飲食店",
+                  item: "https://watoto-kula.com/taste",
+                },
+              ],
+            }),
+          }}
+        />
         {children}
       </body>
     </html>
