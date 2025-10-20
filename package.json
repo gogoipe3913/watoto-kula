@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "generate-sitemap": "npx next-sitemap"
+    "postbuild": "next-sitemap"
   },
   "dependencies": {
     "@fullcalendar/daygrid": "^6.1.17",
