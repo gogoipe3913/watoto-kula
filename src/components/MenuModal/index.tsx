@@ -105,7 +105,7 @@ const MenuModal: React.FC<MenuModalProps> = ({
         <button
           className={classNames(
             styles.MenuModal__button,
-            contentActive ? styles["MenuModal__button--active"] : ""
+            contentActive ? styles["MenuModal__button--active"] : "",
           )}
           aria-label="Close menu"
           onClick={onClose}
@@ -116,7 +116,7 @@ const MenuModal: React.FC<MenuModalProps> = ({
         <div
           className={classNames(
             styles.MenuModal__info,
-            contentActive && styles.isOpen
+            contentActive && styles.isOpen,
           )}
         >
           <div className={styles.MenuModal__selectedPage}>
@@ -176,7 +176,7 @@ const MenuModal: React.FC<MenuModalProps> = ({
             </p>
           </div>
           <div className={styles.MenuModal__copyright}>
-            ©︎ 2025 watoto all rights reserved.
+            ©︎ 2026 watoto all rights reserved.
           </div>
         </div>
       </aside>
