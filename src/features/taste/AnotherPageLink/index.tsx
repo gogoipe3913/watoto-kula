@@ -37,7 +37,7 @@ const TasteAnotherPageLink: React.FC = ({}) => {
         </p>
       </Link>
       <p className={styles.TasteAnotherPageLink__copyright}>
-        ©︎ 2025 watoto all rights reserved.
+        ©︎ 2026 watoto all rights reserved.
       </p>
     </div>
   );

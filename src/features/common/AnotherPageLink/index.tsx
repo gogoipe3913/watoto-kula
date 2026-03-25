@@ -8,7 +8,7 @@ import styles from "./style.module.scss";
 const AnotherPageLink: React.FC = ({}) => {
   return (
     <div className={styles.AnotherPageLink}>
-      <Link href="/stay">
+      <Link href="https://watoto-lita.com/">
         <Image
           src="/taste/anotherPage/stay-text.svg"
           alt="stay"

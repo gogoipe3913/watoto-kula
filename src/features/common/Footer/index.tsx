@@ -41,7 +41,7 @@ const Footer: React.FC = ({}) => {
           </a>
         </p>
         <p className={styles.Footer__copyright}>
-          © 2025 watoto. All rights reserved.
+          © 2026 watoto. All rights reserved.
         </p>
       </div>
       <Logo isColored={true} className={styles.Footer__logo} />
