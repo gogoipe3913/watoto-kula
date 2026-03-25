@@ -20,9 +20,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://watoto-kula.com"),
 
-  title: "わとと | 京都・下鴨の飲食店 & 福井・小浜の宿",
+  title: "わとと | 京都",
   description:
-    "京都・下鴨の飲食店、福井・小浜の宿を運営するわととについて紹介する公式サイト。人と人とのつながりを大切にし、食・音楽・文化・滞在を通して多様な時間を提供します。",
+    "京都・下鴨本通沿いの「わとと（watoto）」は、人と人とのつながりを大切にする飲食店。お酒とコーヒー、薬膳・発酵食、音楽イベントや習字教室など、多様な過ごし方に寄り添います。",
   keywords: [
     "わとと",
     "watoto",
@@ -30,9 +30,6 @@ export const metadata: Metadata = {
     "下鴨",
     "カフェ",
     "バー",
-    "宿",
-    "小浜",
-    "福井",
     "薬膳",
     "発酵食品",
     "イベント",
@@ -50,9 +47,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "/",
-    title: "わとと | 京都・下鴨の飲食店 & 福井・小浜の宿",
+    title: "わとと | 京都",
     description:
-      "京都・下鴨の飲食店、福井・小浜の宿を運営するわととについて紹介する公式サイト。人と人とのつながりを大切にし、食・音楽・文化・滞在を通して多様な時間を提供します。",
+      "京都・下鴨本通沿いの「わとと（watoto）」は、人と人とのつながりを大切にする飲食店。お酒とコーヒー、薬膳・発酵食、音楽イベントや習字教室など、多様な過ごし方に寄り添います。",
     siteName: "わとと",
     locale: "ja_JP",
     images: [
