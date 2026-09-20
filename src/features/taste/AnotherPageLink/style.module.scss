@@ -40,6 +40,7 @@
     justify-content: center;
     align-items: center;
     aspect-ratio: 1010 / 673;
+    max-width: 1010px;
     width: calc(100vw * 1010px / 1440px);
 
     @include m.respondToMd {
