@@ -5,10 +5,23 @@ import styles from "./style.module.scss";
 import HeadingTexts from "@/components/HeadingTexts";
 import contents from "@/contents/TastePhilosophy.ja.json";
 
+const renderTouchInMincho = (text: string) => {
+  const parts = text.split("触");
+
+  return parts.map((part, i) => (
+    <React.Fragment key={i}>
+      {part}
+      {i < parts.length - 1 ? (
+        <span className={styles.TastePhilosophy__minchoGlyph}>触</span>
+      ) : null}
+    </React.Fragment>
+  ));
+};
+
 const renderWithBr = (text: string, isCategory?: boolean) =>
   text.split("\n").map((line, i, arr) => (
     <React.Fragment key={i}>
-      {line}
+      {renderTouchInMincho(line)}
       {i < arr.length - 1 ? (
         <>
           {isCategory ? (
