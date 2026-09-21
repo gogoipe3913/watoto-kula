@@ -4,17 +4,25 @@
   --scrollLen: 0px; /* JS sets: trackLenX * WEIGHT（重さ適用） */
   --revealLen: 0px; /* JS sets: ~0.8 * innerWidth */
 
+  /* ステージは lvh（バーが隠れた状態の高さ）で敷くので、ラッパもそれに合わせる。
+     こうすると sticky の移動距離が正確に scrollLen + revealLen になる */
   height: calc(100vh + var(--scrollLen) + var(--revealLen));
   height: calc(100svh + var(--scrollLen) + var(--revealLen));
+  height: calc(100lvh + var(--scrollLen) + var(--revealLen));
   overflow: visible; /* sticky殺し回避 */
 }
 
-/* 固定領域（全画面） */
+/* 固定領域（全画面）
+   SP でバーが隠れると可視領域は svh より高くなる。svh のままだと画面下端に
+   ステージの外（＝ベージュの帯）が出て写真が下まで届かないので、バーが隠れた
+   状態の高さ = lvh で敷く。lvh も svh 同様バー開閉では変化しないのでガクつかない
+   （バーが出ているときは下端がバーの裏に少し隠れるだけ） */
 .TasteInsertImages__sticky {
   position: sticky;
   top: 0;
   height: 100vh;
   height: 100svh;
+  height: 100lvh;
   width: 100%;
   overflow: hidden;
 
@@ -70,11 +78,12 @@
   transform: translateX(calc(-1 * var(--mp) * var(--trackLenX)));
 }
 
-/* スライド：縦いっぱい（高さ 100svh）、幅は aspect-ratio で自動 */
+/* スライド：縦いっぱい（ステージと同じ高さ）、幅は aspect-ratio で自動 */
 .TasteInsertImages__slide {
   position: relative;
   height: 100vh;
   height: 100svh;
+  height: 100lvh;
   aspect-ratio: var(--ratio, 3 / 4);
   flex: 0 0 auto;
   overflow: hidden;

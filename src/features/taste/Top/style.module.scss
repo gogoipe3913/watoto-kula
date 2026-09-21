@@ -26,13 +26,27 @@
      常に一定の svh を使う（JS 側も utils/viewport の実測 svh に合わせている） */
   height: 100svh;
   --r-js: 0px; /* 念のため初期値 */
+
+  /* SP でバーが隠れると可視領域は svh より高くなる。position:fixed の
+     ヒーロー（100svh）のままだと画面下端に body 背景の隙間が出るので、
+     背景レイヤー（スライダー／リビール円）だけをこの差分ぶん下へ伸ばして
+     塗り切る。ボックス自体は svh のままなので、バー開閉でテキストは動かない */
+  --bar-gap: 0px;
+
+  @supports (height: 100lvh) {
+    --bar-gap: calc(100lvh - 100svh);
+  }
 }
 
-/* スライダーは全面に（背面） */
+/* スライダーは全面に（背面）＋バー分だけ下へはみ出させる
+   （position は slick.css の .slick-slider{position:relative} が勝つため、
+     オフセットではなく height で伸ばす） */
 .TasteTop__slider {
   position: absolute;
-  inset: 0;
-  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: calc(100% + var(--bar-gap));
   z-index: 0;
 }
 
