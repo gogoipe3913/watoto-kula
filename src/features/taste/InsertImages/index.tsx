@@ -14,6 +14,13 @@ const pageY = (el: Element) => el.getBoundingClientRect().top + window.scrollY;
 // ★ このセクションを“重く”する倍率（1.0=通常, 2.0=2倍重い 等）
 const WEIGHT = 3;
 
+// 写真が画面を覆い始めて、固定要素（メニュー等）を白に戻すタイミング（--p 基準）
+const SLIDE_WHITE_START = 0.5;
+
+// html に付与して固定要素の配色を切り替えるフェーズ
+type InsertPhase = "slide" | "reveal" | null;
+const PHASE_ATTR = "data-insert-phase";
+
 const TasteInsertImages: React.FC = () => {
   const wrapperRef = useRef<HTMLElement | null>(null);
   const stickyRef = useRef<HTMLDivElement | null>(null);
@@ -21,6 +28,7 @@ const TasteInsertImages: React.FC = () => {
   const rafRef = useRef<number | null>(null);
   const lastY = useRef<number>(0);
   const velSmoothed = useRef<number>(0);
+  const phaseRef = useRef<InsertPhase>(null);
 
   useEffect(() => {
     const wrapper = wrapperRef.current!;
@@ -50,6 +58,14 @@ const TasteInsertImages: React.FC = () => {
       onScroll();
     };
 
+    const setPhase = (phase: InsertPhase) => {
+      if (phase === phaseRef.current) return;
+      phaseRef.current = phase;
+      const de = document.documentElement;
+      if (phase) de.setAttribute(PHASE_ATTR, phase);
+      else de.removeAttribute(PHASE_ATTR);
+    };
+
     const onScroll = () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
       rafRef.current = requestAnimationFrame(() => {
@@ -76,6 +92,13 @@ const TasteInsertImages: React.FC = () => {
         sticky.style.setProperty("--p", String(p)); // p は sticky でOK
 
         const q = clamp((rel - scrollLen) / revealLen, 0, 1);
+
+        // 写真の上では白 → リビール（明るいパネル）が入り始めたら黒へ
+        const inSection = rel >= 0 && rel <= scrollLen + revealLen;
+        if (!inSection) setPhase(null);
+        else if (q > 0) setPhase("reveal");
+        else if (p >= SLIDE_WHITE_START) setPhase("slide");
+        else setPhase(null);
 
         // velocity
         const dy = Math.abs(window.scrollY - lastY.current);
@@ -110,6 +133,8 @@ const TasteInsertImages: React.FC = () => {
       window.removeEventListener("scroll", onScroll);
       offResize();
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      phaseRef.current = null;
+      document.documentElement.removeAttribute(PHASE_ATTR);
     };
   }, []);
 
