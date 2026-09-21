@@ -29,3 +29,19 @@ html[data-hero-latched] .MenuButtonWithModal {
     color: var(--color-dark);
   }
 }
+
+// InsertImages（写真セクション）の上では再び白に
+// モーダルを開いている間（aria-expanded="true"）は --opened の指定を優先
+html[data-insert-phase="slide"] .MenuButtonWithModal[aria-expanded="false"] {
+  .MenuButtonWithModal__icon {
+    color: var(--color-white);
+  }
+}
+
+// リビール（明るいパネル）が右から入ってきたら黒に戻す
+html[data-insert-phase="reveal"] .MenuButtonWithModal[aria-expanded="false"] {
+  .MenuButtonWithModal__icon {
+    color: var(--color-dark);
+    transition-duration: 0.8s;
+  }
+}
