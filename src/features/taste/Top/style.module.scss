@@ -7,10 +7,11 @@
   initial-value: 0px;
 }
 
-/* セクションは 200vh：前半 100vh が演出区間 */
+/* セクションは 200svh：前半 100svh が演出区間 */
 .TasteTop {
   position: relative;
-  height: 200vh;
+  height: 200vh; /* fallback */
+  height: 200svh;
 
   @include m.respondToMd {
     overflow: hidden;
@@ -21,7 +22,9 @@
 .TasteTop__sticky {
   position: relative;
   height: 100vh; /* fallback */
-  height: 100dvh; /* SPのアドレスバー対策 */
+  /* SP: dvh はアドレスバーの出し入れで高さが変わりレイアウトが飛ぶため、
+     常に一定の svh を使う（JS 側も utils/viewport の実測 svh に合わせている） */
+  height: 100svh;
   --r-js: 0px; /* 念のため初期値 */
 }
 

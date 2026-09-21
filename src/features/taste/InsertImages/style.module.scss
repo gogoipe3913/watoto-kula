@@ -1,11 +1,11 @@
-/* ラッパ：縦スクロール量 = 100dvh + “必要スクロール量(scrollLen)” + リビール距離 */
+/* ラッパ：縦スクロール量 = 100svh + “必要スクロール量(scrollLen)” + リビール距離 */
 .TasteInsertImages {
   --trackLenX: 0px; /* JS sets: track.scrollWidth - innerWidth（実移動距離） */
   --scrollLen: 0px; /* JS sets: trackLenX * WEIGHT（重さ適用） */
   --revealLen: 0px; /* JS sets: ~0.8 * innerWidth */
 
   height: calc(100vh + var(--scrollLen) + var(--revealLen));
-  height: calc(100dvh + var(--scrollLen) + var(--revealLen));
+  height: calc(100svh + var(--scrollLen) + var(--revealLen));
   overflow: visible; /* sticky殺し回避 */
 }
 
@@ -14,7 +14,7 @@
   position: sticky;
   top: 0;
   height: 100vh;
-  height: 100dvh;
+  height: 100svh;
   width: 100%;
   overflow: hidden;
 
@@ -70,11 +70,11 @@
   transform: translateX(calc(-1 * var(--mp) * var(--trackLenX)));
 }
 
-/* スライド：縦いっぱい（高さ 100dvh）、幅は aspect-ratio で自動 */
+/* スライド：縦いっぱい（高さ 100svh）、幅は aspect-ratio で自動 */
 .TasteInsertImages__slide {
   position: relative;
   height: 100vh;
-  height: 100dvh;
+  height: 100svh;
   aspect-ratio: var(--ratio, 3 / 4);
   flex: 0 0 auto;
   overflow: hidden;

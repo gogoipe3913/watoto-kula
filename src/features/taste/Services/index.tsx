@@ -32,7 +32,8 @@ const TasteServices: React.FC = () => {
   const contentsRef = useRef<HTMLDivElement | null>(null);
 
   // .js-parallaxに対してdata-speedで速度指定できる
-  useParallax({ root: contentsRef.current });
+  // ref オブジェクトを渡す（.current は初回レンダー時点では null のため）
+  useParallax({ root: contentsRef });
 
   return (
     <section id="services" data-section className={styles.TasteServices}>
