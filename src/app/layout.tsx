@@ -1,6 +1,5 @@
 // app/layout.tsx
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import MouseStalker from "@/components/MouseStalker";
 import AdobeFontsLoader from "@/components/AdobeFontsLoader";
 import RevealBoot from "@/components/RevealBoot";
@@ -11,12 +10,6 @@ import "../styles/reveal.scss";
 import "./globals.css";
 import "@/styles/globals.scss";
 import LenisProvider from "./lenis-provider";
-
-const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 const SITE_NAME = "watoto わとと";
 const SITE_URL = "https://watoto-kula.com";
@@ -122,10 +115,10 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon.ico" />
         <StructuredData />
+        <AdobeFontsLoader />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body>
         <LenisProvider>
-          <AdobeFontsLoader />
           <RevealBoot />
           {children}
           <MouseStalker />
