@@ -219,6 +219,7 @@ const TasteTop: React.FC = () => {
       data-ready={initReady ? "true" : "false"}
     >
       <div ref={stickyRef} className={styles.TasteTop__sticky}>
+        <h1 className={styles.TasteTop__srOnly}>watoto わとと</h1>
         <Slider {...settings} className={styles.TasteTop__slider}>
           {slides.map((s, i) => (
             <div
@@ -250,7 +251,7 @@ const TasteTop: React.FC = () => {
 
         <Image
           src="/logo/watoto-taste-logo.svg"
-          alt="わとと京都 ロゴ"
+          alt="watoto わとと ロゴ"
           width={68}
           height={175}
           className={styles.TasteTop__logo}
