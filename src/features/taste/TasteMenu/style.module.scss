@@ -160,7 +160,7 @@ html[data-insert-phase="slide"] .TasteMenu {
 
 // リビール（明るいパネル）が右から入ってきたら黒に戻す
 // パネルの移動はスクロール量に直結して速いので、色は短めに追従させる
-html[data-insert-phase="reveal"] .TasteMenu {
+html[data-insert-phase^="reveal"] .TasteMenu {
   color: var(--color-dark);
   transition-duration: 0.8s;
 }

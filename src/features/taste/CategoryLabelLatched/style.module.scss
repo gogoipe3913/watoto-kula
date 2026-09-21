@@ -19,7 +19,7 @@
     opacity: 0;
     z-index: var(--z-index-elevation-4);
     transition-duration: 2s;
-    transition-property: opacity;
+    transition-property: opacity, color;
     transform-origin: bottom left;
     transform: rotate(90deg);
   }
@@ -69,5 +69,39 @@
 html[data-hero-latched] .CategoryLabelLatched {
   @include m.respondToMd {
     opacity: 1;
+  }
+}
+
+// InsertImages（写真セクション）の上では再び白に
+html[data-insert-phase="slide"] .CategoryLabelLatched {
+  @include m.respondToMd {
+    color: var(--color-white);
+  }
+
+  .CategoryLabelLatched__title,
+  .CategoryLabelLatched__textFirst {
+    &::after {
+      @include m.respondToMd {
+        background-color: var(--color-white);
+      }
+    }
+  }
+}
+
+// SP のラベルは画面右端にあるため、パネルが入り始めた時点で黒に戻す
+html[data-insert-phase^="reveal"] .CategoryLabelLatched {
+  @include m.respondToMd {
+    color: var(--color-dark);
+    transition-duration: 0.8s;
+  }
+
+  .CategoryLabelLatched__title,
+  .CategoryLabelLatched__textFirst {
+    &::after {
+      @include m.respondToMd {
+        background-color: var(--color-dark);
+        transition-duration: 0.8s;
+      }
+    }
   }
 }

@@ -102,3 +102,39 @@ html[data-hero-latched][data-hero-latched] .CategoryLabel {
     opacity: 0;
   }
 }
+
+// InsertImages（写真セクション）の上では再び白に
+// リビールのパネルは右から来るため、左下のラベルは reveal の終盤まで白のまま
+html[data-insert-phase="slide"] .CategoryLabel,
+html[data-insert-phase="reveal"] .CategoryLabel {
+  @include m.respondToOverMd {
+    color: var(--color-white);
+  }
+
+  .CategoryLabel__title,
+  .CategoryLabel__textFirst {
+    &::after {
+      @include m.respondToOverMd {
+        background-color: var(--color-white);
+      }
+    }
+  }
+}
+
+// パネルが左端まで到達したら黒に戻す
+html[data-insert-phase="reveal-end"] .CategoryLabel {
+  @include m.respondToOverMd {
+    color: var(--color-dark);
+    transition-duration: 0.8s;
+  }
+
+  .CategoryLabel__title,
+  .CategoryLabel__textFirst {
+    &::after {
+      @include m.respondToOverMd {
+        background-color: var(--color-dark);
+        transition-duration: 0.8s;
+      }
+    }
+  }
+}
