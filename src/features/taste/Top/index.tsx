@@ -5,7 +5,11 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import styles from "./style.module.scss";
 import classNames from "classnames";
-import { getStableViewportHeight, onStableResize } from "@/utils/viewport";
+import {
+  getLargeViewportHeight,
+  getStableViewportHeight,
+  onStableResize,
+} from "@/utils/viewport";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -106,8 +110,15 @@ const TasteTop: React.FC = () => {
       end = start + getStableViewportHeight(); // 100svh 分で演出
     };
 
-    const computeRadius = () =>
-      Math.hypot(window.innerWidth, getStableViewportHeight()) / 2;
+    // 円はヒーロー（100svh）の中心に置かれるが、背景レイヤーは
+    // バーが隠れたときの隙間ぶん（lvh - svh）だけ下へはみ出している。
+    // その下端の角まで届く半径にしないと、塗り残しが出る
+    const computeRadius = () => {
+      const smallVh = getStableViewportHeight();
+      const largeVh = getLargeViewportHeight();
+      const barGap = Math.max(largeVh - smallVh, 0);
+      return Math.hypot(window.innerWidth / 2, smallVh / 2 + barGap);
+    };
 
     const applyStickyEmulation = (y: number) => {
       if (y < start) {

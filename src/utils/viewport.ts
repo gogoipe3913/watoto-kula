@@ -14,7 +14,8 @@
  * とし、両者を常に一致させる。
  */
 
-let cachedHeight = 0;
+let cachedSmallHeight = 0;
+let cachedLargeHeight = 0;
 let cachedWidth = -1;
 
 const isCoarsePointer = () =>
@@ -22,11 +23,11 @@ const isCoarsePointer = () =>
   typeof window.matchMedia === "function" &&
   window.matchMedia("(pointer: coarse)").matches;
 
-/** `100svh` を実測する（未対応ブラウザは innerHeight にフォールバック） */
-const measureSvh = (): number => {
+/** `100svh` / `100lvh` を実測する（未対応ブラウザは innerHeight にフォールバック） */
+const measureVh = (unit: "svh" | "lvh"): number => {
   const probe = document.createElement("div");
   probe.style.cssText =
-    "position:absolute;top:0;left:0;width:0;height:100svh;" +
+    `position:absolute;top:0;left:0;width:0;height:100${unit};` +
     "visibility:hidden;pointer-events:none;";
   document.documentElement.appendChild(probe);
   const height = probe.getBoundingClientRect().height;
@@ -37,7 +38,20 @@ const measureSvh = (): number => {
 /** 測り直しを強制する（本当のリサイズ時に呼ぶ） */
 export const invalidateViewportHeight = () => {
   cachedWidth = -1;
-  cachedHeight = 0;
+  cachedSmallHeight = 0;
+  cachedLargeHeight = 0;
+};
+
+const refreshCache = () => {
+  if (
+    cachedSmallHeight === 0 ||
+    cachedLargeHeight === 0 ||
+    cachedWidth !== window.innerWidth
+  ) {
+    cachedWidth = window.innerWidth;
+    cachedSmallHeight = measureVh("svh");
+    cachedLargeHeight = measureVh("lvh");
+  }
 };
 
 /**
@@ -46,11 +60,19 @@ export const invalidateViewportHeight = () => {
  */
 export const getStableViewportHeight = (): number => {
   if (typeof window === "undefined") return 0;
-  if (cachedHeight === 0 || cachedWidth !== window.innerWidth) {
-    cachedWidth = window.innerWidth;
-    cachedHeight = measureSvh();
-  }
-  return cachedHeight;
+  refreshCache();
+  return cachedSmallHeight;
+};
+
+/**
+ * バーが隠れた状態のビューポート高さ(px) = `100lvh`。
+ * これもバーの開閉では変化しない。`svh` との差分が「バーが隠れたときに
+ * 画面下へ露出する高さ」になるので、全画面の固定レイヤーを塗り切る用途に使う。
+ */
+export const getLargeViewportHeight = (): number => {
+  if (typeof window === "undefined") return 0;
+  refreshCache();
+  return cachedLargeHeight;
 };
 
 /**
