@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import styles from "./style.module.scss";
 import classNames from "classnames";
+import { getStableViewportHeight, onStableResize } from "@/utils/viewport";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -21,7 +22,7 @@ const TasteTop: React.FC = () => {
   const [firstImageLoaded, setFirstImageLoaded] = useState(false);
   const [initReady, setInitReady] = useState(false);
 
-  // セクション（200vh）とヒーロー本体（100vh）
+  // セクション（200svh）とヒーロー本体（100svh）
   const sectionRef = useRef<HTMLElement | null>(null);
   const stickyRef = useRef<HTMLDivElement | null>(null);
 
@@ -93,18 +94,20 @@ const TasteTop: React.FC = () => {
     }
 
     let start = 0;
-    let end = 0; // start + 100vh
+    let end = 0; // start + 100svh
     let ticking = false;
 
     const recalc = () => {
       const rect = section.getBoundingClientRect();
       start =
         rect.top + (window.scrollY || document.documentElement.scrollTop || 0);
-      end = start + window.innerHeight; // 100vh 分で演出
+      // innerHeight は SP のアドレスバー開閉で変動し、上下スクロールで
+      // 演出区間の長さが変わってしまうので、安定した高さ（CSS の svh と同値）を使う
+      end = start + getStableViewportHeight(); // 100svh 分で演出
     };
 
     const computeRadius = () =>
-      Math.hypot(window.innerWidth, window.innerHeight) / 2;
+      Math.hypot(window.innerWidth, getStableViewportHeight()) / 2;
 
     const applyStickyEmulation = (y: number) => {
       if (y < start) {
@@ -169,10 +172,11 @@ const TasteTop: React.FC = () => {
     onScroll();
 
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onResize);
+    // SP のバー開閉（＝幅が変わらない高さ変化）では再計算しない
+    const offResize = onStableResize(onResize);
     return () => {
       window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onResize);
+      offResize();
       // ページ離脱時の掃除
       const de = document.documentElement;
       de.removeAttribute("data-hero-latched");

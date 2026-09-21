@@ -3,6 +3,7 @@
 import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import styles from "./style.module.scss";
+import { getStableViewportHeight, onStableResize } from "@/utils/viewport";
 
 type CSSVars = React.CSSProperties & Record<`--${string}`, string | number>;
 
@@ -85,7 +86,7 @@ const TasteInsertImages: React.FC = () => {
         // curve mix
         const curveMix = clamp((1 - q) * (0.25 + 0.75 * velNorm), 0, 1);
         const maxCurveX = Math.min(window.innerWidth * 0.24, 360);
-        const maxCurveY = Math.min(window.innerHeight * 0.6, 680);
+        const maxCurveY = Math.min(getStableViewportHeight() * 0.6, 680);
         const curveX = Math.round(lerp(16, maxCurveX, curveMix));
         const curveY = Math.round(lerp(24, maxCurveY, curveMix));
 
@@ -102,11 +103,12 @@ const TasteInsertImages: React.FC = () => {
     measure();
 
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", measure);
+    // SP のアドレスバー開閉（＝幅が変わらない高さ変化）では測り直さない
+    const offResize = onStableResize(measure);
     return () => {
       ro.disconnect();
       window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", measure);
+      offResize();
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
   }, []);
