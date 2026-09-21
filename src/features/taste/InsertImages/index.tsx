@@ -17,8 +17,13 @@ const WEIGHT = 3;
 // 写真が画面を覆い始めて、固定要素（メニュー等）を白に戻すタイミング（--p 基準）
 const SLIDE_WHITE_START = 0.5;
 
+// リビールのパネルは右から来るので、左端の固定要素を覆うのは終盤（--q 基準）
+const REVEAL_LEFT_START = 0.8;
+
 // html に付与して固定要素の配色を切り替えるフェーズ
-type InsertPhase = "slide" | "reveal" | null;
+// reveal      : パネルが画面右側を覆った（右側の固定要素は黒へ）
+// reveal-end  : パネルが左端まで到達した（左側の固定要素も黒へ）
+type InsertPhase = "slide" | "reveal" | "reveal-end" | null;
 const PHASE_ATTR = "data-insert-phase";
 
 const TasteInsertImages: React.FC = () => {
@@ -93,9 +98,10 @@ const TasteInsertImages: React.FC = () => {
 
         const q = clamp((rel - scrollLen) / revealLen, 0, 1);
 
-        // 写真の上では白 → リビール（明るいパネル）が入り始めたら黒へ
+        // 写真の上では白 → リビール（明るいパネル）が覆った側から順に黒へ
         const inSection = rel >= 0 && rel <= scrollLen + revealLen;
         if (!inSection) setPhase(null);
+        else if (q >= REVEAL_LEFT_START) setPhase("reveal-end");
         else if (q > 0) setPhase("reveal");
         else if (p >= SLIDE_WHITE_START) setPhase("slide");
         else setPhase(null);

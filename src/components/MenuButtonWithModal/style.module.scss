@@ -39,7 +39,7 @@ html[data-insert-phase="slide"] .MenuButtonWithModal[aria-expanded="false"] {
 }
 
 // リビール（明るいパネル）が右から入ってきたら黒に戻す
-html[data-insert-phase="reveal"] .MenuButtonWithModal[aria-expanded="false"] {
+html[data-insert-phase^="reveal"] .MenuButtonWithModal[aria-expanded="false"] {
   .MenuButtonWithModal__icon {
     color: var(--color-dark);
     transition-duration: 0.8s;
