@@ -28,11 +28,14 @@
   --color-stay-placeholder: #a6a6a6;
 
   /* Fonts */
-  --font-family-title: ltc-nicholas-cochin-pro, shippori-mincho-b1, sans-serif;
-  --font-family-gothic: mr-eaves-sans, shippori-mincho-b1, sans-serif;
-  --font-family-serif: cochin, shippori-mincho-b1, serif;
-  --font-family-text-jp: shippori-mincho-b1, sans-serif;
-  --font-family-text-en: shippori-mincho-b1, sans-serif;
+  /* Web フォント読み込み前／失敗時に明朝で出るようフォールバックを明朝体で揃える */
+  --font-fallback-jp: "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Yu Mincho",
+    YuMincho, "Noto Serif JP", serif;
+  --font-family-title: ltc-nicholas-cochin-pro, shippori-mincho-b1,
+    var(--font-fallback-jp);
+  --font-family-serif: cochin, shippori-mincho-b1, var(--font-fallback-jp);
+  --font-family-text-jp: shippori-mincho-b1, var(--font-fallback-jp);
+  --font-family-text-en: shippori-mincho-b1, var(--font-fallback-jp);
 
   /* Letter spacing */
   --letter-space-text-jp: 0.02em;
