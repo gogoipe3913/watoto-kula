@@ -98,6 +98,19 @@
   pointer-events: none;
 }
 
+/* リビール完了後（ラッチ後）は「円」である必要がないので、画面全面を塗る矩形に切り替える。
+   Instagram などのアプリ内ブラウザでは svh / lvh の実測値と実際の可視領域が
+   わずかにズレることがあり、円のままだと四隅に塗り残し（背景写真の覗き）が出るため。
+   ヒーローは 100svh なので、バーが隠れたぶん（--bar-gap）は下へはみ出させる。 */
+.TasteTop__sticky[data-latched="true"] .TasteTop__reveal {
+  inset: 0 -2px calc(var(--bar-gap) * -1 - 2px);
+  translate: none;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  will-change: auto;
+}
+
 /* ロゴ（中央揃え） */
 .TasteTop__logo {
   position: absolute;

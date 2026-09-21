@@ -112,12 +112,20 @@ const TasteTop: React.FC = () => {
 
     // 円はヒーロー（100svh）の中心に置かれるが、背景レイヤーは
     // バーが隠れたときの隙間ぶん（lvh - svh）だけ下へはみ出している。
-    // その下端の角まで届く半径にしないと、塗り残しが出る
+    // その下端の角まで届く半径にしないと、塗り残しが出る。
+    //
+    // さらに Instagram などのアプリ内ブラウザでは、svh / lvh の実測値と
+    // 実際の可視領域がわずかにズレることがある。対角ちょうどの半径だと
+    // そのズレぶんだけ四隅が塗り残される（＝角が欠けて背景写真が覗く）ので、
+    // 余裕を持たせた半径にしておく。
     const computeRadius = () => {
       const smallVh = getStableViewportHeight();
       const largeVh = getLargeViewportHeight();
-      const barGap = Math.max(largeVh - smallVh, 0);
-      return Math.hypot(window.innerWidth / 2, smallVh / 2 + barGap);
+      const visibleVh = Math.max(smallVh, largeVh, window.innerHeight);
+      // 円の中心は svh/2。そこから画面上端／下端までの「遠いほう」に届かせる
+      const halfH = Math.max(smallVh / 2, visibleVh - smallVh / 2);
+      const diagonal = Math.hypot(window.innerWidth / 2, halfH);
+      return diagonal * 1.08 + 24; // 計測誤差ぶんの余裕
     };
 
     const applyStickyEmulation = (y: number) => {
